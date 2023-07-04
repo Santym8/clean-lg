@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -12,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all()->where('status', 1);
+        $users = User::all();
 
         return view('users.index', [
             'users' => $users,
@@ -54,7 +55,6 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -63,8 +63,8 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        return redirect()->route('users.update', [$user]);
-
+        $user->password = '';
+        return view('users.update', ['user' => $user]);
     }
 
     /**
@@ -72,7 +72,20 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $userValidated = $request->validate([
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'last_name' => ['required', 'string', 'min:3', 'max:255'],
+            'email' => ['required', 'email', 'min:3', 'max:255', Rule::unique('users')->ignore($id),],
+            'identification_type' => ['required', 'string', 'min:3', 'max:255'],
+            'identification' => ['required', 'string', 'min:3', 'max:255', Rule::unique('users')->ignore($id)],
+            'phone_number' => ['required', 'string', 'min:10', 'max:10', Rule::unique('users')->ignore($id)],
+            'status' => ['required'],
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->fill($userValidated)->save();
+
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado con exitosamente.');
     }
 
     /**
@@ -80,11 +93,5 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
-        $user->status = 0;
-
-        $user->save();
-
-        return redirect()->route('users.index')->with('success', 'Usuario eliminado con exitosamente.');
     }
 }

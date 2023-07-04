@@ -43,11 +43,10 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>
-                                    <a class="btn btn-primary" href="{{ route('users.edit', [$user->id]) }}">Editar</a>
-                                    <form action="{{ route('users.destroy', [$user->id]) }}" method="POST">
+                                    <form action="{{ route('users.edit', [$user->id]) }}" method="GET">
                                         @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Desactivar</button>
+                                        @method('GET')
+                                        <button class="btn btn-primary" type="submit">Editar</button>
                                     </form>
                                 </td>
                                 <td>{{ $user->name }}</td>
@@ -56,7 +55,7 @@
                                 <td>{{ $user->identification_type }}</td>
                                 <td>{{ $user->identification }}</td>
                                 <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->active }}</td>
+                                <td>{{ $user->status == 1 ? 'SI':'NO' }}</td>
 
 
                             </tr>

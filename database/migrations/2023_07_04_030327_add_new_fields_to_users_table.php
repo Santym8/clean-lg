@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('identification_type');
             $table->string('identification');
             $table->string('phone_number');
-            $table->string('status')->default('active');
+            $table->boolean('status')->default(1);
         });
     }
 

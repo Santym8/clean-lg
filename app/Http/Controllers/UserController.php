@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -25,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $available_roles = Role::all();
+        return view('users.create', ['available_roles' => $available_roles]);
     }
 
     /**
@@ -41,11 +43,17 @@ class UserController extends Controller
             'identification_type' => ['required', 'string', 'min:3', 'max:255'],
             'identification' => ['required', 'string', 'min:3', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'min:10', 'max:10', 'unique:users'],
+            'selected_roles' => ['required', 'array'],
         ]);
 
         $user = new User($userValidated);
-
         $user->save();
+
+        foreach ($userValidated['selected_roles'] as $role_id) {
+            $user->roles()->attach($role_id);
+        }
+
+
 
         return redirect()->route('users.index')->with('success', 'Usuario creado con exitosamente.');
     }

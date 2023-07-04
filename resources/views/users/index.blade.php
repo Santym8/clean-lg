@@ -36,6 +36,7 @@
                             <th>Identificaci&oacute;n</th>
                             <th>N&uacute;mero de Tel&eacute;fono</th>
                             <th>Activo</th>
+                            <th>Roles</th>
                         </tr>
                     </thead>
 
@@ -55,8 +56,12 @@
                                 <td>{{ $user->identification_type }}</td>
                                 <td>{{ $user->identification }}</td>
                                 <td>{{ $user->phone_number }}</td>
-                                <td>{{ $user->status == 1 ? 'SI':'NO' }}</td>
-
+                                <td>{{ $user->status == 1 ? 'SI' : 'NO' }}</td>
+                                <td>
+                                    @foreach ($user->roles as $role)
+                                        {{ $role->name }}
+                                    @endforeach
+                                </td>
 
                             </tr>
                         @endforeach

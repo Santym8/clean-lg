@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product_warehouse;
+use App\Models\Product;
+use App\Models\Warehouse;
+
 
 class product_warehouse_controller extends Controller
 {
@@ -21,7 +24,10 @@ class product_warehouse_controller extends Controller
      */
     public function create()
     {
-        return view('inventory.product_warehouse.create');
+        $products = Product::all();
+        $warehouses = Warehouse::all();
+    
+        return view('inventory.product_warehouse.create', compact('products', 'warehouses'));
     }
 
     /**
@@ -58,7 +64,10 @@ class product_warehouse_controller extends Controller
     public function edit(string $id)
     {
         $product_warehouse = product_warehouse::find($id);
-        return view('inventory.product_warehouse.edit', ['product_warehouse' => $product_warehouse]);
+        $products = Product::all();
+        $warehouses = Warehouse::all();
+        
+        return view('inventory.product_warehouse.edit', compact('product_warehouse', 'products', 'warehouses'));
     }
 
     /**

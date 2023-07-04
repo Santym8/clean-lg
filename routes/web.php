@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\warehouse_controller;
+use App\Http\Controllers\product_warehouse_controller;
 use App\Http\Controllers\category_controller;
 use App\Http\Controllers\product_controller;
 /*
@@ -20,5 +21,6 @@ Route::get('/', function () {
 });
 
 Route::resource("warehouse", warehouse_controller::class);
+Route::resource("product_warehouse", product_warehouse_controller::class);
 Route::resource("category", category_controller::class);
 Route::resource("product", product_controller::class);

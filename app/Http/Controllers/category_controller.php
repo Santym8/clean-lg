@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class category_controller extends Controller
 {
@@ -85,8 +86,16 @@ class category_controller extends Controller
     public function destroy(string $id)
     {
         $category = Category::find($id);
-        $category->status = 0;
+        if ($category->id == 1) {
+            return redirect()->back()->with('error', 'No puedes eliminar la categoría principal');
+        }else{
+            $category->status = 0;
+        }
         $category->save();
+        
+        // Actualizar la categoría de los productos asociados
+        Product::where('category_id', $id)->update(['category_id' => 1]);
+
         return redirect()->back()->with('success', 'Categoria eliminada con éxito'); // Ejemplo de redirección con mensaje de éxito
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -18,6 +19,17 @@ return new class extends Migration
             $table->string('phone_number');
             $table->boolean('status')->default(1);
         });
+
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
+            'identification_type' => 'CEDULA',
+            'identification' => 'admin',
+            'phone_number' => 'none',
+            'status' => 1,
+        ]);
     }
 
     /**

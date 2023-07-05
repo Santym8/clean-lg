@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class UserController extends Controller
 {
@@ -15,6 +16,19 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
+        // Get only active asignation roles
+        foreach ($users as $user) {
+            $active_roles = array();
+            foreach ($user->roles as $role) {
+                if ($role->pivot->status == 1) {
+                    array_push($active_roles, $role);
+                }
+            }
+            $user->roles = $active_roles;
+        }
+
+
 
         return view('users.index', [
             'users' => $users,
@@ -72,7 +86,25 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->password = '';
-        return view('users.update', ['user' => $user]);
+
+        // Get only active roles
+        $active_roles = array();
+        foreach ($user->roles as $role) {
+            if ($role->pivot->status == 1) {
+                array_push($active_roles, $role);
+            }
+        }
+        $user->roles = $active_roles;
+
+        $id_active_roles = array();
+        foreach ($user->roles as $role) {
+            array_push($id_active_roles, $role->id);
+        }
+
+        // Get only available roles
+        $available_roles = Role::all()->whereNotIn('id', $id_active_roles);
+
+        return view('users.update', ['user' => $user, 'available_roles' => $available_roles]);
     }
 
     /**
@@ -88,10 +120,36 @@ class UserController extends Controller
             'identification' => ['required', 'string', 'min:3', 'max:255', Rule::unique('users')->ignore($id)],
             'phone_number' => ['required', 'string', 'min:10', 'max:10', Rule::unique('users')->ignore($id)],
             'status' => ['required'],
+            'selected_roles' => ['required', 'array'],
         ]);
 
         $user = User::findOrFail($id);
-        $user->fill($userValidated)->save();
+        $user->fill($userValidated);
+
+        // Delete roles that are not selected
+        foreach ($user->roles as $role) {
+            if (!in_array($role->pivot['role_id'], $userValidated['selected_roles'])) {
+                $role->pivot['status'] = false;
+                $role->pivot->save();
+            }
+        }
+
+        foreach ($userValidated['selected_roles'] as $role_id) {
+            // Check if the user already has the role
+            if ($user->roles->pluck('id')->contains($role_id)) {
+                continue;
+            }
+
+            // Check if the role is new
+            if (!$user->roles->pluck('id')->contains($role_id)) {
+                $user->roles()->attach($role_id);
+            }
+        }
+
+        $user->save();
+
+
+
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado con exitosamente.');
     }

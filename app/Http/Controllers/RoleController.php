@@ -13,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+        if (!Gate::allows('has-rol', 'ADMINSTRADOR_DE_SISTEMA')) {
             return redirect()->route('dashboard');
         }
 

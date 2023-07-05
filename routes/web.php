@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\security\LoginController;
+use App\Http\Controllers\security\UserController;
+use App\Http\Controllers\security\RoleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\warehouse_controller;
 use App\Http\Controllers\product_warehouse_controller;

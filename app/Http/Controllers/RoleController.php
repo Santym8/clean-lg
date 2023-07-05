@@ -13,7 +13,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('has-rol', 'ADMINSTRADOR_DE_SISTEMA')) {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
             return redirect()->route('dashboard');
         }
 
@@ -27,10 +28,10 @@ class RoleController extends Controller
      */
     public function create()
     {
-        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
             return redirect()->route('dashboard');
         }
-
         return view('roles.create');
     }
 
@@ -39,7 +40,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
             return redirect()->route('dashboard');
         }
 
@@ -64,7 +67,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
             return redirect()->route('dashboard');
         }
 
@@ -80,7 +84,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
             return redirect()->route('dashboard');
         }
 

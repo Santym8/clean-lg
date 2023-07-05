@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('jobs',JobsController::class);
+Route::resource('job',JobsController::class);

@@ -26,7 +26,9 @@
                 <select name="product_id" class="form-control" id="product_id" required>
                     <option value="">Seleccione un producto</option>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                        @if ($product->status == 1)
+                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -36,7 +38,9 @@
                 <select name="warehouse_id" class="form-control" id="warehouse_id" required>
                     <option value="">Seleccione una bodega</option>
                     @foreach ($warehouses as $warehouse)
-                        <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
+                        @if ($warehouse->status == 1)
+                            <option value="{{ $warehouse->id }}">{{ $warehouse->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>

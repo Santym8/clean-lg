@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -12,6 +13,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+            return redirect()->route('dashboard');
+        }
+
         return view('roles.index', [
             'roles' => Role::all(),
         ]);
@@ -22,6 +27,10 @@ class RoleController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+            return redirect()->route('dashboard');
+        }
+
         return view('roles.create');
     }
 
@@ -30,6 +39,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+            return redirect()->route('dashboard');
+        }
+
         $validated = $request->validate([
             'name' => 'required|unique:roles|max:255',
         ]);
@@ -51,6 +64,10 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+            return redirect()->route('dashboard');
+        }
+
         $role = Role::findOrFail($id);
 
         return view('roles.edit', [
@@ -63,6 +80,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!Gate::allows('has-rol', 'Administrador del Sistema')) {
+            return redirect()->route('dashboard');
+        }
+
         $role = Role::findOrFail($id);
 
         $validated = $request->validate([

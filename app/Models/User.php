@@ -23,6 +23,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class)->withTimestamps()->withPivot('status')->wherePivot('status', 1);
     }
 
+    public function hasRole(string $rol_name): bool
+    {
+        return $this->roles()->where('name', $rol_name)->exists();
+    }
+
     /**
      * The attributes that are mass assignable.
      *

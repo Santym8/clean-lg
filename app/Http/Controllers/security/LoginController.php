@@ -16,14 +16,20 @@ class LoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard');
+        if (!Auth::attempt($credentials)) {
+            return redirect()->route('login')->withErrors([
+                'identification' => 'Las credenciales no coinciden con nuestros registros.',
+            ]);
         }
 
-        return redirect()->route('login')->withErrors([
-            'identification' => 'Las credenciales no coinciden con nuestros registros.',
-        ]);
+        if (Auth::user()->status == false) {
+            return redirect()->route('login')->withErrors([
+                'identification' => 'El usuario se encuentra inactivo.',
+            ]);
+        }
+
+        $request->session()->regenerate();
+        return redirect()->route('dashboard');
     }
 
     public function logout(Request $request): RedirectResponse

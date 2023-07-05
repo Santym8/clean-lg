@@ -21,7 +21,7 @@ class UserController extends Controller
         foreach ($users as $user) {
             $active_roles = array();
             foreach ($user->roles as $role) {
-                if ($role->pivot->status == 1) {
+                if ($role->status == 1) {
                     array_push($active_roles, $role);
                 }
             }
@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $available_roles = Role::all();
+        $available_roles = Role::all()->where('status', 1);
         return view('users.create', ['available_roles' => $available_roles]);
     }
 
@@ -63,6 +63,7 @@ class UserController extends Controller
         $user = new User($userValidated);
         $user->save();
 
+        // Todo - Validate if role is active
         foreach ($userValidated['selected_roles'] as $role_id) {
             $user->roles()->attach($role_id);
         }
@@ -87,10 +88,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->password = '';
 
-        // Get only active roles
+        // Get only asignation and roles that are activated
         $active_roles = array();
         foreach ($user->roles as $role) {
-            if ($role->pivot->status == 1) {
+            if ($role->pivot->status == 1 && $role->status == 1) {
                 array_push($active_roles, $role);
             }
         }
@@ -102,7 +103,7 @@ class UserController extends Controller
         }
 
         // Get only available roles
-        $available_roles = Role::all()->whereNotIn('id', $id_active_roles);
+        $available_roles = Role::all()->where('status', 1)->whereNotIn('id', $id_active_roles);
 
         return view('users.update', ['user' => $user, 'available_roles' => $available_roles]);
     }
@@ -125,6 +126,8 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
         $user->fill($userValidated);
+
+        // Todo - Validate if role is active
 
         // Delete roles that are not selected
         foreach ($user->roles as $role) {

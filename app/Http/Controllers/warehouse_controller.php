@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
-
+use App\Models\product_warehouse;
 class warehouse_controller extends Controller
 {
     /**
@@ -86,9 +86,18 @@ class warehouse_controller extends Controller
     {
 
         $warehouse = Warehouse::find($id);
+        $relatedProducts = product_warehouse::where('warehouse_id', $warehouse->id)
+            ->where('status', 1)
+            ->count();
+    
+        if ($relatedProducts > 0) {
+            return redirect()->back()->with('error', 'No se puede eliminar la bodega porque existen productos asociados a esta.');
+        }
+    
         $warehouse->status = 0;
         $warehouse->save();
-        return redirect()->back()->with('success', 'Bodega eliminada con éxito'); // Ejemplo de redirección con mensaje de éxito
+    
+        return redirect()->back()->with('success', 'Bodega eliminada con éxito');
 
 
     }

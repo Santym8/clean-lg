@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
-use PhpParser\Node\Expr\Cast\Array_;
+
 
 class UserController extends Controller
 {
@@ -15,6 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            return redirect()->route('dashboard');
+        }
+
         $users = User::all();
 
         // Get only active asignation roles
@@ -40,6 +46,12 @@ class UserController extends Controller
      */
     public function create()
     {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            return redirect()->route('dashboard');
+        }
+
+
         $available_roles = Role::all()->where('status', 1);
         return view('users.create', ['available_roles' => $available_roles]);
     }
@@ -49,6 +61,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            return redirect()->route('dashboard');
+        }
+
         $userValidated = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
@@ -85,6 +102,12 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            return redirect()->route('dashboard');
+        }
+
+
         $user = User::findOrFail($id);
         $user->password = '';
 
@@ -113,6 +136,11 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            return redirect()->route('dashboard');
+        }
+
         $userValidated = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],

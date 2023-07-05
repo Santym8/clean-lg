@@ -4,7 +4,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\warehouse_controller;
+use App\Http\Controllers\product_warehouse_controller;
+use App\Http\Controllers\category_controller;
+use App\Http\Controllers\product_controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +23,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// ------------Users----------------
 
+// ------------Inventory----------------
+Route::resource("warehouse", warehouse_controller::class)->middleware('auth');
+Route::resource("product_warehouse", product_warehouse_controller::class)->middleware('auth');
+Route::resource("category", category_controller::class)->middleware('auth');
+Route::resource("product", product_controller::class)->middleware('auth');
+
+// ------------Users----------------
 Route::resource('users', UserController::class)->except(
     'show',
     'destroy'
@@ -40,3 +49,7 @@ Route::get('/login', function () {
 Route::get('auth', [LoginController::class, 'authenticate'])->name('auth');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware(['auth'])->name('dashboard');

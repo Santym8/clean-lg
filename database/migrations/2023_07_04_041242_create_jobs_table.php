@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('status') -> default(true);
             $table->timestamps();
-            $table->string('status',50);
+           // $table->string('status',50);
         });
     }
 

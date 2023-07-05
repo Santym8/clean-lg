@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JobsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::resource('job',JobsController::class);
+
+
+Route::resource('customers', CustomerController::class);

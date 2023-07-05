@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\Job;
+
 
 class JobsController extends Controller
 {
@@ -55,7 +57,7 @@ class JobsController extends Controller
     public function edit(string $id)
     {
         $job=Job::find($id);
-        return view('job.edit',['job'=>$job]);
+        return view('job.edit',['jobs'=>$job]);
     }
 
     /**
@@ -81,7 +83,18 @@ class JobsController extends Controller
     public function destroy(string $id)
     {
         $job=Job::find($id);
-        $job->delete();
-        return redirect()->route('job.index')->with('success', 'Trabajo Eliminado con éxito.');
+
+        if ($job->id == 1) {
+            return redirect()->back()->with('error', 'No puedes eliminar el trabajo principal');
+        }else{
+            $job->status = 0;
+        }
+        $job->save();
+        
+        // Actualizar la categoría de los productos asociados
+        Customer::where('job_id', $id)->update(['job_id' => 1]);
+
+        return redirect()->back()->with('success', 'Trabajo eliminado con éxito'); 
+       
     }
 }

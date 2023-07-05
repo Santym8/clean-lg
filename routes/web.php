@@ -25,10 +25,10 @@ Route::get('/', function () {
 
 
 // ------------Inventory----------------
-Route::resource("warehouse", warehouse_controller::class);
-Route::resource("product_warehouse", product_warehouse_controller::class);
-Route::resource("category", category_controller::class);
-Route::resource("product", product_controller::class);
+Route::resource("warehouse", warehouse_controller::class)->middleware('auth');
+Route::resource("product_warehouse", product_warehouse_controller::class)->middleware('auth');
+Route::resource("category", category_controller::class)->middleware('auth');
+Route::resource("product", product_controller::class)->middleware('auth');
 
 // ------------Users----------------
 Route::resource('users', UserController::class)->except(
@@ -49,3 +49,7 @@ Route::get('/login', function () {
 Route::get('auth', [LoginController::class, 'authenticate'])->name('auth');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware(['auth'])->name('dashboard');

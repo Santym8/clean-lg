@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\security;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\security\Role;
+use App\Models\security\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
@@ -75,15 +75,18 @@ class UserController extends Controller
             'identification_type' => ['required', 'string', 'min:3', 'max:255'],
             'identification' => ['required', 'string', 'min:3', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'min:10', 'max:10', 'unique:users'],
-            'selected_roles' => ['required', 'array'],
+            'selected_roles' => ['array'],
         ]);
 
         $user = new User($userValidated);
         $user->save();
 
         // Todo - Validate if role is active
-        foreach ($userValidated['selected_roles'] as $role_id) {
-            $user->roles()->attach($role_id);
+
+        if(isset($userValidated['selected_roles'])){
+            foreach ($userValidated['selected_roles'] as $role_id) {
+                $user->roles()->attach($role_id);
+            }
         }
 
 

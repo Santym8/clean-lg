@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobsController;
+use App\Http\Controllers\audit_trail\AuditTrailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\security\LoginController;
@@ -26,7 +27,7 @@ Route::get('/', function () {
 });
 
 // ------------------------------Module Customer-----------------------------
-Route::resource('job',JobsController::class)->middleware('auth');
+Route::resource('job', JobsController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
 
 // -----------------------------Module Inventory-------------------------------
@@ -59,3 +60,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware(['auth'])->name('dashboard');
+
+// ------------------------------Module Auditory--------------------------------
+Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');

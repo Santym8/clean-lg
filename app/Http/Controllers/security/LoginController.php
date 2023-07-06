@@ -29,6 +29,9 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
+
+
+        $this->addAudit(Auth::user(), $this->typeAudit['successful_login'], '');
         return redirect()->route('dashboard');
     }
 

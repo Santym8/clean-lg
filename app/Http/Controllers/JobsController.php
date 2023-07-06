@@ -57,7 +57,7 @@ class JobsController extends Controller
     public function edit(string $id)
     {
         $job=Job::find($id);
-        return view('job.edit',['jobs'=>$job]);
+        return view('job.edit',['job'=>$job]);
     }
 
     /**

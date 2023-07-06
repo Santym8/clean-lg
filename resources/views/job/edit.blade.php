@@ -31,6 +31,7 @@
 
         <!-- Add other fields as needed -->
         <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a class="btn btn-secondary" href="{{ route('job.index') }}">Cancelar</a>
     </form>
 </div>
 

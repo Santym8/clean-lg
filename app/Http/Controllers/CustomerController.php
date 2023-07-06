@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+
 use Illuminate\Http\Request;
+use App\Models\Customer;
 use App\Models\Job;
 
 class CustomerController extends Controller
@@ -14,7 +15,8 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return view('customers.index', ['customers' => $customers]);
+        $job = Job::all();
+        return view('customers.index', ['customers' => $customers, 'jobs' => $job]);
     }
 
     /**
@@ -22,8 +24,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $jobs = Job::all();
-        return view('customers.create', ['jobs' => $jobs]);
+        $job = Job::all();
+        return view('customers.create', ['jobs' => $job]);
     }
 
     /**
@@ -38,7 +40,7 @@ class CustomerController extends Controller
             'identification' => 'required|unique:customers',
             'phone_number' => 'required',
             'address' => 'required',
-            'jobs' => 'required|exists:job,id',
+            'jobs' => 'required',
         ]);
 
         $customer = new Customer();
@@ -48,7 +50,7 @@ class CustomerController extends Controller
         $customer->identification = $request->identification;
         $customer->phone_number = $request->phone_number;
         $customer->address = $request->address;
-        $customer->job = $request->jobs;
+        $customer->job_id = $request->jobs;
         $customer->save();
 
         return redirect()->route('customers.index')->with('success', 'Cliente creado con éxito');
@@ -59,7 +61,7 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        $customers = Customer::all();
+        $customers = Customer::find($id);
         return view('customers.show', ['customers' => $customers]);
     }
 
@@ -69,8 +71,8 @@ class CustomerController extends Controller
     public function edit(string $id)
     {
         $customer = Customer::find($id);
-        $jobs = Job::all();
-        return view('customers.edit', ['customer' => $customer, 'jobs' => $jobs]);
+        $job = Job::all();
+        return view('customers.edit', ['customer' => $customer, 'jobs' => $job]);
     }
 
     /**
@@ -82,10 +84,10 @@ class CustomerController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'identification_type' => 'required',
-            'identification' => 'required|unique:customers',
+            'identification' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
-            'job' => 'required|exists:job,id',
+            'jobs' => 'required',
         ]);
 
         $customer = Customer::find($id);
@@ -95,8 +97,8 @@ class CustomerController extends Controller
         $customer->identification = $request->identification;
         $customer->phone_number = $request->phone_number;
         $customer->address = $request->address;
-        $customer->status=$request->status;
-        $customer->job_id = $request->job;
+        $customer->status = $request->status;
+        $customer->job_id = $request->jobs;
         $customer->save();
 
         return redirect()->route('customers.index')->with('success', 'Cliente actualizado con éxito');

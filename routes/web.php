@@ -26,8 +26,8 @@ Route::get('/', function () {
 });
 
 // ------------------------------Module Customer-----------------------------
-Route::resource('job',JobsController::class);
-Route::resource('customers', CustomerController::class);
+Route::resource('job',JobsController::class)->middleware('auth');
+Route::resource('customers', CustomerController::class)->middleware('auth');
 
 // -----------------------------Module Inventory-------------------------------
 Route::resource("warehouse", warehouse_controller::class)->middleware('auth');

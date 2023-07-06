@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Customer extends Model
 {
     use HasFactory;
-    public function jobs() :BelongsTo
+    public function job() :BelongsTo
     {
-        return $this->belongsTo(Job::class,'job_id','job_id');
+        return $this->belongsTo(Job::class,'job_id');
 
     }
 }

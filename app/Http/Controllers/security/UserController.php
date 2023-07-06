@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
         $users = User::all();
@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
 
@@ -64,7 +64,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
         $userValidated = $request->validate([
@@ -83,7 +83,7 @@ class UserController extends Controller
 
         // Todo - Validate if role is active
 
-        if(isset($userValidated['selected_roles'])){
+        if (isset($userValidated['selected_roles'])) {
             foreach ($userValidated['selected_roles'] as $role_id) {
                 $user->roles()->attach($role_id);
             }
@@ -108,7 +108,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
 
@@ -142,7 +142,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
         $userValidated = $request->validate([

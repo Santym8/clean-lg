@@ -8,7 +8,6 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Acciones</th>
                             <th>Identificaci&oacute;n Usuario</th>
                             <th>Usuario</th>
                             <th>Tipo</th>
@@ -20,11 +19,6 @@
                     <tbody>
                         @foreach ($audits as $audit)
                             <tr>
-                                <td>
-                                    <a href="{{ route('audit_trails.show', $audit->id) }}" class="btn btn-xs btn-default">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td>
                                 <td>{{ $audit->user->identification }}</td>
                                 <td>{{ $audit->user->name }} {{ $audit->user->last_name }}</td>
                                 <td>{{ $audit->type }}</td>

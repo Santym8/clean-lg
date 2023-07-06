@@ -63,4 +63,3 @@ Route::get('/dashboard', function () {
 
 // ------------------------------Module Auditory--------------------------------
 Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');
-Route::get('audit-trails/{id}', [AuditTrailController::class, 'show'])->name('audit_trails.show')->middleware('auth');

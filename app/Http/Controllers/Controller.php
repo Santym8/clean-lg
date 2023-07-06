@@ -11,12 +11,15 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
+    /*
+        Data must be: alias => module/name-action
+    */
     protected $typeAudit = [
-        'successful_login' => 'SUCCESSFUL-LOGIN',
+        'successful_login' => 'AUTHENTICATION/SUCCESSFUL-LOGIN',
     ];
 
 
-    protected function addAudit($user, $type, $data)
+    protected function addAudit($user, $type, $data = null)
     {
         $audit = new AuditTrail();
         $audit->user()->associate($user);

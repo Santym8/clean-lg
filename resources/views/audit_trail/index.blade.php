@@ -12,8 +12,8 @@
                             <th>Identificaci&oacute;n Usuario</th>
                             <th>Usuario</th>
                             <th>Tipo</th>
-                            <th>Acci&oacute;n</th>
                             <th>Fecha</th>
+                            <th>Informaci&oacute;n Adicional</th>
                         </tr>
                     </thead>
 
@@ -28,8 +28,8 @@
                                 <td>{{ $audit->user->identification }}</td>
                                 <td>{{ $audit->user->name }} {{ $audit->user->last_name }}</td>
                                 <td>{{ $audit->type }}</td>
-                                <td>{{ $audit->data }}</td>
                                 <td>{{ $audit->created_at }}</td>
+                                <td>{{ $audit->data ? $audit->data : '-'}}</td>
                             </tr>
                         @endforeach
                     </tbody>

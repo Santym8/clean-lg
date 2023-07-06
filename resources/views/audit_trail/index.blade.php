@@ -21,14 +21,14 @@
                         @foreach ($audits as $audit)
                             <tr>
                                 <td>
-                                    <a href="{{ route('audit_trail.show', $audit->id) }}" class="btn btn-xs btn-default">
+                                    <a href="{{ route('audit_trails.show', $audit->id) }}" class="btn btn-xs btn-default">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>
-                                <td>{{ $audit->user->identificaction }}</td>
+                                <td>{{ $audit->user->identification }}</td>
                                 <td>{{ $audit->user->name }} {{ $audit->user->last_name }}</td>
                                 <td>{{ $audit->type }}</td>
-                                <td>{{ $audit->action }}</td>
+                                <td>{{ $audit->data }}</td>
                                 <td>{{ $audit->created_at }}</td>
                             </tr>
                         @endforeach

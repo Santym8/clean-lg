@@ -12,7 +12,7 @@ class AuditTrail extends Model
 
     protected $fillable = [
         'type',
-        'action',
+        'data',
     ];
 
     public function user()

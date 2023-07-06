@@ -24,28 +24,35 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Roles</h1>
-                <a class="btn btn-success" href="{{ route('roles.create') }}">Crear Rol</a>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <td>Acciones</td>
                             <td>Nombre</td>
                             <td>Fecha Creaci&oacute;n</td>
                             <td>Fecha Atualizaci&oacute;n</td>
                             <td>Activo</td>
+                            <td>Acciones</td>
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach ($roles as $role)
                             <tr>
-                                <td>
-                                    <a class="btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Editar</a>
-                                </td>
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->created_at }}</td>
                                 <td>{{ $role->updated_at }}</td>
                                 <td>{{ $role->status == 1 ? 'SI' : 'NO' }}</td>
+                                <td>
+                                    <form action="{{ route('roles.changeStatus', [$role->id]) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        @if ($role->status == 1)
+                                            <button type="submit" class="btn btn-danger">Desactivar</button>
+                                        @else
+                                            <button type="submit" class="btn btn-success">Activar</button>
+                                        @endif
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
 

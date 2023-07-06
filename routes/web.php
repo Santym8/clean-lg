@@ -30,16 +30,17 @@ Route::resource("product_warehouse", product_warehouse_controller::class)->middl
 Route::resource("category", category_controller::class)->middleware('auth');
 Route::resource("product", product_controller::class)->middleware('auth');
 
+// ------------------------------Security--------------------------------
+
 // ------------Users----------------
 Route::resource('users', UserController::class)->except(
     'show',
     'destroy'
 )->middleware('auth');
 
-Route::resource('roles', RoleController::class)->except(
-    'show',
-    'destroy'
-)->middleware('auth');
+// ------------Roles----------------
+Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware('auth');
+Route::put('roles/{id}/change-status', [RoleController::class, 'changeStatus'])->name('roles.changeStatus')->middleware('auth');
 
 // ------------Login----------------
 Route::get('/login', function () {

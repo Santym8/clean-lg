@@ -75,15 +75,18 @@ class UserController extends Controller
             'identification_type' => ['required', 'string', 'min:3', 'max:255'],
             'identification' => ['required', 'string', 'min:3', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'min:10', 'max:10', 'unique:users'],
-            'selected_roles' => ['required', 'array'],
+            'selected_roles' => ['array'],
         ]);
 
         $user = new User($userValidated);
         $user->save();
 
         // Todo - Validate if role is active
-        foreach ($userValidated['selected_roles'] as $role_id) {
-            $user->roles()->attach($role_id);
+
+        if(isset($userValidated['selected_roles'])){
+            foreach ($userValidated['selected_roles'] as $role_id) {
+                $user->roles()->attach($role_id);
+            }
         }
 
 

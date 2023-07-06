@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('last_name')->after('name');
             $table->string('identification_type');
-            $table->string('identification');
-            $table->string('phone_number');
+            $table->string('identification')->unique();
+            $table->string('phone_number')->unique();
             $table->boolean('status')->default(1);
         });
 

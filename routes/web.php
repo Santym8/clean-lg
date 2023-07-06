@@ -3,7 +3,13 @@
 use App\Http\Controllers\JobsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
-
+use App\Http\Controllers\security\LoginController;
+use App\Http\Controllers\security\UserController;
+use App\Http\Controllers\security\RoleController;
+use App\Http\Controllers\warehouse_controller;
+use App\Http\Controllers\product_warehouse_controller;
+use App\Http\Controllers\category_controller;
+use App\Http\Controllers\product_controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +25,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ------------------------------Module Customer-----------------------------
 Route::resource('job',JobsController::class);
-
-
 Route::resource('customers', CustomerController::class);
+
+// -----------------------------Module Inventory-------------------------------
+Route::resource("warehouse", warehouse_controller::class)->middleware('auth');
+Route::resource("product_warehouse", product_warehouse_controller::class)->middleware('auth');
+Route::resource("category", category_controller::class)->middleware('auth');
+Route::resource("product", product_controller::class)->middleware('auth');
+
+// ------------------------------Module Security--------------------------------
+
+// ------------Users----------------
+Route::resource('users', UserController::class)->except(
+    'show',
+    'destroy'
+)->middleware('auth');
+
+// ------------Roles----------------
+Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware('auth');
+Route::put('roles/{id}/change-status', [RoleController::class, 'changeStatus'])->name('roles.changeStatus')->middleware('auth');
+
+// ------------Login----------------
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('auth', [LoginController::class, 'authenticate'])->name('auth');
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware(['auth'])->name('dashboard');

@@ -43,15 +43,18 @@
                                 <td>{{ $role->updated_at }}</td>
                                 <td>{{ $role->status == 1 ? 'SI' : 'NO' }}</td>
                                 <td>
-                                    <form action="{{ route('roles.changeStatus', [$role->id]) }}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        @if ($role->status == 1)
-                                            <button type="submit" class="btn btn-danger">Desactivar</button>
-                                        @else
-                                            <button type="submit" class="btn btn-success">Activar</button>
-                                        @endif
-                                    </form>
+                                    @if ($role->name != 'ADMINSTRADOR_DE_SISTEMA')
+                                        <form action="{{ route('roles.changeStatus', [$role->id]) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            @if ($role->status == 1)
+                                                <button type="submit" class="btn btn-danger">Desactivar</button>
+                                            @else
+                                                <button type="submit" class="btn btn-success">Activar</button>
+                                            @endif
+                                        </form>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach

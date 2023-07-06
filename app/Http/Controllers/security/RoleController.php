@@ -35,6 +35,11 @@ class RoleController extends Controller
         }
 
         $role = Role::findOrFail($id);
+
+        if($role->name == 'ADMINSTRADOR_DE_SISTEMA'){
+            return redirect()->route('roles.index')->with('error', 'No se puede desactivar el rol ADMINSTRADOR_DE_SISTEMA.');
+        }
+
         $role->status = !$role->status;
         $role->save();
 

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\JobsController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\warehouse_controller;
 use App\Http\Controllers\product_warehouse_controller;
 use App\Http\Controllers\category_controller;
@@ -23,14 +25,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ------------------------------Module Customer-----------------------------
+Route::resource('job',JobsController::class)->middleware('auth');
+Route::resource('customers', CustomerController::class)->middleware('auth');
 
-// ------------Inventory----------------
+// -----------------------------Module Inventory-------------------------------
 Route::resource("warehouse", warehouse_controller::class)->middleware('auth');
 Route::resource("product_warehouse", product_warehouse_controller::class)->middleware('auth');
 Route::resource("category", category_controller::class)->middleware('auth');
 Route::resource("product", product_controller::class)->middleware('auth');
 
-// ------------------------------Security--------------------------------
+// ------------------------------Module Security--------------------------------
 
 // ------------Users----------------
 Route::resource('users', UserController::class)->except(

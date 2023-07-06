@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\security;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\security\Role;
+use App\Models\security\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;

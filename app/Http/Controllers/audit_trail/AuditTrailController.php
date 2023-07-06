@@ -10,7 +10,7 @@ class AuditTrailController extends Controller
 {
     public function index()
     {
-        $audit_trails = AuditTrail::all();
+        $audit_trails = AuditTrail::all()->sortByDesc('created_at');
         return view('audit_trail.index', ['audits' => $audit_trails]);
     }
 }

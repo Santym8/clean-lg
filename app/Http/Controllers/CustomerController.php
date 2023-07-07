@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return view('customers.index', ['customers' => $customers]);
+        return view('customer.customers.index', ['customers' => $customers]);
     }
 
     /**
@@ -25,7 +25,7 @@ class CustomerController extends Controller
     {
         $customers = Customer::all();
         $job = Job::all();
-        return view('customers.create', ['customers' => $customers,'jobs' => $job]);
+        return view('customer.customers.create', ['customers' => $customers,'jobs' => $job]);
     }
 
     /**
@@ -72,7 +72,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::find($id);
         $job = Job::all();
-        return view('customers.edit', ['customer' => $customer, 'jobs' => $job]);
+        return view('customer.customers.edit', ['customer' => $customer, 'jobs' => $job]);
     }
 
     /**

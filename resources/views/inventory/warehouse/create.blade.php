@@ -1,4 +1,4 @@
-@extends('inventory.app')
+@extends('app')
 
 @section('content')
     <div class="container">

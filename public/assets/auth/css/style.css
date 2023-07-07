@@ -17465,3 +17465,12 @@ html[dir=rtl] .sidebar li > a .caret:before {
   font-weight: 500;
 }
 /*# sourceMappingURL=style.css.map */
+.sidebar .sidebar-inner .section-title-module {
+  padding: 1.25rem 1.56rem 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: rgba(191, 199, 217, 0.7);
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+}

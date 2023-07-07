@@ -15,7 +15,7 @@ class JobsController extends Controller
     public function index()
     {
         $job=Job::all();
-        return view('job.index',['jobs'=>$job]);
+        return view('customer.job.index',['jobs'=>$job]);
     }
 
     /**
@@ -23,7 +23,7 @@ class JobsController extends Controller
      */
     public function create()
     {
-        return view('job.create');
+        return view('customer.job.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class JobsController extends Controller
     public function edit(string $id)
     {
         $job=Job::find($id);
-        return view('job.edit',['job'=>$job]);
+        return view('customer.job.edit',['job'=>$job]);
     }
 
     /**

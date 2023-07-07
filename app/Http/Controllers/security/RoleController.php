@@ -16,7 +16,7 @@ class RoleController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
         return view('roles.index', [
@@ -31,12 +31,12 @@ class RoleController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
         $role = Role::findOrFail($id);
 
-        if($role->name == 'ADMINSTRADOR_DE_SISTEMA'){
+        if ($role->name == 'ADMINSTRADOR_DE_SISTEMA') {
             return redirect()->route('roles.index')->with('error', 'No se puede desactivar el rol ADMINSTRADOR_DE_SISTEMA.');
         }
 
@@ -45,5 +45,4 @@ class RoleController extends Controller
 
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
     }
-
 }

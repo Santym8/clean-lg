@@ -19,18 +19,18 @@ return new class extends Migration
             $table->boolean('status')->default(true);
         });
 
-        DB::table('roles')->insert(
+        // ---------------System Roles----------------
+        $roles = [
             [
-                [
-                    'name' => 'ADMINSTRADOR_DE_SISTEMA',
-                    'status' => 1,
-                ],
-                [
-                    'name' => 'AUDITOR',
-                    'status' => 1,
-                ]
+                'name' => 'ADMINSTRADOR_DE_SISTEMA',
+            ],
+            [
+                'name' => 'AUDITOR',
             ]
-        );
+        ];
+
+        // Insert roles
+        DB::table('roles')->insert($roles);
     }
 
     /**

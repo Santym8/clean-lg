@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\security\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -20,17 +21,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('role_user')->insert([
-            [
-                'role_id' => 1,
+        // -------------Asignation all Roles to Admin----------------
+        $roles = Role::all();
+        foreach ($roles as $role) {
+            DB::table('role_user')->insert([
+                'role_id' => $role->id,
                 'user_id' => 1,
-                'status' => 1,
-            ], [
-                'role_id' => 2,
-                'user_id' => 1,
-                'status' => 1,
-            ]
-        ]);
+            ]);
+        }
     }
 
     /**

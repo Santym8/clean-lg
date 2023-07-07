@@ -48,6 +48,7 @@
             <!-- Add other fields as needed -->
 
             <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-secondary" href="{{ route('product_warehouse.index') }}">Cancelar</a>
         </form>
     </div>
 @endsection

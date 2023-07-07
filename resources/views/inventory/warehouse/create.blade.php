@@ -23,6 +23,7 @@
             </div>
             <!-- Add other fields as needed -->
             <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-secondary" href="{{ route('warehouse.index') }}">Cancelar</a>
         </form>
     </div>
 

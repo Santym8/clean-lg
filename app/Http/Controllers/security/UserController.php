@@ -112,6 +112,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_user'], 'user_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -136,6 +137,7 @@ class UserController extends Controller
         // Get only available roles
         $available_roles = Role::all()->where('status', 1)->whereNotIn('id', $id_active_roles);
 
+        $this->addAudit(Auth::user(), $this->typeAudit['access_edit_user'], 'user_id: ' . $id);
         return view('users.update', ['user' => $user, 'available_roles' => $available_roles]);
     }
 
@@ -146,6 +148,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_user'], 'user_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -191,9 +194,7 @@ class UserController extends Controller
 
         $user->save();
 
-
-
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_update_user'], 'user_id: ' . $id);
         return redirect()->route('users.index')->with('success', 'Usuario actualizado con exitosamente.');
     }
 

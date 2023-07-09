@@ -32,6 +32,10 @@ class Controller extends BaseController
         'access_create_user' => 'SECURITY/USER/AUTHORIZED-CREATE-VIEW',
         'not_access_store_user' => 'SECURITY/USER/NOT-AUTHORIZED-STORE',
         'access_store_user' => 'SECURITY/USER/AUTHORIZED-STORE',
+        'not_access_edit_user' => 'SECURITY/USER/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_user' => 'SECURITY/USER/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_user' => 'SECURITY/USER/NOT-AUTHORIZED-UPDATE',
+        'access_update_user' => 'SECURITY/USER/AUTHORIZED-UPDATE',
 
     ];
 

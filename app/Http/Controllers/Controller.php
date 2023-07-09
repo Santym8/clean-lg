@@ -12,19 +12,23 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
 
     /*
-        Data must be: alias => module/name-action
+        Data must be: alias => module/controller/name-action
     */
     protected $typeAudit = [
         // ---------------Security-----------------
-        'successful_login' => 'AUTHENTICATION/SUCCESSFUL-LOGIN',
-        'failed_login' => 'AUTHENTICATION/FAILED-LOGIN',
-        'user_desabled' => 'AUTHENTICATION/USER-DESABLED',
-        'successful_logout' => 'AUTHENTICATION/SUCCESSFUL-LOGOUT',
+        'successful_login' => 'AUTHENTICATION/LOGIN/SUCCESSFUL',
+        'failed_login' => 'AUTHENTICATION/LOGIN/FAILED',
+        'user_desabled' => 'AUTHENTICATION/LOGIN/USER-DESABLED',
+        'successful_logout' => 'AUTHENTICATION/LOGOUT/SUCCESSFUL',
 
-        'not_access_index_role' => 'SECURITY/NOT-AUTHORIZED-INDEX-ROLE',
-        'access_index_role' => 'SECURITY/AUTHORIZED-INDEX-ROLE',
-        'not_access_status_role' => 'SECURITY/NOT-AUTHORIZED-CHANGE-STATUS-ROLE',
-        'access_status_role' => 'SECURITY/CHANGE-STATUS-ROLE',
+        'not_access_index_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-INDEX',
+        'access_index_role' => 'SECURITY/ROLE/AUTHORIZED-INDEX',
+        'not_access_status_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_status_role' => 'SECURITY/ROLE/CHANGE-STATUS',
+
+        'not_access_index_user' => 'SECURITY/USER/NOT-AUTHORIZED-INDEX',
+        'access_index_user' => 'SECURITY/USER/AUTHORIZED-INDEX',
+
     ];
 
 

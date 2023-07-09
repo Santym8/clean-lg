@@ -20,6 +20,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -37,7 +38,7 @@ class UserController extends Controller
         }
 
 
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_user'], '');
         return view('users.index', [
             'users' => $users,
         ]);
@@ -157,7 +158,7 @@ class UserController extends Controller
             'selected_roles' => ['array'],
         ]);
 
-        if(!isset($userValidated['selected_roles'])){
+        if (!isset($userValidated['selected_roles'])) {
             $userValidated['selected_roles'] = array();
         }
 

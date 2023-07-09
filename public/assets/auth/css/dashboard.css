@@ -1,0 +1,129 @@
+.module-box {
+    width: 280px;
+    height: 280px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.module-icon {
+    font-size: 100px;
+    margin-bottom: 20px;
+}
+
+.module-title {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.module-box:nth-child(1) {
+    background-color: #007BFF;
+}
+
+.module-box:nth-child(2) {
+    background-color: #28A745;
+}
+
+.module-box:nth-child(3) {
+    background-color: #DC3545;
+}
+
+.module-box:nth-child(4) {
+    background-color: #FFC107;
+}
+
+.module-box:nth-child(5) {
+    background-color: #17A2B8;
+}
+
+.module-box:hover {
+    transform: scale(1.05);
+}
+
+.module-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.module-container>* {
+    flex-basis: calc(33.33% - 30px);
+}
+
+/* Estilos del nav */
+nav.navbar {
+    background-color: #31343d;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 20px;
+}
+
+nav.navbar .navbar-brand {
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+nav.navbar .navbar-brand img {
+    height: 45px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+nav.navbar .navbar-brand h4 {
+    margin: 0;
+    color: #fff;
+}
+
+nav.navbar .navbar-collapse {
+    justify-content: flex-end;
+}
+
+nav.navbar .navbar-nav {
+    margin-right: 20px;
+}
+
+/* Estilos de la lista desplegable */
+nav.navbar .nav-item .dropdown-toggle {
+    background-color: #31343d;
+    border: none;
+    color: #fff;
+    padding: 0;
+    font-size: 16px;
+    cursor: pointer;
+}
+nav.navbar .nav-item .dropdown-toggle:hover {
+    background-color: #31343d;
+    color: #fff;
+}
+    
+
+nav.navbar .nav-item .dropdown-menu {
+    min-width: 180px;
+    margin-top: 10px;
+    background-color: #fff;
+    border: none;
+    padding: 0;
+    color: #31343d
+}
+
+
+/* Estilos del contenido principal */
+.content-container {
+    margin-top: 80px;
+}

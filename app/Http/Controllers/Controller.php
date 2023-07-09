@@ -16,10 +16,10 @@ class Controller extends BaseController
     */
     protected $typeAudit = [
         // ---------------Security-----------------
-        'successful_login' => 'AUTHENTICATION/LOGIN/SUCCESSFUL',
-        'failed_login' => 'AUTHENTICATION/LOGIN/FAILED',
-        'user_desabled' => 'AUTHENTICATION/LOGIN/USER-DESABLED',
-        'successful_logout' => 'AUTHENTICATION/LOGOUT/SUCCESSFUL',
+        'successful_login' => 'SECURITY/LOGIN/SUCCESSFUL',
+        'failed_login' => 'SECURITY/LOGIN/FAILED',
+        'user_desabled' => 'SECURITY/LOGIN/USER-DESABLED',
+        'successful_logout' => 'SECURITY/LOGOUT/SUCCESSFUL',
 
         'not_access_index_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-INDEX',
         'access_index_role' => 'SECURITY/ROLE/AUTHORIZED-INDEX',
@@ -28,6 +28,10 @@ class Controller extends BaseController
 
         'not_access_index_user' => 'SECURITY/USER/NOT-AUTHORIZED-INDEX',
         'access_index_user' => 'SECURITY/USER/AUTHORIZED-INDEX',
+        'not_access_create_user' => 'SECURITY/USER/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_user' => 'SECURITY/USER/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_user' => 'SECURITY/USER/NOT-AUTHORIZED-STORE',
+        'access_store_user' => 'SECURITY/USER/AUTHORIZED-STORE',
 
     ];
 

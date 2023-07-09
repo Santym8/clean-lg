@@ -51,11 +51,13 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
 
         $available_roles = Role::all()->where('status', 1);
+        $this->addAudit(Auth::user(), $this->typeAudit['access_create_user'], '');
         return view('users.create', ['available_roles' => $available_roles]);
     }
 
@@ -66,6 +68,7 @@ class UserController extends Controller
     {
         $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
         if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -91,8 +94,7 @@ class UserController extends Controller
             }
         }
 
-
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_store_user'], 'user_id: ' . $user->id);
         return redirect()->route('users.index')->with('success', 'Usuario creado con exitosamente.');
     }
 

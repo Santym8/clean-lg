@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\security\Role;
 use App\Models\security\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
@@ -153,8 +154,12 @@ class UserController extends Controller
             'identification' => ['required', 'string', 'min:3', 'max:255', Rule::unique('users')->ignore($id)],
             'phone_number' => ['required', 'string', 'min:10', 'max:10', Rule::unique('users')->ignore($id)],
             'status' => ['required'],
-            'selected_roles' => ['required', 'array'],
+            'selected_roles' => ['array'],
         ]);
+
+        if(!isset($userValidated['selected_roles'])){
+            $userValidated['selected_roles'] = array();
+        }
 
         $user = User::findOrFail($id);
         $user->fill($userValidated);

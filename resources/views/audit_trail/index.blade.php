@@ -19,8 +19,10 @@
                     <tbody>
                         @foreach ($audits as $audit)
                             <tr>
-                                <td>{{ $audit->user->identification }}</td>
-                                <td>{{ $audit->user->name }} {{ $audit->user->last_name }}</td>
+                                <td>{{ $audit->user ? $audit->user->identification : '-' }}</td>
+                                <td>{{ $audit->user ? $audit->user->name : '-' }}
+                                    {{ $audit->user ? $audit->user->name : '-' }}
+                                </td>
                                 <td>{{ $audit->type }}</td>
                                 <td>
                                     <input type="datetime" readonly value="{{ $audit->created_at }}">

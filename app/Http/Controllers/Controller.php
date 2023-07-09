@@ -15,7 +15,11 @@ class Controller extends BaseController
         Data must be: alias => module/name-action
     */
     protected $typeAudit = [
+        // ---------------Security-----------------
         'successful_login' => 'AUTHENTICATION/SUCCESSFUL-LOGIN',
+        'failed_login' => 'AUTHENTICATION/FAILED-LOGIN',
+        'user_desabled' => 'AUTHENTICATION/USER-DESABLED',
+        'successful_logout' => 'AUTHENTICATION/SUCCESSFUL-LOGOUT',
     ];
 
 

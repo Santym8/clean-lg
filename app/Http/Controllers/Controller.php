@@ -20,6 +20,11 @@ class Controller extends BaseController
         'failed_login' => 'AUTHENTICATION/FAILED-LOGIN',
         'user_desabled' => 'AUTHENTICATION/USER-DESABLED',
         'successful_logout' => 'AUTHENTICATION/SUCCESSFUL-LOGOUT',
+
+        'not_access_index_role' => 'SECURITY/NOT-AUTHORIZED-INDEX-ROLE',
+        'access_index_role' => 'SECURITY/AUTHORIZED-INDEX-ROLE',
+        'not_access_status_role' => 'SECURITY/NOT-AUTHORIZED-CHANGE-STATUS-ROLE',
+        'access_status_role' => 'SECURITY/CHANGE-STATUS-ROLE',
     ];
 
 

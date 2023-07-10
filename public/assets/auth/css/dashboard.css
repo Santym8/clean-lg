@@ -53,7 +53,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 130px;
 }
 
 .module-container>* {
@@ -122,8 +122,10 @@ nav.navbar .nav-item .dropdown-menu {
     color: #31343d
 }
 
-
-/* Estilos del contenido principal */
-.content-container {
-    margin-top: 80px;
+.container-error-dashboard{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-top: 70px;
 }

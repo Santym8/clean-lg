@@ -26,6 +26,9 @@ return new class extends Migration
             ],
             [
                 'name' => 'AUDITOR',
+            ],
+            [
+                'name' => 'BODEGUERO_INVENTARIO',
             ]
         ];
 

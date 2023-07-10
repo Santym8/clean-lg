@@ -41,6 +41,18 @@ class Controller extends BaseController
         'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',
         'access_index_audit' => 'AUDIT/AUDIT-TRAIL/AUTHORIZED-INDEX',
 
+        //----------------Inventory-------------------
+        'not_access_index_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-INDEX',
+        'access_index_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-INDEX',
+        'not_access_create_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-STORE',
+        'access_store_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-STORE',
+        'not_access_edit_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-UPDATE',
+        'access_update_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-UPDATE',
+
     ];
 
 

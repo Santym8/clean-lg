@@ -36,6 +36,13 @@
         </div>
     </nav>
 
+    <div class="container-error-dashboard">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
     <div class="container mt-4 content-container">
         <div class="module-container">
             <div class="module-box">

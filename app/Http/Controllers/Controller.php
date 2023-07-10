@@ -52,6 +52,21 @@ class Controller extends BaseController
         'access_edit_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-EDIT-VIEW',
         'not_access_update_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-UPDATE',
         'access_update_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-UPDATE',
+        'not_access_destroy_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-DESTROY',
+
+        'not_access_index_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-INDEX',
+        'access_index_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-INDEX',
+        'not_access_create_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-STORE',
+        'access_store_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-STORE',
+        'not_access_edit_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-UPDATE',
+        'access_update_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-UPDATE',
+        'not_access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-DESTROY',
 
     ];
 

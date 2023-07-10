@@ -115,6 +115,11 @@ class WarehouseController extends Controller
     public function destroy(string $id)
     {
 
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_warehouse'], 'warehouse_id: ' . $id);
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         $warehouse = Warehouse::find($id);
         $relatedProducts = product_warehouse::where('warehouse_id', $warehouse->id)
             ->where('status', 1)
@@ -126,7 +131,8 @@ class WarehouseController extends Controller
     
         $warehouse->status = 0;
         $warehouse->save();
-    
+        
+        $this->addAudit(Auth::user(), $this->typeAudit['access_destroy_warehouse'], 'warehouse_id: ' . $id);
         return redirect()->back()->with('success', 'Bodega eliminada con éxito');
 
 

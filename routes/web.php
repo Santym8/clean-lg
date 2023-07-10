@@ -7,10 +7,10 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;
-use App\Http\Controllers\inventario\WarehouseController;
-use App\Http\Controllers\inventario\ProductWarehouseController;
-use App\Http\Controllers\inventario\CategoryController;
-use App\Http\Controllers\inventario\ProductController;
+use App\Http\Controllers\inventory\WarehouseController;
+use App\Http\Controllers\inventory\ProductWarehouseController;
+use App\Http\Controllers\inventory\CategoryController;
+use App\Http\Controllers\inventory\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

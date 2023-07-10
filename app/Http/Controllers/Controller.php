@@ -37,6 +37,10 @@ class Controller extends BaseController
         'not_access_update_user' => 'SECURITY/USER/NOT-AUTHORIZED-UPDATE',
         'access_update_user' => 'SECURITY/USER/AUTHORIZED-UPDATE',
 
+        // ---------------Audit Trail-----------------
+        'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',
+        'access_index_audit' => 'AUDIT/AUDIT-TRAIL/AUTHORIZED-INDEX',
+
     ];
 
 

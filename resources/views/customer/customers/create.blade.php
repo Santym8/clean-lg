@@ -31,7 +31,7 @@
             </select>
 
             <label for="identification">Identificacion:</label>
-            <input type="text" class="form-control" id="identification" name="identification" placeholder="Identificacion" required>
+            <input type="number" class="form-control" id="identification" name="identification" placeholder="Identificacion" required>
 
             <label for="phone_number">Numero telefono:</label>
             <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Numero telefono" required>

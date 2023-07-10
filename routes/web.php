@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\JobsController;
+use App\Http\Controllers\job\JobsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\customer\CustomerController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;

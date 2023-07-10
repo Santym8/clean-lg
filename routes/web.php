@@ -7,10 +7,10 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;
-use App\Http\Controllers\warehouse_controller;
-use App\Http\Controllers\product_warehouse_controller;
-use App\Http\Controllers\category_controller;
-use App\Http\Controllers\product_controller;
+use App\Http\Controllers\inventario\WarehouseController;
+use App\Http\Controllers\inventario\ProductWarehouseController;
+use App\Http\Controllers\inventario\CategoryController;
+use App\Http\Controllers\inventario\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +31,10 @@ Route::resource('job', JobsController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
 
 // -----------------------------Module Inventory-------------------------------
-Route::resource("warehouse", warehouse_controller::class)->middleware('auth');
-Route::resource("product_warehouse", product_warehouse_controller::class)->middleware('auth');
-Route::resource("category", category_controller::class)->middleware('auth');
-Route::resource("product", product_controller::class)->middleware('auth');
+Route::resource("warehouse", WarehouseController::class)->middleware('auth');
+Route::resource("product_warehouse", ProductWarehouseController::class)->middleware('auth');
+Route::resource("category", CategoryController::class)->middleware('auth');
+Route::resource("product", ProductController::class)->middleware('auth');
 
 // ------------------------------Module Security--------------------------------
 

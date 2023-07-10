@@ -17,12 +17,15 @@ class LoginController extends Controller
         ]);
 
         if (!Auth::attempt($credentials)) {
+            $this->addAudit(null, $this->typeAudit['failed_login'], 'Intento de inicio de sesión fallido del usuario: ' . $request->input('identification'));
             return redirect()->route('login')->withErrors([
                 'identification' => 'Las credenciales no coinciden con nuestros registros.',
             ]);
         }
 
         if (Auth::user()->status == false) {
+            $this->addAudit(Auth::user(), $this->typeAudit['user_desabled'], '');
+            Auth::logout();
             return redirect()->route('login')->withErrors([
                 'identification' => 'El usuario se encuentra inactivo.',
             ]);
@@ -37,6 +40,7 @@ class LoginController extends Controller
 
     public function logout(Request $request): RedirectResponse
     {
+        $this->addAudit(Auth::user(), $this->typeAudit['successful_logout'], '');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

@@ -25,10 +25,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Mi perfil
+                            {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -36,27 +36,44 @@
         </div>
     </nav>
 
+    <div class="container-error-dashboard">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
     <div class="container mt-4 content-container">
         <div class="module-container">
-            <div class="module-box">
-                <i class="mdi mdi-package-variant module-icon"></i>
-                <h5 class="module-title">Inventario</h5>
+            <div class="module-box module-box-link">
+                <a class="module-box-link" href="{{ route('product_warehouse.index') }}">
+                    <i class="mdi mdi-package-variant module-icon"></i>
+                    <h5 class="module-title">Inventario</h5>
+                </a>
             </div>
-            <div class="module-box">
-                <i class="mdi mdi-account-multiple module-icon"></i>
-                <h5 class="module-title">Clientes</h5>
+            <div class="module-box module-box-link">
+                <a class="module-box-link" href="{{ route('customers.index') }}">
+                    <i class="mdi mdi-account-multiple module-icon"></i>
+                    <h5 class="module-title">Clientes</h5>
+                </a>
             </div>
-            <div class="module-box">
-                <i class="mdi mdi-account-lock module-icon"></i>
-                <h5 class="module-title">Autenticación Usuarios</h5>
+            <div class="module-box module-box-link">
+                <a class="module-box-link" href="{{ route('users.index') }}">
+                    <i class="mdi mdi-account-lock module-icon"></i>
+                    <h5 class="module-title">Autenticación Usuarios</h5>
+                </a>
             </div>
-            <div class="module-box">
-                <i class="mdi mdi-file-check module-icon"></i>
-                <h5 class="module-title">Ordenes de Servicio</h5>
+            <div class="module-box module-box-link">
+                <a class="module-box-link" href="#">
+                    <i class="mdi mdi-file-check module-icon"></i>
+                    <h5 class="module-title">Ordenes de Servicio</h5>
+                </a>
             </div>
-            <div class="module-box">
-                <i class="mdi mdi-receipt module-icon"></i>
-                <h5 class="module-title">Facturación</h5>
+            <div class="module-box module-box-link">
+                <a class="module-box-link" href="#">
+                    <i class="mdi mdi-receipt module-icon"></i>
+                    <h5 class="module-title">Facturación</h5>
+                </a>
             </div>
         </div>
     </div>

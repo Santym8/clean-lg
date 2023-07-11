@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\inventory;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\product_warehouse;
 
-class product_controller extends Controller
+class ProductController extends Controller
 {
 
     /**
@@ -97,6 +99,12 @@ class product_controller extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
+        $relatedProducts = product_warehouse::where('product_id', $product->id)
+            ->where('status', 1)
+            ->count();
+        if ($relatedProducts > 0) {
+            return redirect()->back()->with('error', 'No se puede eliminar el producto porque tiene productos relacionados en bodega');
+        }
         $product->status = 0;
         $product->save();
         return redirect()->back()->with('success', 'Producto eliminado con éxito');

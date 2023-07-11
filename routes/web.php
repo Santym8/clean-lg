@@ -1,16 +1,17 @@
 <?php
 
 use App\Http\Controllers\job\JobsController;
+use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;
-use App\Http\Controllers\warehouse_controller;
-use App\Http\Controllers\product_warehouse_controller;
-use App\Http\Controllers\category_controller;
-use App\Http\Controllers\product_controller;
+use App\Http\Controllers\inventory\WarehouseController;
+use App\Http\Controllers\inventory\ProductWarehouseController;
+use App\Http\Controllers\inventory\CategoryController;
+use App\Http\Controllers\inventory\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +32,10 @@ Route::resource('job', JobsController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
 
 // -----------------------------Module Inventory-------------------------------
-Route::resource("warehouse", warehouse_controller::class)->middleware('auth');
-Route::resource("product_warehouse", product_warehouse_controller::class)->middleware('auth');
-Route::resource("category", category_controller::class)->middleware('auth');
-Route::resource("product", product_controller::class)->middleware('auth');
+Route::resource("warehouse", WarehouseController::class)->middleware('auth');
+Route::resource("product_warehouse", ProductWarehouseController::class)->middleware('auth');
+Route::resource("category", CategoryController::class)->middleware('auth');
+Route::resource("product", ProductController::class)->middleware('auth');
 
 // ------------------------------Module Security--------------------------------
 
@@ -63,3 +64,4 @@ Route::get('/dashboard', function () {
 
 // ------------------------------Module Auditory--------------------------------
 Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');
+Route::get('audit-trails/user-actions', [AuditStatisticsController::class, 'userActions'])->name('audit_trails.userActions')->middleware('auth');

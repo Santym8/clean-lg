@@ -1,4 +1,5 @@
 .module-box {
+    position: relative; 
     width: 280px;
     height: 280px;
     text-align: center;
@@ -12,6 +13,20 @@
     font-size: 24px;
     transition: all 0.3s ease;
     cursor: pointer;
+}
+
+.module-box a.module-box-link {
+    position: absolute; /* Agrega esta propiedad */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
 }
 
 .module-icon {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Customer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Job;
+use App\Models\job\Job;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Customer extends Model

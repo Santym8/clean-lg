@@ -28,8 +28,14 @@ return new class extends Migration
                 'name' => 'AUDITOR',
             ],
             [
+                'name' => 'OPERADOR_CLIENTE',
+            ],
+            [
+                'name' => 'OPERADOR_TRABAJO',
+            ],
+            [
                 'name' => 'BODEGUERO_INVENTARIO',
-            ]
+            ],
         ];
 
         // Insert roles

@@ -70,6 +70,36 @@ class Controller extends BaseController
         'not_access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-DESTROY',
         'access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-DESTROY',
 
+        // ---------------Customer-----------------
+        'not_access_index_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-INDEX',
+        'access_index_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-INDEX',
+        'not_access_create_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-STORE',
+        'access_store_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-STORE',
+        'not_access_show_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-SHOW',
+        'access_show_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-SHOW',
+        'not_access_edit_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-UPDATE',
+        'access_update_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-UPDATE',
+        'not_access_destroy_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-DESTROY',
+
+        // ---------------Jobs-----------------
+        'not_access_index_job' => 'JOB/JOB/NOT-AUTHORIZED-INDEX',
+        'access_index_job' => 'JOB/JOB/AUTHORIZED-INDEX',
+        'not_access_create_job' => 'JOB/JOB/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_job' => 'JOB/JOB/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_job' => 'JOB/JOB/NOT-AUTHORIZED-STORE',
+        'access_store_job' => 'JOB/JOB/AUTHORIZED-STORE',
+        'not_access_edit_job' => 'JOB/JOB/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_job' => 'JOB/JOB/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_job' => 'JOB/JOB/NOT-AUTHORIZED-UPDATE',
+        'access_update_job' => 'JOB/JOB/AUTHORIZED-UPDATE',
+        'not_access_destroy_job' => 'JOB/JOB/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_job' => 'JOB/JOB/AUTHORIZED-DESTROY',
+
     ];
 
 

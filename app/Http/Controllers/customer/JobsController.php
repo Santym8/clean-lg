@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\customer;
 
 use App\Models\customer\Customer;
+use App\Models\customer\Job;
 use Illuminate\Http\Request;
-use App\Models\job\Job;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;

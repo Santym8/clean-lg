@@ -37,123 +37,122 @@
                 <div class="sidebar-left" data-simplebar style="height: 100%;">
                     <!-- sidebar menu -->
                     <ul class="nav sidebar-inner" id="sidebar-menu">
+                        @php
+                            $rolInventory = ['BODEGUERO_INVENTARIO'];
+                            $rolSecurity = ['ADMINSTRADOR_DE_SISTEMA'];
+                            $rolCustomer = ['OPERADOR_CLIENTE', 'OPERADOR_TRABAJO'];
+                        @endphp
 
-                        <li class="">
-                            <div class="section-title-module">
-                                <i class="mdi mdi-book-minus"></i>
-                                <span class="nav-text">Inventario</span>
-                            </div>
-                        </li>
-
-                        <li class="section-title">
-                            Funciones
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#inventory"
-                                aria-expanded="false" aria-controls="inventory">
-                                <i class="mdi mdi-book-open"></i>
-                                <span class="nav-text">Gestión Inventario</span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="inventory" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('product.index') }}">
-                                            <span class="nav-text">Productos</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('product_warehouse.index') }}">
-                                            <span class="nav-text">Productos en Bodega</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('category.index') }}">
-                                            <span class="nav-text">Categorías de Productos</span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('warehouse.index') }}">
-                                            <span class="nav-text">Bodegas</span>
-                                        </a>
-                                    </li>
-
+                        @if (Gate::allows('has-rol', [$rolInventory]))
+                            <li class="">
+                                <div class="section-title-module">
+                                    <i class="mdi mdi-book-minus"></i>
+                                    <span class="nav-text">Inventario</span>
                                 </div>
-                            </ul>
-                        </li>
+                            </li>
 
-                        <li class="">
-                            <div class="section-title-module">
-                                <i class="mdi mdi-account-multiple"></i>
-                                <span class="nav-text">Clientes</span>
-                            </div>
-                        </li>
+                            <li class="has-sub">
+                                <a class="sidenav-item-link" href="" data-toggle="collapse"
+                                    data-target="#inventory" aria-expanded="false" aria-controls="inventory">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span class="nav-text">Gestión Inventario</span> <b class="caret"></b>
+                                </a>
+                                <ul class="collapse" id="inventory" data-parent="#sidebar-menu">
+                                    <div class="sub-menu">
 
-                        <li class="section-title">
-                            Funciones
-                        </li>
+                                        <li>
+                                            <a class="sidenav-item-link" href="{{ route('product.index') }}">
+                                                <span class="nav-text">Productos</span>
+                                            </a>
+                                        </li>
 
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#customer"
-                                aria-expanded="false" aria-controls="customer">
-                                <i class="mdi mdi-book-open"></i>
-                                <span class="nav-text">Gestión Clientes</span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="customer" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
+                                        <li>
+                                            <a class="sidenav-item-link" href="{{ route('product_warehouse.index') }}">
+                                                <span class="nav-text">Productos en Bodega</span>
+                                            </a>
+                                        </li>
 
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('customers.index') }}">
-                                            <span class="nav-text">Clientes</span>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a class="sidenav-item-link" href="{{ route('category.index') }}">
+                                                <span class="nav-text">Categorías de Productos</span>
+                                            </a>
+                                        </li>
 
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('job.index') }}">
-                                            <span class="nav-text">Trabajos</span>
-                                        </a>
-                                    </li>
+                                        <li>
+                                            <a class="sidenav-item-link" href="{{ route('warehouse.index') }}">
+                                                <span class="nav-text">Bodegas</span>
+                                            </a>
+                                        </li>
+
+                                    </div>
+                                </ul>
+                            </li>
+                        @endif
+                        @if (Gate::allows('has-rol', [$rolCustomer]))
+                            <li class="">
+                                <div class="section-title-module">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span class="nav-text">Clientes</span>
                                 </div>
-                            </ul>
-                        </li>
+                            </li>
 
-                        <li class="">
-                            <div class="section-title-module">
-                                <i class="mdi mdi-account-key"></i>
-                                <span class="nav-text">Control de Acceso</span>
-                            </div>
-                        </li>
+                            <li class="has-sub">
+                                <a class="sidenav-item-link" href="" data-toggle="collapse"
+                                    data-target="#customer" aria-expanded="false" aria-controls="customer">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span class="nav-text">Gestión Clientes</span> <b class="caret"></b>
+                                </a>
+                                <ul class="collapse" id="customer" data-parent="#sidebar-menu">
+                                    <div class="sub-menu">
 
-                        <li class="section-title">
-                            Funciones
-                        </li>
-
-                        <li class="has-sub">
-                            <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#access"
-                                aria-expanded="false" aria-controls="access">
-                                <i class="mdi mdi-book-open"></i>
-                                <span class="nav-text">Gestión Usuario</span> <b class="caret"></b>
-                            </a>
-                            <ul class="collapse" id="access" data-parent="#sidebar-menu">
-                                <div class="sub-menu">
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('users.index') }}">
-                                            <span class="nav-text">Usuarios</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="sidenav-item-link" href="{{ route('roles.index') }}">
-                                            <span class="nav-text">Roles</span>
-                                        </a>
-                                    </li>
+                                        @if (Gate::allows('has-rol', [['OPERADOR_CLIENTE']]))
+                                            <li>
+                                                <a class="sidenav-item-link" href="{{ route('customers.index') }}">
+                                                    <span class="nav-text">Clientes</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                        @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']]))
+                                            <li>
+                                                <a class="sidenav-item-link" href="{{ route('job.index') }}">
+                                                    <span class="nav-text">Trabajos</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                    </div>
+                                </ul>
+                            </li>
+                        @endif
+                        @if (Gate::allows('has-rol', [$rolSecurity]))
+                            <li class="">
+                                <div class="section-title-module">
+                                    <i class="mdi mdi-account-key"></i>
+                                    <span class="nav-text">Control de Acceso</span>
                                 </div>
-                            </ul>
-                        </li>
+                            </li>
 
+                            <li class="has-sub">
+                                <a class="sidenav-item-link" href="" data-toggle="collapse" data-target="#access"
+                                    aria-expanded="false" aria-controls="access">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span class="nav-text">Gestión Usuario</span> <b class="caret"></b>
+                                </a>
+                                <ul class="collapse" id="access" data-parent="#sidebar-menu">
+                                    <div class="sub-menu">
+                                        <li>
+                                            <a class="sidenav-item-link" href="{{ route('users.index') }}">
+                                                <span class="nav-text">Usuarios</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="sidenav-item-link" href="{{ route('roles.index') }}">
+                                                <span class="nav-text">Roles</span>
+                                            </a>
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
 
@@ -217,7 +216,7 @@
 
             <!-- Footer -->
             <footer class="footer mt-auto">
-                
+
             </footer>
 
         </div>

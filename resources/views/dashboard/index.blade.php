@@ -52,7 +52,9 @@
                 </a>
             </div>
             <div class="module-box module-box-link">
-                <a class="module-box-link" href="{{ route('customers.index') }}">
+                <a class="module-box-link"
+                    @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']])) href="{{ route('job.index') }}"  
+                    @else href="{{ route('customers.index') }}"> @endif
                     <i class="mdi mdi-account-multiple module-icon"></i>
                     <h5 class="module-title">Clientes</h5>
                 </a>

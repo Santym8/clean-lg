@@ -4,9 +4,9 @@ namespace App\Http\Controllers\inventory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Category;
-use App\Models\product_warehouse;
+use App\Models\inventory\Product;
+use App\Models\inventory\Category;
+use App\Models\inventory\ProductWarehouse;
 
 class ProductController extends Controller
 {
@@ -99,7 +99,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::find($id);
-        $relatedProducts = product_warehouse::where('product_id', $product->id)
+        $relatedProducts = ProductWarehouse::where('product_id', $product->id)
             ->where('status', 1)
             ->count();
         if ($relatedProducts > 0) {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use Illuminate\Support\Facades\Route;
@@ -63,3 +64,4 @@ Route::get('/dashboard', function () {
 
 // ------------------------------Module Auditory--------------------------------
 Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');
+Route::get('audit-trails/user-actions', [AuditStatisticsController::class, 'userActions'])->name('audit_trails.userActions')->middleware('auth');

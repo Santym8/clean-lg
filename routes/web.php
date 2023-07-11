@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\job\JobsController;
+use App\Http\Controllers\customer\JobsController;
 use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use Illuminate\Support\Facades\Route;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\customer;
 
 use Illuminate\Http\Request;
 use App\Models\customer\Customer;
-use App\Models\job\Job;
+use App\Models\customer\Job;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -37,7 +37,7 @@ class CustomerController extends Controller
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        
+
         $customers = Customer::all();
         $job = Job::all();
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_customer'], '');
@@ -54,7 +54,7 @@ class CustomerController extends Controller
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        
+
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -89,7 +89,7 @@ class CustomerController extends Controller
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-               
+
         $customers = Customer::find($id);
         $this->addAudit(Auth::user(), $this->typeAudit['access_show_customer'], '');
         return view('customers.show', ['customers' => $customers]);
@@ -122,7 +122,7 @@ class CustomerController extends Controller
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        
+
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',

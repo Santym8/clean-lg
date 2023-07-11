@@ -41,6 +41,7 @@
                             $rolInventory = ['BODEGUERO_INVENTARIO'];
                             $rolSecurity = ['ADMINSTRADOR_DE_SISTEMA'];
                             $rolCustomer = ['OPERADOR_CLIENTE', 'OPERADOR_TRABAJO'];
+                            $rolAudit = ['AUDITOR'];
                         @endphp
 
                         @if (Gate::allows('has-rol', [$rolInventory]))
@@ -153,22 +154,37 @@
                                 </ul>
                             </li>
                         @endif
-                    </ul>
-                </div>
-
-                <div class="sidebar-footer">
-                    <div class="sidebar-footer-content">
-                        <ul class="d-flex">
-                            {{-- <li>
-                                <a href="user-account-settings.html" data-toggle="tooltip"
-                                    title="Profile settings"><i class="mdi mdi-settings"></i></a>
+                        @if (Gate::allows('has-rol', [$rolAudit]))
+                            <li class="">
+                                <div class="section-title-module">
+                                    <i class="mdi mdi-eye"></i>
+                                    <span class="nav-text">Auditoría</span>
+                                </div>
                             </li>
-                            <li>
-                                <a href="#" data-toggle="tooltip" title="No chat messages"><i
-                                        class="mdi mdi-chat-processing"></i></a>
-                            </li> --}}
-                        </ul>
-                    </div>
+
+                            <li class="has-sub">
+                                <a class="sidenav-item-link" href="" data-toggle="collapse"
+                                    data-target="#audit-trail" aria-expanded="false" aria-controls="audit-trail">
+                                    <i class="mdi mdi-book-open"></i>
+                                    <span class="nav-text">Gestión Auditoría</span> <b class="caret"></b>
+                                </a>
+                                <ul class="collapse" id="audit-trail" data-parent="#sidebar-menu">
+                                    <div class="sub-menu">
+                                            <li>
+                                                <a class="sidenav-item-link" href="{{ route('audit_trails.index') }}">
+                                                    <span class="nav-text">Pista de Auditoría</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="sidenav-item-link" href="{{ route('audit_trails.userActions') }}">
+                                                    <span class="nav-text">Estadísticas de Usuario</span>
+                                                </a>
+                                            </li>
+                                    </div>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
                 </div>
             </div>
         </aside>

@@ -60,6 +60,9 @@
     background-color: #17A2B8;
 }
 
+.module-box:nth-child(6) {
+    background-color: #4717b8;
+}
 .module-box:hover {
     transform: scale(1.05);
 }

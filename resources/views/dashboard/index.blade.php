@@ -53,7 +53,7 @@
             </div>
             <div class="module-box module-box-link">
                 <a class="module-box-link"
-                    @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']])) href="{{ route('job.index') }}"  
+                    @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']])) href="{{ route('job.index') }}">  
                     @else href="{{ route('customers.index') }}"> @endif
                     <i class="mdi mdi-account-multiple module-icon"></i>
                     <h5 class="module-title">Clientes</h5>
@@ -62,7 +62,7 @@
             <div class="module-box module-box-link">
                 <a class="module-box-link" href="{{ route('users.index') }}">
                     <i class="mdi mdi-account-lock module-icon"></i>
-                    <h5 class="module-title">Autenticación Usuarios</h5>
+                    <h5 class="module-title">Usuarios</h5>
                 </a>
             </div>
             <div class="module-box module-box-link">
@@ -75,6 +75,12 @@
                 <a class="module-box-link" href="#">
                     <i class="mdi mdi-receipt module-icon"></i>
                     <h5 class="module-title">Facturación</h5>
+                </a>
+            </div>
+            <div class="module-box module-box-link">
+                <a class="module-box-link" href="{{route('audit_trails.index')}}">
+                    <i class="mdi mdi-eye module-icon"></i>
+                    <h5 class="module-title">Auditoría</h5>
                 </a>
             </div>
         </div>

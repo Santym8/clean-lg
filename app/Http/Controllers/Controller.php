@@ -40,6 +40,8 @@ class Controller extends BaseController
         // ---------------Audit Trail-----------------
         'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',
         'access_index_audit' => 'AUDIT/AUDIT-TRAIL/AUTHORIZED-INDEX',
+        'acces_user_actions' => 'AUDIT/AUDIT-TRAIL/USER-ACTIONS',
+        'not_access_user_actions' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-USER-ACTIONS',
 
         //----------------Inventory-------------------
         'not_access_index_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-INDEX',

@@ -36,6 +36,9 @@ return new class extends Migration
             [
                 'name' => 'BODEGUERO_INVENTARIO',
             ],
+            [
+                'name' => 'OPERADOR_SERVICIOS',
+            ],
         ];
 
         // Insert roles

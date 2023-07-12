@@ -100,6 +100,20 @@ class Controller extends BaseController
         'not_access_destroy_job' => 'JOB/JOB/NOT-AUTHORIZED-DESTROY',
         'access_destroy_job' => 'JOB/JOB/AUTHORIZED-DESTROY',
 
+         // ---------------Services-----------------
+         'not_access_index_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-INDEX',
+         'access_index_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-INDEX',
+         'not_access_create_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-CREATE-VIEW',
+         'access_create_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-CREATE-VIEW',
+         'not_access_store_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-STORE',
+         'access_store_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-STORE',
+         'not_access_edit_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-EDIT-VIEW',
+         'access_edit_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-EDIT-VIEW',
+         'not_access_update_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-UPDATE',
+         'access_update_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-UPDATE',
+         'not_access_destroy_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-DESTROY',
+         'access_destroy_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-DESTROY',
+
     ];
 
 

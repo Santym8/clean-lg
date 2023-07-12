@@ -12,6 +12,7 @@ use App\Http\Controllers\inventory\WarehouseController;
 use App\Http\Controllers\inventory\ProductWarehouseController;
 use App\Http\Controllers\inventory\CategoryController;
 use App\Http\Controllers\inventory\ProductController;
+use App\Http\Controllers\service_orders\ServicesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,3 +66,6 @@ Route::get('/dashboard', function () {
 // ------------------------------Module Auditory--------------------------------
 Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');
 Route::get('audit-trails/user-actions', [AuditStatisticsController::class, 'userActions'])->name('audit_trails.userActions')->middleware('auth');
+
+// ------------------------------Module Service Orders-----------------------------
+Route::resource('services', ServicesController::class);

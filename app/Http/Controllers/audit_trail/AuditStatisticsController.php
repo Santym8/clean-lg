@@ -45,7 +45,7 @@ class AuditStatisticsController extends Controller
             } elseif ($percentage >= 40) {
                 $likertLevelsUser[$key] = 'Moderado';
             } elseif ($percentage >= 20) {
-                $likertLevelsUser[$key] = 'Incativo';
+                $likertLevelsUser[$key] = 'Inactivo';
             } else {
                 $likertLevelsUser[$key] = 'Muy Inactivo';
             }

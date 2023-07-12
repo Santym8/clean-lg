@@ -20,6 +20,8 @@ class AuditStatisticsController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta página');
         }
 
+        $this->addAudit(Auth::user(), $this->typeAudit['acces_user_actions'], '');
+
         //Count the number of actions per user
         $audit_trails = User::selectRaw('users.id, users.identification, users.name, users.last_name, count(audit_trails.id) as number_actions')
             ->leftjoin('audit_trails', 'users.id', '=', 'audit_trails.user_id')
@@ -34,7 +36,7 @@ class AuditStatisticsController extends Controller
         }
 
         $likertLevelsUser = [];
-        $maxNumberActions = max($actionsUser);
+        $maxNumberActions = max($actionsUser) != 0 ? max($actionsUser) : 1;
         foreach ($actionsUser as $key => $value) {
             $percentage = $value / $maxNumberActions * 100;
 
@@ -51,7 +53,7 @@ class AuditStatisticsController extends Controller
             }
         }
 
-        $this->addAudit(Auth::user(), $this->typeAudit['acces_user_actions'], '');
+
         return view('audit_trail.user_actions', [
             'audits' => $audit_trails,
             'likertLevelsUser' => $likertLevelsUser

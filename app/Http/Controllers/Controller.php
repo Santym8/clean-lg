@@ -109,6 +109,7 @@ class Controller extends BaseController
         $audit->user()->associate($user);
         $audit->type = $type;
         $audit->data = $data;
+        $audit->ip = request()->ip();
         $audit->save();
     }
 }

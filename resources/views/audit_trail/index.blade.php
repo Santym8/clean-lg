@@ -10,6 +10,7 @@
                         <tr>
                             <th>Identificaci&oacute;n Usuario</th>
                             <th>Usuario</th>
+                            <th>Ip</th>
                             <th>Tipo</th>
                             <th>Fecha</th>
                             <th>Informaci&oacute;n Adicional</th>
@@ -23,6 +24,7 @@
                                 <td>{{ $audit->user ? $audit->user->name : '-' }}
                                     {{ $audit->user ? $audit->user->name : '-' }}
                                 </td>
+                                <td>{{ $audit->ip }}</td>
                                 <td>{{ $audit->type }}</td>
                                 <td>
                                     <input type="datetime" readonly value="{{ $audit->created_at }}">

@@ -13,6 +13,7 @@ class AuditTrail extends Model
     protected $fillable = [
         'type',
         'data',
+        'ip',
     ];
 
     public function user()

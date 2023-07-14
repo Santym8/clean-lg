@@ -12,7 +12,10 @@ use App\Http\Controllers\inventory\WarehouseController;
 use App\Http\Controllers\inventory\ProductWarehouseController;
 use App\Http\Controllers\inventory\CategoryController;
 use App\Http\Controllers\inventory\ProductController;
+use App\Http\Controllers\service_orders\GoodsController;
 use App\Http\Controllers\service_orders\ServicesController;
+use App\Http\Controllers\service_orders\ServiceOrderGoodsController;
+use App\Http\Controllers\service_orders\ServiceOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,3 +72,6 @@ Route::get('audit-trails/user-actions', [AuditStatisticsController::class, 'user
 
 // ------------------------------Module Service Orders-----------------------------
 Route::resource('services', ServicesController::class);
+Route::resource('goods', GoodsController::class);
+Route::resource('service_orders_goods', ServiceOrderGoodsController::class);
+Route::resource('service_orders', ServiceOrderController::class);

@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\security\Module;
-use App\Models\security\SecModuleAction;
+use App\Models\security\ModuleAction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class SecuritySeeder extends Seeder
 
             if (is_array($actions)) {
                 foreach ($actions as $action) {
-                    SecModuleAction::create(
+                    ModuleAction::create(
                         $action + ['module_id' => $createdModule->id]
                     );
                 }

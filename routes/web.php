@@ -4,7 +4,7 @@ use App\Http\Controllers\customer\JobsController;
 use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use App\Http\Controllers\security\ModuleController;
-use App\Http\Controllers\security\SecModuleActionController;
+use App\Http\Controllers\security\ModuleActionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
 use App\Http\Controllers\security\LoginController;
@@ -45,10 +45,10 @@ Route::get('modules', [ModuleController::class, 'index'])->name('modules.index')
 Route::put('modules/{id}/change-status', [ModuleController::class, 'changeStatus'])->name('modules.changeStatus')->middleware('auth');
 
 // ------------Module Actions----------------
-Route::get('module-actions', [SecModuleActionController::class, 'index'])->name('module_actions.index')->middleware('auth');
-Route::put('module-actions/{id}/change-status', [SecModuleActionController::class, 'changeStatus'])->name('module_actions.changeStatus')->middleware('auth');
-Route::get('module-actions/{id}/edit', [SecModuleActionController::class, 'edit'])->name('module_actions.edit')->middleware('auth');
-Route::patch('module-actions/{id}/update', [SecModuleActionController::class, 'update'])->name('module_actions.update')->middleware('auth');
+Route::get('module-actions', [ModuleActionController::class, 'index'])->name('module_actions.index')->middleware('auth');
+Route::put('module-actions/{id}/change-status', [ModuleActionController::class, 'changeStatus'])->name('module_actions.changeStatus')->middleware('auth');
+Route::get('module-actions/{id}/edit', [ModuleActionController::class, 'edit'])->name('module_actions.edit')->middleware('auth');
+Route::patch('module-actions/{id}/update', [ModuleActionController::class, 'update'])->name('module_actions.update')->middleware('auth');
 
 // ------------Roles----------------
 Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware('auth');

@@ -5,7 +5,7 @@ namespace App\Models\security;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SecModuleAction extends Model
+class ModuleAction extends Model
 {
     use HasFactory;
 

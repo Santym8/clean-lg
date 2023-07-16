@@ -16,9 +16,12 @@
                 <h6 class="alert alert-success">{{ session('success') }}</h6>
             @endif
 
-            <form action="{{ route('users.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
-            </form>
+            @if (Gate::allows('action-allowed-to-user', ['USER/CREATE']))
+                <form action="{{ route('users.create') }}" method="GET">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            @endif
+
 
             <thead class="thead-dark">
                 <tr>
@@ -50,11 +53,14 @@
                             @endforeach
                         </td>
                         <td>
-                            <form action="{{ route('users.edit', [$user->id]) }}" method="GET">
-                                @csrf
-                                @method('GET')
-                                <button class="btn btn-primary" type="submit">Editar</button>
-                            </form>
+                            @if (Gate::allows('action-allowed-to-user', ['USER/EDIT']))
+                                <form action="{{ route('users.edit', [$user->id]) }}" method="GET">
+                                    @csrf
+                                    @method('GET')
+                                    <button class="btn btn-primary" type="submit">Editar</button>
+                                </form>
+                            @endif
+
                         </td>
                     </tr>
                 @endforeach

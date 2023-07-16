@@ -44,7 +44,7 @@
                         <td>{{ $moduleAction->updated_at }}</td>
                         <td>{{ $moduleAction->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            @if ($moduleAction->module->name != 'SECURITY')
+                            @if ($moduleAction->module->name != 'SECURITY' && Gate::allows('action-allowed-to-user', ['MODULE-ACTION/CHANGE-STATUS']))
                                 <form action="{{ route('module_actions.changeStatus', [$moduleAction->id]) }}"
                                     method="post">
                                     @csrf
@@ -58,7 +58,7 @@
                             @endif
 
 
-                            @if ($moduleAction->displayable_menu)
+                            @if ($moduleAction->displayable_menu && Gate::allows('action-allowed-to-user', ['MODULE-ACTION/EDIT']))
                                 <a href="{{ route('module_actions.edit', [$moduleAction->id]) }}"
                                     class="btn btn-primary">Editar</a>
                             @endif

@@ -13,6 +13,9 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+
+    private $pathViews = 'security.seg-system-administrator.users';
+
     /**
      * Display a listing of the resource.
      */
@@ -39,7 +42,7 @@ class UserController extends Controller
 
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_user'], '');
-        return view('users.index', [
+        return view($this->pathViews . '.index', [
             'users' => $users,
         ]);
     }
@@ -58,7 +61,7 @@ class UserController extends Controller
 
         $available_roles = Role::all()->where('status', 1);
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_user'], '');
-        return view('users.create', ['available_roles' => $available_roles]);
+        return view($this->pathViews . '.create', ['available_roles' => $available_roles]);
     }
 
     /**
@@ -138,7 +141,7 @@ class UserController extends Controller
         $available_roles = Role::all()->where('status', 1)->whereNotIn('id', $id_active_roles);
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_user'], 'user_id: ' . $id);
-        return view('users.update', ['user' => $user, 'available_roles' => $available_roles]);
+        return view($this->pathViews . '.update', ['user' => $user, 'available_roles' => $available_roles]);
     }
 
     /**

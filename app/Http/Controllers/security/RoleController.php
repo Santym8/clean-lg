@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
+
+    private $pathViews = 'security.seg-system-administrator.roles';
+
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +25,7 @@ class RoleController extends Controller
         }
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_role'], '');
-        return view('roles.index', [
+        return view($this->pathViews . '.index', [
             'roles' => Role::all(),
         ]);
     }

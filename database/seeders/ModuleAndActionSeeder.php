@@ -32,14 +32,14 @@ class ModuleAndActionSeeder extends Seeder
     private $moduleAndActionsList = [
         'SECURITY' => [
             'menu_text' => 'Seguridad',
-            'icon_name' => 'fas fa-user-shield',
+            'icon_name' => 'mdi mdi-lock',
             'actions' => [
                 //---------------Module------------
                 [
                     'name' => 'MODULE/INDEX',
                     'route' => 'modules.index',
                     'displayable_menu' => true,
-                    'icon_name' => 'fas fa-cubes',
+                    'icon_name' => 'mdi mdi-cube-outline',
                     'menu_text' => 'Modulos'
                 ],
                 [
@@ -59,7 +59,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'MODULE-ACTION/INDEX',
                     'route' => 'module_actions.index',
                     'displayable_menu' => true,
-                    'icon_name' => 'fas fa-cube',
+                    'icon_name' => 'mdi mdi-brightness-auto',
                     'menu_text' => 'Acciones de Modulo'
                 ],
                 [
@@ -79,7 +79,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'ROLE/INDEX',
                     'route' => 'roles.index',
                     'displayable_menu' => true,
-                    'icon_name' => 'fas fa-user-tag',
+                    'icon_name' => 'mdi mdi-account-card-details',
                     'menu_text' => 'Roles'
                 ],
                 [
@@ -107,7 +107,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'USER/INDEX',
                     'route' => 'users.index',
                     'displayable_menu' => true,
-                    'icon_name' => 'fas fa-users',
+                    'icon_name' => 'mdi mdi-account',
                     'menu_text' => 'Usuarios'
                 ],
                 [

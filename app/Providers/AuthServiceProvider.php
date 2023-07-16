@@ -50,5 +50,23 @@ class AuthServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+        Gate::define('has-access-to-at-least-one-action-module', function (User $user, $module_name) {
+            foreach ($user->roles as $role) {
+                if (!$role->status) {
+                    continue;
+                }
+                foreach ($role->moduleActions as $action) {
+                    if (!$action->status || !$action->module->status) {
+                        continue;
+                    }
+
+                    if ($action->module->name == $module_name) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
     }
 }

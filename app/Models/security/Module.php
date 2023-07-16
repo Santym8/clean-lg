@@ -13,4 +13,9 @@ class Module extends Model
         'name',
         'status',
     ];
+
+    public function moduleActions()
+    {
+        return $this->hasMany(ModuleAction::class);
+    }
 }

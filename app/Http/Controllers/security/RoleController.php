@@ -9,6 +9,7 @@ use App\Models\security\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
@@ -77,6 +78,11 @@ class RoleController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
+        $request->validate([
+            'name' => 'required|unique:roles',
+            'selected_module_actions' => 'array',
+        ]);
+
         $role = new Role();
         $role->name = $request->name;
         $role->save();
@@ -118,6 +124,12 @@ class RoleController extends Controller
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol con id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
+
+        $request->validate([
+            'name' => [Rule::unique('roles')->ignore($id)],
+            'selected_module_actions' => 'array',
+        ]);
+
 
         $role = Role::findOrFail($id);
         $role->name = $request->name;

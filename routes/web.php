@@ -3,6 +3,7 @@
 use App\Http\Controllers\customer\JobsController;
 use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
+use App\Http\Controllers\security\ModuleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
 use App\Http\Controllers\security\LoginController;
@@ -48,6 +49,10 @@ Route::resource('users', UserController::class)->except(
 // ------------Roles----------------
 Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware('auth');
 Route::put('roles/{id}/change-status', [RoleController::class, 'changeStatus'])->name('roles.changeStatus')->middleware('auth');
+
+// ------------Modules----------------
+Route::get('modules', [ModuleController::class, 'index'])->name('modules.index')->middleware('auth');
+Route::put('modules/{id}/change-status', [ModuleController::class, 'changeStatus'])->name('modules.changeStatus')->middleware('auth');
 
 // ------------Login----------------
 Route::get('/login', function () {

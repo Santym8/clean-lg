@@ -152,6 +152,59 @@ class Controller extends BaseController
         'not_access_destroy_job' => 'JOB/JOB/NOT-AUTHORIZED-DESTROY',
         'access_destroy_job' => 'JOB/JOB/AUTHORIZED-DESTROY',
 
+         // ---------------Services-----------------
+         'not_access_index_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-INDEX',
+         'access_index_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-INDEX',
+         'not_access_create_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-CREATE-VIEW',
+         'access_create_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-CREATE-VIEW',
+         'not_access_store_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-STORE',
+         'access_store_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-STORE',
+         'not_access_edit_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-EDIT-VIEW',
+         'access_edit_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-EDIT-VIEW',
+         'not_access_update_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-UPDATE',
+         'access_update_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-UPDATE',
+         'not_access_destroy_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-DESTROY',
+         'access_destroy_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-DESTROY',
+
+         // ---------------Goods-----------------
+         'not_access_index_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-INDEX',
+         'access_index_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-INDEX',
+         'not_access_create_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-CREATE-VIEW',
+         'access_create_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-CREATE-VIEW',
+         'not_access_store_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-STORE',
+         'access_store_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-STORE',
+         'not_access_show_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-SHOW',
+         'access_show_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-SHOW',
+         'not_access_edit_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-EDIT-VIEW',
+         'access_edit_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-EDIT-VIEW',
+         'not_access_update_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-UPDATE',
+         'access_update_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-UPDATE',
+         'not_access_destroy_goods' => 'SERVICE_ORDERS/GOODS/NOT-AUTHORIZED-DESTROY',
+         'access_destroy_goods' => 'SERVICE_ORDERS/GOODS/AUTHORIZED-DESTROY',
+
+         // ---------------serviceOrders-----------------
+         'not_access_index_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-INDEX',
+         'access_index_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-INDEX',
+         'not_access_create_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-CREATE-VIEW',
+         'access_create_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-CREATE-VIEW',
+         'not_access_store_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-STORE',
+         'access_store_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-STORE',
+         'not_access_show_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-SHOW',
+         'access_show_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-SHOW',
+         'not_access_edit_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-EDIT-VIEW',
+         'access_edit_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-EDIT-VIEW',
+         'not_access_update_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-UPDATE',
+         'access_update_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-UPDATE',
+         'not_access_destroy_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-DESTROY',
+         'access_destroy_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-DESTROY',
+
+         // ---------------serviceOrdersGoods-----------------
+         'not_access_index_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/NOT-AUTHORIZED-INDEX',
+         'access_index_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/AUTHORIZED-INDEX',
+         'not_access_create_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/NOT-AUTHORIZED-CREATE-VIEW',
+         'access_create_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/AUTHORIZED-CREATE-VIEW',
+         'not_access_store_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/NOT-AUTHORIZED-STORE',
+         'access_store_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/AUTHORIZED-STORE',
     ];
 
 

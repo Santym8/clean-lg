@@ -42,6 +42,8 @@ class RoleAndActionSeeder extends Seeder
             //MODULES
             'MODULE/INDEX',
             'MODULE/CHANGE-STATUS',
+            'MODULE/EDIT',
+            'MODULE/UPDATE',
             //MODULE-ACTIONS
             'MODULE-ACTION/INDEX',
             'MODULE-ACTION/CHANGE-STATUS',

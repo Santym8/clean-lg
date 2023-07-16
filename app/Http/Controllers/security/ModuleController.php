@@ -32,4 +32,26 @@ class ModuleController extends Controller
         $module->save();
         return redirect()->route('modules.index')->with('success', 'Modulo actualizado exitosamente.');
     }
+
+    public function edit(Request $request, string $id)
+    {
+        if (!Gate::allows('action-allowed-to-user', ['MODULE/EDIT'])) {
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para realizar esta accion.');
+        }
+
+        $module = Module::findOrFail($id);
+        return view($this->viewsPath . '.edit', compact('module'));
+    }
+
+    public function update(Request $request, string $id){
+        if (!Gate::allows('action-allowed-to-user', ['MODULE/UPDATE'])) {
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para realizar esta accion.');
+        }
+
+        $module = Module::findOrFail($id);
+        $module->menu_text = $request->menu_text;
+        $module->icon_name = $request->icon_name;
+        $module->save();
+        return redirect()->route('modules.index')->with('success', 'Modulo actualizado exitosamente.');
+    }
 }

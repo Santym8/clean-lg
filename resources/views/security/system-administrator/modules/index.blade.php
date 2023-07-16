@@ -19,6 +19,8 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Nombre</th>
+                    <th>Texto menu</th>
+                    <th>Icono</th>
                     <th scope="col">Fecha Creaci&oacute;n</th>
                     <th scope="col">Fecha Actulizaci&oacute;n</th>
                     <th scope="col">Estado</th>
@@ -30,6 +32,8 @@
                 @foreach ($modules as $module)
                     <tr>
                         <td>{{ $module->name }}</td>
+                        <td>{{ $module->menu_text }}</td>
+                        <td>{{ $module->icon_name }}</td>
                         <td>{{ $module->created_at }}</td>
                         <td>{{ $module->updated_at }}</td>
                         <td>{{ $module->status == 1 ? 'SI' : 'NO' }}</td>
@@ -43,6 +47,12 @@
                                     <button type="submit" class="btn btn-success">Activar</button>
                                 @endif
                             </form>
+
+                            <form action="{{ route('modules.edit', [$module->id]) }}">
+                                @csrf
+                                <input type="submit" class="btn btn-primary" value="Editar">
+                            </form>
+
                         </td>
                     </tr>
                 @endforeach

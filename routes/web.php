@@ -43,7 +43,8 @@ Route::resource("product", ProductController::class)->middleware('auth');
 // ------------Modules----------------
 Route::get('modules', [ModuleController::class, 'index'])->name('modules.index')->middleware('auth');
 Route::put('modules/{id}/change-status', [ModuleController::class, 'changeStatus'])->name('modules.changeStatus')->middleware('auth');
-
+Route::get('modules/{id}/edit', [ModuleController::class, 'edit'])->name('modules.edit')->middleware('auth');
+Route::patch('modules/{id}/update', [ModuleController::class, 'update'])->name('modules.update')->middleware('auth');
 // ------------Module Actions----------------
 Route::get('module-actions', [ModuleActionController::class, 'index'])->name('module_actions.index')->middleware('auth');
 Route::put('module-actions/{id}/change-status', [ModuleActionController::class, 'changeStatus'])->name('module_actions.changeStatus')->middleware('auth');

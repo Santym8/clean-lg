@@ -55,6 +55,34 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
     }
 
+    public function create(){
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/CREATE'])) {
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
+        $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
+            $query->where('status', true);
+        })->get()->sortBy('module.name');
+
+        return view($this->pathViews . '.create', [
+            'available_module_actions' => $availableModuleActions,
+        ]);
+    }
+
+    public function store(Request $request){
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/STORE'])) {
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
+        $role = new Role();
+        $role->name = $request->name;
+        $role->save();
+        $role->moduleActions()->sync($request->selected_module_actions);
+
+
+        return redirect()->route('roles.index')->with('success', 'Rol creado exitosamente.');
+    }
+
     public function edit(Request $request, string $id)
     {
         if (!Gate::allows('action-allowed-to-user', ['ROLE/EDIT'])) {

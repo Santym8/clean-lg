@@ -81,6 +81,14 @@ class ModuleAndActionSeeder extends Seeder
                 'name' => 'ROLE/UPDATE',
                 'route' => 'roles.update',
             ],
+            [
+                'name' => 'ROLE/CREATE',
+                'route' => 'roles.create',
+            ],
+            [
+                'name' => 'ROLE/STORE',
+                'route' => 'roles.store',
+            ],
             //---------------User------------
             [
                 'name' => 'USER/INDEX',

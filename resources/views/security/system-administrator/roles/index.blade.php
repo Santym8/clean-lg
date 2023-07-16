@@ -16,6 +16,10 @@
                 <h6 class="alert alert-success">{{ session('success') }}</h6>
             @endif
 
+            <form action="{{ route('roles.create') }}" method="GET">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Name</th>

@@ -55,6 +55,8 @@ Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->midd
 Route::put('roles/{id}/change-status', [RoleController::class, 'changeStatus'])->name('roles.changeStatus')->middleware('auth');
 Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit')->middleware('auth');
 Route::patch('roles/{id}/update', [RoleController::class, 'update'])->name('roles.update')->middleware('auth');
+Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create')->middleware('auth');
+Route::post('roles/store', [RoleController::class, 'store'])->name('roles.store')->middleware('auth');
 // ------------Users----------------
 Route::resource('users', UserController::class)->except(
     'show',

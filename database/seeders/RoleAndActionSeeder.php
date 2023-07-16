@@ -39,16 +39,22 @@ class RoleAndActionSeeder extends Seeder
     private $roleAndActionList = [
 
         'ADMINSTRADOR_DE_SISTEMA' => [
+            //MODULES
             'MODULE/INDEX',
             'MODULE/CHANGE-STATUS',
+            //MODULE-ACTIONS
             'MODULE-ACTION/INDEX',
             'MODULE-ACTION/CHANGE-STATUS',
             'MODULE-ACTION/EDIT',
             'MODULE-ACTION/UPDATE',
+            //ROLES
             'ROLE/INDEX',
             'ROLE/CHANGE-STATUS',
             'ROLE/EDIT',
             'ROLE/UPDATE',
+            'ROLE/CREATE',
+            'ROLE/STORE',
+            //USERS
             'USER/INDEX',
             'USER/CHANGE-STATUS',
             'USER/EDIT',

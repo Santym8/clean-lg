@@ -80,14 +80,26 @@ class ServiceOrderGoodsController extends Controller
         $service_orders->user_id = Auth::id();
         $service_orders->save();
 
-        $goods = new Goods();
-        //$goods->name = $request->name;
-        $goods->description = $request->description;
-        $goods->cost = $request->cost;
-        $goods->service_id = $request->service_id;
-        $goods->service_order_id = $service_orders->id;
-        //$goods->service_orders()->associate($service_orders);
-        $goods->save();
+
+        if ($request->has('service_id') && $request->has('description') && $request->has('cost')) {
+            
+            $serviceIds = $request->service_id;
+            $descriptions = $request->description;
+            $costs = $request->cost;
+            foreach ($serviceIds as $index => $serviceId) {
+            
+                $goods = new Goods();
+                //$goods->name = $request->name;
+                $goods->description = $descriptions[$index];
+                $goods->cost = $costs[$index];
+                $goods->service_id = $serviceId;
+                $goods->service_order_id = $service_orders->id;
+                //$goods->service_orders()->associate($service_orders);
+                $goods->save();
+            }
+        }
+      
+       
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_store_service_orders_goods'], '');
         return redirect()->route('service_orders_goods.index')->with('success', 'Orden y bien creado con éxito');

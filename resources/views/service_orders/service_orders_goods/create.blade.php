@@ -1,5 +1,5 @@
 @extends('app')
-
+<script src="{{ asset('js/goods.js') }}"></script>
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -46,17 +46,17 @@
                             <hr>
                             <h5 class="col-md-12 col-form-label text-md-left">Bienes</h5>
 
-                            <div class="goods-container">
+                            <div id="bienes-container">
                                 <div class="good form-inline">
 
                                     <div class="form-group">
                                         <label for="description" class="mr-2">Descripción:</label>
-                                        <input id="description" type="text" class="form-control mr-2" name="description"  >                                    
+                                        <input id="description" type="text" class="form-control mr-2" name="description[]"  >                                    
                                     </div>
 
                                     <div class="form-group">
                                         <label for="service" class="mr-2">Servicio:</label>
-                                        <select class="form-control mr-2" name="service_id" onchange="updateCost(this)">
+                                        <select class="form-control mr-2" name="service_id[]" onchange="updateCost(this)">
                                             <option value="" disabled selected>Seleccione el servicio</option>
                                             @foreach ($services as $service)
                                                 <option value="{{ $service->id }}" data-price="{{ $service->cost }}">{{ $service->name }}</option>
@@ -65,21 +65,23 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="cost" class="mr-2">Costo:</label>
-                                        <input type="number" step="0.01" class="form-control mr-2" name="cost" readonly>
+                                        <input id="cost" type="number" step="0.01" class="form-control mr-2" name="cost[]" >
                                     </div>
 
-                                    <button type="button" class="btn btn-danger" onclick="removeGood(this)">X</button>
+                                  
                                 </div>
                             </div>
                             <hr>
 
-                            <button type="button" class="btn btn-primary" onclick="addGood()">Agregar Bien</button>
+                              <!-- Campos para los bienes -->
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Guardar</button>
                                 </div>
                             </div>
+                            <button type="button" id="agregar-bien">Agregar Bien</button>
                         </form>
                     </div>
                 </div>

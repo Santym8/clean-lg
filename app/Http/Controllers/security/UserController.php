@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
 
-    private $pathViews = 'security.seg-system-administrator.users';
+    private $pathViews = 'security.system-administrator.users';
 
     /**
      * Display a listing of the resource.

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Gate;
 class RoleController extends Controller
 {
 
-    private $pathViews = 'security.seg-system-administrator.roles';
+    private $pathViews = 'security.system-administrator.roles';
 
     /**
      * Display a listing of the resource.

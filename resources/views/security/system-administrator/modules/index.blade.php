@@ -38,7 +38,7 @@
                         <td>{{ $module->updated_at }}</td>
                         <td>{{ $module->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            @if ($module->name != 'SECURITY')
+                            @if ($module->name != 'SECURITY' && Gate::allows('action-allowed-to-user', ['MODULE/CHANGE-STATUS']))
                                 <form action="{{ route('modules.changeStatus', [$module->id]) }}" method="post">
                                     @csrf
                                     @method('PUT')
@@ -50,12 +50,12 @@
                                 </form>
                             @endif
 
-
-                            <form action="{{ route('modules.edit', [$module->id]) }}">
-                                @csrf
-                                <input type="submit" class="btn btn-primary" value="Editar">
-                            </form>
-
+                            @if (Gate::allows('action-allowed-to-user', ['MODULE/EDIT']))
+                                <form action="{{ route('modules.edit', [$module->id]) }}">
+                                    @csrf
+                                    <input type="submit" class="btn btn-primary" value="Editar">
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

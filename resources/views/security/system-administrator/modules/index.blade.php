@@ -38,15 +38,18 @@
                         <td>{{ $module->updated_at }}</td>
                         <td>{{ $module->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            <form action="{{ route('modules.changeStatus', [$module->id]) }}" method="post">
-                                @csrf
-                                @method('PUT')
-                                @if ($module->status == 1)
-                                    <button type="submit" class="btn btn-danger">Desactivar</button>
-                                @else
-                                    <button type="submit" class="btn btn-success">Activar</button>
-                                @endif
-                            </form>
+                            @if ($module->name != 'SECURITY')
+                                <form action="{{ route('modules.changeStatus', [$module->id]) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    @if ($module->status == 1)
+                                        <button type="submit" class="btn btn-danger">Desactivar</button>
+                                    @else
+                                        <button type="submit" class="btn btn-success">Activar</button>
+                                    @endif
+                                </form>
+                            @endif
+
 
                             <form action="{{ route('modules.edit', [$module->id]) }}">
                                 @csrf

@@ -28,6 +28,11 @@ class ModuleController extends Controller
         }
 
         $module = Module::findOrFail($id);
+
+        if($module->name == 'SECURITY'){
+            return redirect()->route('modules.index')->with('error', 'No se puede desactivar el modulo de seguridad.');
+        }
+
         $module->status = !$module->status;
         $module->save();
         return redirect()->route('modules.index')->with('success', 'Modulo actualizado exitosamente.');

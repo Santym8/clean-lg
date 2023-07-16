@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('displayable_menu')->default(false);
             $table->string('icon_name', 50)->nullable();
             $table->boolean('status')->default(true);
+            $table->string('menu_text', 50)->nullable();
             $table->foreignId('module_id')->constrained('modules');
         });
     }

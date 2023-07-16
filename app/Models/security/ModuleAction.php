@@ -2,6 +2,7 @@
 
 namespace App\Models\security;
 
+use App\Models\security\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,7 @@ class ModuleAction extends Model
         'route',
         'displayable_menu',
         'icon_name',
+        'menu_text',
         'status',
         'module_id',
     ];
@@ -21,5 +23,10 @@ class ModuleAction extends Model
     public function module()
     {
         return $this->belongsTo(Module::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class)->withTimestamps()->withPivot('status')->where('status', true);
     }
 }

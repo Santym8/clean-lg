@@ -53,7 +53,8 @@ Route::patch('module-actions/{id}/update', [ModuleActionController::class, 'upda
 // ------------Roles----------------
 Route::get('roles', [RoleController::class, 'index'])->name('roles.index')->middleware('auth');
 Route::put('roles/{id}/change-status', [RoleController::class, 'changeStatus'])->name('roles.changeStatus')->middleware('auth');
-
+Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit')->middleware('auth');
+Route::patch('roles/{id}/update', [RoleController::class, 'update'])->name('roles.update')->middleware('auth');
 // ------------Users----------------
 Route::resource('users', UserController::class)->except(
     'show',

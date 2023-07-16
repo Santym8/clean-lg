@@ -13,9 +13,7 @@ class ModuleActionController extends Controller
     public function index()
     {
         //Only actions that belongs to an active module will be desplayed
-        $moduleActions = ModuleAction::whereHas('module', function ($query) {
-            $query->where('status', true);
-        })->get()->sortBy('module.name')->sortBy('name');
+        $moduleActions = ModuleAction::all()->sortBy('module.name')->sortBy('name');
 
         return view($this->viewsPath . '.index', compact('moduleActions'));
     }
@@ -29,6 +27,7 @@ class ModuleActionController extends Controller
     public function update(Request $request, string $id)
     {
         $action = ModuleAction::find($id);
+        $action->menu_text = $request->menu_text;
         $action->icon_name = $request->icon_name;
         $action->save();
 

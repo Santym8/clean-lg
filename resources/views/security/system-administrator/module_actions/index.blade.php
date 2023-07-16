@@ -23,6 +23,7 @@
                     <th>Ruta</th>
                     <th>Menu</th>
                     <th>Icono</th>
+                    <th>Texto Menu</th>
                     <th scope="col">Fecha Creaci&oacute;n</th>
                     <th scope="col">Fecha Actulizaci&oacute;n</th>
                     <th scope="col">Estado</th>
@@ -38,6 +39,7 @@
                         <td>{{ $moduleAction->route }}</td>
                         <td>{{ $moduleAction->displayable_menu == 1 ? 'SI' : 'NO' }}</td>
                         <td>{{ $moduleAction->icon_name }}</td>
+                        <td> {{ $moduleAction->menu_text }}</td>
                         <td>{{ $moduleAction->created_at }}</td>
                         <td>{{ $moduleAction->updated_at }}</td>
                         <td>{{ $moduleAction->status == 1 ? 'SI' : 'NO' }}</td>
@@ -52,7 +54,8 @@
                                 @endif
                             </form>
 
-                            <a href="{{ route('module_actions.edit', [$moduleAction->id]) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('module_actions.edit', [$moduleAction->id]) }}"
+                                class="btn btn-primary">Editar</a>
                         </td>
                     </tr>
                 @endforeach

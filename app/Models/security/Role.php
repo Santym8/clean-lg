@@ -10,4 +10,9 @@ class Role extends Model
     use HasFactory;
 
     protected $fillable=['name','status'];
+
+    public function moduleActions()
+    {
+        return $this->belongsToMany(ModuleAction::class);
+    }
 }

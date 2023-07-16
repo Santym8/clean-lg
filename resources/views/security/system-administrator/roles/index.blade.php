@@ -45,7 +45,10 @@
                                     @endif
                                 </form>
                             @endif
-
+                            <form action="{{ route('roles.edit', [$role->id]) }}">
+                                @csrf
+                                <input type="submit" class="btn btn-primary" value="Editar">
+                            </form>
                         </td>
                     </tr>
                 @endforeach

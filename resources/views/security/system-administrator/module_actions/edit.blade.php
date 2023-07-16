@@ -25,6 +25,10 @@
             <input type="text" name="icon_name" id="icon_name" class="form-control" placeholder="Nombre Icono"
                 value="{{ $moduleAction->icon_name }}">
 
+            <label for="menu_text">Texto de Menu</label>
+            <input type="text" name="menu_text" id="menu_text" class="form-control" placeholder="Texto de Menu"
+                value="{{ $moduleAction->menu_text }}">
+
             <input type="submit" class="btn btn-primary" value="Guardar" />
         </form>
     </div>

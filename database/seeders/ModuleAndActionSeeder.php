@@ -7,7 +7,7 @@ use App\Models\security\ModuleAction;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class SecuritySeeder extends Seeder
+class ModuleAndActionSeeder extends Seeder
 {
 
     public function run(): void
@@ -35,6 +35,7 @@ class SecuritySeeder extends Seeder
                 'route' => 'modules.index',
                 'displayable_menu' => true,
                 'icon_name' => 'fas fa-cubes',
+                'menu_text' => 'Modulos'
             ],
             [
                 'name' => 'MODULE/CHANGE-STATUS',
@@ -46,6 +47,7 @@ class SecuritySeeder extends Seeder
                 'route' => 'module_actions.index',
                 'displayable_menu' => true,
                 'icon_name' => 'fas fa-cube',
+                'menu_text' => 'Acciones de Modulo'
             ],
             [
                 'name' => 'MODULE-ACTION/CHANGE-STATUS',
@@ -61,14 +63,23 @@ class SecuritySeeder extends Seeder
             ],
             //---------------Rol------------
             [
-                'name' => 'ROL/INDEX',
+                'name' => 'ROLE/INDEX',
                 'route' => 'roles.index',
                 'displayable_menu' => true,
                 'icon_name' => 'fas fa-user-tag',
+                'menu_text' => 'Roles'
             ],
             [
-                'name' => 'ROL/CHANGE-STATUS',
+                'name' => 'ROLE/CHANGE-STATUS',
                 'route' => 'roles.changeStatus',
+            ],
+            [
+                'name' => 'ROLE/EDIT',
+                'route' => 'roles.edit',
+            ],
+            [
+                'name' => 'ROLE/UPDATE',
+                'route' => 'roles.update',
             ],
             //---------------User------------
             [
@@ -76,14 +87,11 @@ class SecuritySeeder extends Seeder
                 'route' => 'users.index',
                 'displayable_menu' => true,
                 'icon_name' => 'fas fa-users',
+                'menu_text' => 'Usuarios'
             ],
             [
-                'name' => 'USER/CREATE',
-                'route' => 'users.create',
-            ],
-            [
-                'name' => 'USER/STORE',
-                'route' => 'users.store',
+                'name' => 'USER/CHANGE-STATUS',
+                'route' => 'users.changeStatus',
             ],
             [
                 'name' => 'USER/EDIT',
@@ -94,8 +102,12 @@ class SecuritySeeder extends Seeder
                 'route' => 'users.update',
             ],
             [
-                'name' => 'USER/CHANGE-STATUS',
-                'route' => 'users.changeStatus',
+                'name' => 'USER/CREATE',
+                'route' => 'users.create',
+            ],
+            [
+                'name' => 'USER/STORE',
+                'route' => 'users.store',
             ],
         ],
         'AUDIT',

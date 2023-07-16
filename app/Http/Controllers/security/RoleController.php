@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\security;
 
 use App\Http\Controllers\Controller;
+use App\Models\security\Module;
+use App\Models\security\ModuleAction;
 use App\Models\security\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +54,34 @@ class RoleController extends Controller
         $role->save();
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_status_role'], 'Se modifico el estado del rol con id: ' . $id);
+        return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
+    }
+
+    public function edit(Request $request, string $id)
+    {
+        $role = Role::findOrFail($id);
+        $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
+            $query->where('status', true);
+        })->get()->sortBy('module.name');
+
+        //Delete from the list all the actions that the role already has
+        foreach ($role->moduleActions as $moduleAction) {
+            $availableModuleActions = $availableModuleActions->reject(function ($value, $key) use ($moduleAction) {
+                return $value->id == $moduleAction->id;
+            });
+        }
+
+        return view($this->pathViews . '.edit', [
+            'role' => $role,
+            'available_module_actions' => $availableModuleActions,
+        ]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $role = Role::findOrFail($id);
+        $role->moduleActions()->sync($request->selected_module_actions);
+
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
     }
 }

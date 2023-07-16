@@ -31,7 +31,7 @@ class ModuleAndActionSeeder extends Seeder
 
     private $moduleAndActionsList = [
         'SECURITY' => [
-            'menu_text' => 'Seguridad',
+            'menu_text' => 'SEGURIDAD',
             'icon_name' => 'mdi mdi-lock',
             'actions' => [
                 //---------------Module------------
@@ -40,7 +40,7 @@ class ModuleAndActionSeeder extends Seeder
                     'route' => 'modules.index',
                     'displayable_menu' => true,
                     'icon_name' => 'mdi mdi-cube-outline',
-                    'menu_text' => 'Modulos'
+                    'menu_text' => 'MODULOS'
                 ],
                 [
                     'name' => 'MODULE/CHANGE-STATUS',
@@ -60,7 +60,7 @@ class ModuleAndActionSeeder extends Seeder
                     'route' => 'module_actions.index',
                     'displayable_menu' => true,
                     'icon_name' => 'mdi mdi-brightness-auto',
-                    'menu_text' => 'Acciones de Modulo'
+                    'menu_text' => 'ACCIONES DE MODULO'
                 ],
                 [
                     'name' => 'MODULE-ACTION/CHANGE-STATUS',
@@ -80,7 +80,7 @@ class ModuleAndActionSeeder extends Seeder
                     'route' => 'roles.index',
                     'displayable_menu' => true,
                     'icon_name' => 'mdi mdi-account-card-details',
-                    'menu_text' => 'Roles'
+                    'menu_text' => 'ROLES'
                 ],
                 [
                     'name' => 'ROLE/CHANGE-STATUS',
@@ -108,7 +108,7 @@ class ModuleAndActionSeeder extends Seeder
                     'route' => 'users.index',
                     'displayable_menu' => true,
                     'icon_name' => 'mdi mdi-account',
-                    'menu_text' => 'Usuarios'
+                    'menu_text' => 'USUARIOS'
                 ],
                 [
                     'name' => 'USER/EDIT',

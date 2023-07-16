@@ -16,9 +16,12 @@
                 <h6 class="alert alert-success">{{ session('success') }}</h6>
             @endif
 
-            <form action="{{ route('roles.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
-            </form>
+            @if (Gate::allows('action-allowed-to-user', ['ROLE/CREATE']))
+                <form action="{{ route('roles.create') }}" method="GET">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            @endif
+
 
             <thead class="thead-dark">
                 <tr>
@@ -38,7 +41,7 @@
                         <td>{{ $role->updated_at }}</td>
                         <td>{{ $role->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            @if ($role->name != 'ADMINSTRADOR_DE_SISTEMA')
+                            @if ($role->name != 'ADMINSTRADOR_DE_SISTEMA' && Gate::allows('action-allowed-to-user', ['ROLE/CHANGE-STATUS']))
                                 <form action="{{ route('roles.changeStatus', [$role->id]) }}" method="post">
                                     @csrf
                                     @method('PUT')
@@ -49,10 +52,13 @@
                                     @endif
                                 </form>
                             @endif
-                            <form action="{{ route('roles.edit', [$role->id]) }}">
-                                @csrf
-                                <input type="submit" class="btn btn-primary" value="Editar">
-                            </form>
+
+                            @if (Gate::allows('action-allowed-to-user', ['ROLE/EDIT']))
+                                <form action="{{ route('roles.edit', [$role->id]) }}">
+                                    @csrf
+                                    <input type="submit" class="btn btn-primary" value="Editar">
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

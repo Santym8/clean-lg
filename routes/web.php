@@ -26,7 +26,7 @@ use App\Http\Controllers\inventory\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route("login"));
 });
 
 // ------------------------------Module Customer-----------------------------

@@ -36,7 +36,48 @@
                 <!-- begin sidebar scrollbar -->
                 <div class="sidebar-left" data-simplebar style="height: 100%;">
                     <!-- sidebar menu -->
+
                     <ul class="nav sidebar-inner" id="sidebar-menu">
+                        @php
+                            use App\Models\security\Module;
+                            $modules = Module::all();
+                        @endphp
+
+                        @foreach ($modules as $module)
+                            @if (Gate::allows('has-access-to-at-least-one-action-module', [$module->name]))
+                                <li class="has-sub">
+                                    <a class="sidenav-item-link" href="" data-toggle="collapse"
+                                        data-target="#{{ $module->name }}" aria-expanded="false"
+                                        aria-controls="{{ $module->name }}">
+                                        <i class="{{ $module->icon_name }}"></i>
+                                        <span class="nav-text">{{ $module->menu_text }}</span> <b class="caret"></b>
+                                    </a>
+                                    <ul class="collapse" id="{{ $module->name }}" data-parent="#sidebar-menu">
+                                        <div class="sub-menu">
+
+                                            @foreach ($module->moduleActions as $moduleAction)
+                                                @if ($moduleAction->displayable_menu == 1 && Gate::allows('action-allowed-to-user', [$moduleAction->name]))
+                                                    <li>
+                                                        <a class="sidenav-item-link"
+                                                            href="{{ route($moduleAction->route) }}">
+                                                            <i class="{{ $moduleAction->icon_name }}"></i>
+                                                            <span class="nav-text">{{ $moduleAction->menu_text }}</span>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+
+                                        </div>
+                                    </ul>
+                                </li>
+                            @endif
+                        @endforeach
+
+                    </ul>
+
+
+
+                    {{-- <ul class="nav sidebar-inner" id="sidebar-menu">
                         @php
                             $rolInventory = ['BODEGUERO_INVENTARIO'];
                             $rolSecurity = ['ADMINSTRADOR_DE_SISTEMA'];
@@ -184,7 +225,7 @@
                                 </ul>
                             </li>
                         @endif
-                    </ul>
+                    </ul> --}}
                 </div>
             </div>
         </aside>

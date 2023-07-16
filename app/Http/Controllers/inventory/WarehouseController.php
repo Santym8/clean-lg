@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\inventory;
 
 use App\Http\Controllers\Controller;
-use App\Models\Warehouse;
+use App\Models\inventory\Warehouse;
 use Illuminate\Http\Request;
-use App\Models\product_warehouse;
+use App\Models\inventory\ProductWarehouse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 class WarehouseController extends Controller
@@ -121,7 +121,7 @@ class WarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $warehouse = Warehouse::find($id);
-        $relatedProducts = product_warehouse::where('warehouse_id', $warehouse->id)
+        $relatedProducts = ProductWarehouse::where('warehouse_id', $warehouse->id)
             ->where('status', 1)
             ->count();
     

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\inventory;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\inventory\Category;
+use App\Models\inventory\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -22,7 +24,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_category'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         $category = Category::all();
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_category'], '');
         return view('inventory.category.index', ['categories' => $category]);
     }
 
@@ -31,6 +39,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_category'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_category'], '');
         return view('inventory.category.create');
     }
 
@@ -39,13 +53,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_category'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         $request->validate([
             'name' => 'required',
         ]);
         $category = new Category();
         $category->name = $request->name;
         $category->save();
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_category'], '');
         return redirect()->route('category.index')->with('success', 'Categoria creada con éxito');
     }
 
@@ -62,7 +81,13 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_category'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         $category = Category::find($id);
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_category'], '');
         return view('inventory.category.edit', ['category' => $category]);
     }
 
@@ -71,13 +96,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_category'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         $request -> validate([
             'name' => 'required',
         ]);
         $category = Category::find($id);
         $category->name = $request->name;
         $category->save();
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_category'], '');
         return redirect()->route('category.index')->with('success', 'Categoria actualizada con éxito');
     }
 
@@ -86,6 +116,11 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        $roleNames = array("BODEGUERO_INVENTARIO");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_category'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         $category = Category::find($id);
         if ($category->id == 1) {
             return redirect()->back()->with('error', 'No puedes eliminar la categoría principal');
@@ -96,7 +131,7 @@ class CategoryController extends Controller
         
         // Actualizar la categoría de los productos asociados
         Product::where('category_id', $id)->update(['category_id' => 1]);
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_category'], '');
         return redirect()->back()->with('success', 'Categoria eliminada con éxito'); // Ejemplo de redirección con mensaje de éxito
     }
 }

@@ -25,6 +25,14 @@ class Controller extends BaseController
         'access_index_role' => 'SECURITY/ROLE/AUTHORIZED-INDEX',
         'not_access_status_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-CHANGE-STATUS',
         'access_status_role' => 'SECURITY/ROLE/CHANGE-STATUS',
+        'not_access_create_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_role' => 'SECURITY/ROLE/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-STORE',
+        'access_store_role' => 'SECURITY/ROLE/AUTHORIZED-STORE',
+        'not_access_edit_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_role' => 'SECURITY/ROLE/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-UPDATE',
+        'access_update_role' => 'SECURITY/ROLE/AUTHORIZED-UPDATE',
 
         'not_access_index_user' => 'SECURITY/USER/NOT-AUTHORIZED-INDEX',
         'access_index_user' => 'SECURITY/USER/AUTHORIZED-INDEX',
@@ -36,6 +44,25 @@ class Controller extends BaseController
         'access_edit_user' => 'SECURITY/USER/AUTHORIZED-EDIT-VIEW',
         'not_access_update_user' => 'SECURITY/USER/NOT-AUTHORIZED-UPDATE',
         'access_update_user' => 'SECURITY/USER/AUTHORIZED-UPDATE',
+
+        'not_access_index_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-INDEX',
+        'access_index_module' => 'SECURITY/MODULE/AUTHORIZED-INDEX',
+        'not_access_change_status_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_module' => 'SECURITY/MODULE/AUTHORIZED-CHANGE-STATUS',
+        'not_access_edit_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_module' => 'SECURITY/MODULE/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-UPDATE',
+        'access_update_module' => 'SECURITY/MODULE/AUTHORIZED-UPDATE',
+
+        'not_access_index_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-INDEX',
+        'access_index_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-INDEX',
+        'not_access_change_status_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-CHANGE-STATUS',
+        'not_access_edit_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-UPDATE',
+        'access_update_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-UPDATE',
+
 
         // ---------------Audit Trail-----------------
         'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',
@@ -70,6 +97,31 @@ class Controller extends BaseController
         'not_access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-DESTROY',
         'access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-DESTROY',
 
+        'not_access_index_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-INDEX',
+        'access_index_product' => 'INVENTORY/PRODUCT/AUTHORIZED-INDEX',
+        'not_access_create_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_product' => 'INVENTORY/PRODUCT/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-STORE',
+        'access_store_product' => 'INVENTORY/PRODUCT/AUTHORIZED-STORE',
+        'not_access_edit_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_product' => 'INVENTORY/PRODUCT/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-UPDATE',
+        'access_update_product' => 'INVENTORY/PRODUCT/AUTHORIZED-UPDATE',
+        'not_access_destroy_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_product' => 'INVENTORY/PRODUCT/AUTHORIZED-DESTROY',
+
+        'not_access_index_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-INDEX',
+        'access_index_category' => 'INVENTORY/CATEGORY/AUTHORIZED-INDEX',
+        'not_access_create_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_category' => 'INVENTORY/CATEGORY/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-STORE',
+        'access_store_category' => 'INVENTORY/CATEGORY/AUTHORIZED-STORE',
+        'not_access_edit_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_category' => 'INVENTORY/CATEGORY/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-UPDATE',
+        'access_update_category' => 'INVENTORY/CATEGORY/AUTHORIZED-UPDATE',
+        'not_access_destroy_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_category' => 'INVENTORY/CATEGORY/AUTHORIZED-DESTROY',
         // ---------------Customer-----------------
         'not_access_index_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-INDEX',
         'access_index_customer' => 'CUSTOMER/CUSTOMER/AUTHORIZED-INDEX',
@@ -162,6 +214,7 @@ class Controller extends BaseController
         $audit->user()->associate($user);
         $audit->type = $type;
         $audit->data = $data;
+        $audit->ip = request()->ip();
         $audit->save();
     }
 }

@@ -20,15 +20,6 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
-
-        // -------------Asignation all Roles to Admin----------------
-        $roles = Role::all();
-        foreach ($roles as $role) {
-            DB::table('role_user')->insert([
-                'role_id' => $role->id,
-                'user_id' => 1,
-            ]);
-        }
     }
 
     /**

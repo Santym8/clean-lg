@@ -20,7 +20,7 @@ class User extends Authenticatable
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class)->withTimestamps()->withPivot('status')->wherePivot('status', 1);
+        return $this->belongsToMany(Role::class)->withTimestamps()->withPivot('status');
     }
 
     public function hasRole(string $rol_name): bool

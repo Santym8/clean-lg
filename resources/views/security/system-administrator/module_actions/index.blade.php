@@ -54,8 +54,12 @@
                                 @endif
                             </form>
 
-                            <a href="{{ route('module_actions.edit', [$moduleAction->id]) }}"
-                                class="btn btn-primary">Editar</a>
+                            @if ($moduleAction->displayable_menu)
+                                <a href="{{ route('module_actions.edit', [$moduleAction->id]) }}"
+                                    class="btn btn-primary">Editar</a>
+                            @endif
+
+
                         </td>
                     </tr>
                 @endforeach

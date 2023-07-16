@@ -18,33 +18,38 @@
         @csrf
         <div class="form-group">
             <label for="delivery_date">Fecha de entrega:</label>
-            <input type="date" class="form-control" id="delivery_date" name="delivery_date" placeholder="Fecha de entrega" required>
+            <input type="date" class="form-control" id="delivery_date" name="delivery_date" required>
 
             <label for="prepayment">Pago por adelantado:</label>
             <input type="number" class="form-control" id="prepayment" name="prepayment" placeholder="Pago por adelantado" required>
 
-            <label for="customers">Cliente:</label>
-            <select name="customers" id="customers" class="form-control" required>
-                @foreach ($customers as $customer)
-                @if ($customer->status == 1)
-                <option value="{{ $customer->id }}">{{ $customer->first_name }}</option>
-                @endif
-                @endforeach
-            </select>
+            <div class="form-group">
+                <label for="customers" class="mr-2">Cliente:</label>
+                <select class="form-control mr-2" name="customers" onchange="updateCustomerName(this)">
+                <option value="" disabled selected>Seleccione el cliente</option>
+                    @foreach ($customers as $customer)
+                    <option value="{{ $customer->id }}" data-name="{{ $customer->first_name }} {{ $customer->last_name }}">{{ $customer->identification }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-            <label for="users">Usuario:</label>
-            <select name="users" id="users" class="form-control" required>
-                @foreach ($users as $user)
-                @if ($user->status == 1)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endif
-                @endforeach
-            </select>
+            <div class="form-group">
+                <label for="name" class="mr-2">Nombres:</label>
+                <input id="name" type="text" class="form-control mr-2" name="name" readonly>
+            </div>
         </div>
         <!-- Add other fields as needed -->
         <button type="submit" class="btn btn-primary">Crear</button>
         <a class="btn btn-secondary" href="{{ route('service_orders.index') }}">Cancelar</a>
     </form>
 </div>
+<script>
+       function updateCustomerName(select) {
+            const container = select.parentNode.parentNode;
+            const nameInput = container.querySelector('input[name="name"]');
+            const customerName = select.options[select.selectedIndex].getAttribute('data-name');
+            nameInput.value = customerName;
+        }
+    </script>
 
 @endsection

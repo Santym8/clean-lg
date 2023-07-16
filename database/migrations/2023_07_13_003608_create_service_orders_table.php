@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('delivery_date');
             $table->decimal('prepayment', 8, 2);
-            $table->boolean('delivery')->default(true);;
+            $table->boolean('delivery')->default(false);;
             $table->timestamps();
             $table->boolean('status')->default(true);
 

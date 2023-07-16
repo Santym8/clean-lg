@@ -146,6 +146,13 @@ class Controller extends BaseController
          'not_access_destroy_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/NOT-AUTHORIZED-DESTROY',
          'access_destroy_service_orders' => 'SERVICE_ORDERS/SERVICE_ORDERS/AUTHORIZED-DESTROY',
 
+         // ---------------serviceOrdersGoods-----------------
+         'not_access_index_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/NOT-AUTHORIZED-INDEX',
+         'access_index_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/AUTHORIZED-INDEX',
+         'not_access_create_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/NOT-AUTHORIZED-CREATE-VIEW',
+         'access_create_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/AUTHORIZED-CREATE-VIEW',
+         'not_access_store_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/NOT-AUTHORIZED-STORE',
+         'access_store_service_orders_goods' => 'SERVICE_ORDERS/SERVICE_ORDERS_GOODS/AUTHORIZED-STORE',
     ];
 
 

@@ -19,26 +19,32 @@ class ServiceOrderGoodsController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_SERVICIOS_BIENES");
+        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
         if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_goods'], '');
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_goods'], '');
         $goods = Goods::all();
-        $service_orders = ServiceOrders::all();
-        
-        return view('service_orders_goods.goods.index', ['goods' => $goods, 'service_orders' => $service_orders]);
+        $services = Services::all();
+        $service_order_goods = ServiceOrders::all();
+        $this->addAudit(Auth::user(), $this->typeAudit['access_index_service_orders_goods'], '');
+        return view('service_orders.service_orders_goods.index', ['service_order_goods' => $service_order_goods,'goods' => $goods,'services' => $services]);
     }
 
     public function create()
     {
+        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_service_orders_goods'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
         // Aquí puedes cargar los datos necesarios para tu vista, como los clientes y usuarios disponibles
         $customers = Customer::all();
         $users = User::all();
         $services = Services::all();
 
+        $this->addAudit(Auth::user(), $this->typeAudit['access_create_service_orders_goods'], '');
         return view('service_orders.service_orders_goods.create', compact('customers', 'users','services'));
     }
 
@@ -47,46 +53,55 @@ class ServiceOrderGoodsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'delivery_date' => 'required|date',
-            'prepayment' => 'required|numeric',
-            'delivery' => 'required|boolean',
-            'status' => 'required|boolean',
-            'customer_id' => 'required|exists:customers,id',
-            'user_id' => 'required|exists:users,id',
-            'goods' => 'required|array',
-            'goods.*.name' => 'required|string',
-            'goods.*.description' => 'required|string',
-            'goods.*.cost' => 'required|numeric',
-        ]);
-
-        // Crear la orden de servicio
-        $serviceOrder = ServiceOrders::create([
-            'delivery_date' => $request->delivery_date,
-            'prepayment' => $request->prepayment,
-            'delivery' => $request->delivery,
-            'status' => $request->status,
-            'customer_id' => $request->customer_id,
-            'user_id' => $request->user_id,
-        ]);
-
-        // Crear los bienes asociados a la orden de servicio
-        foreach ($request->goods as $goodData) {
-            Goods::create([
-                'name' => $goodData['name'],
-                'description' => $goodData['description'],
-                'cost' => $goodData['cost'],
-                'service_id' => $serviceOrder->service_id,
-                'service_order_id' => $serviceOrder->id,
-            ]);
+        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        if (!Gate::allows('has-rol', [$roleNames])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_service_orders_goods'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        return redirect()->route('service_orders.index')->with('success', 'Orden de servicio creada correctamente.');
+
+        $request->validate([
+            //SeoGoods
+            //'name' => 'required',
+            'description' => 'required',
+            'cost' => 'required|numeric',
+            'service_id' => 'required',
+            //'service_order_id' => 'required',
+            //SeoServiceOrders
+            'delivery_date' => 'required',
+            'prepayment' => 'required|numeric',
+            'customer_id'=>'required',
+            //'user_id'=>'required',
+        ]);
+
+        $service_orders = new ServiceOrders();
+        $service_orders->delivery_date = $request->delivery_date;
+        $service_orders->prepayment = $request->prepayment;
+        $service_orders->customer_id = $request->customer_id;
+        $service_orders->user_id = Auth::id();
+        $service_orders->save();
+
+        $goods = new Goods();
+        //$goods->name = $request->name;
+        $goods->description = $request->description;
+        $goods->cost = $request->cost;
+        $goods->service_id = $request->service_id;
+        $goods->service_order_id = $service_orders->id;
+        //$goods->service_orders()->associate($service_orders);
+        $goods->save();
+
+        $this->addAudit(Auth::user(), $this->typeAudit['access_store_service_orders_goods'], '');
+        return redirect()->route('service_orders_goods.index')->with('success', 'Orden y bien creado con éxito');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
+    {
+
+    }
+
+    public function update(Request $request, string $id)
     {
         
     }
@@ -96,16 +111,6 @@ class ServiceOrderGoodsController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_goods'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
-
-        $goods = Goods::find($id);
-        $goods->status = 0;
-        $goods->save();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_destroy_goods'], '');
-        return redirect()->back()->with('success', 'Bien eliminado con éxito');
+    
     }
 }

@@ -40,7 +40,13 @@ return new class extends Migration
                 'name' => 'OPERADOR_SERVICIOS',
             ],
             [
-                'name' => 'OPERADOR_SERVICIOS_BIENES',
+                'name' => 'OPERADOR_BIENES',
+            ],
+            [
+                'name' => 'OPERADOR_ORDENES_SERVICIOS',
+            ],
+            [
+                'name' => 'OPERADOR_ORDENES_SERVICIOS_BIENES',
             ],
         ];
 

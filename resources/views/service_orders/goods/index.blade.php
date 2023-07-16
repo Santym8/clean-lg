@@ -12,14 +12,13 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Costo</th>
+                <th scope="col">Descripción</th>        
                 <th scope="col">Status</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 <th scope="col">Orden de servicio</th>
                 <th scope="col">Servicio</th>
+                <th scope="col">Costo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,16 +26,16 @@
             @foreach ($goods as $good)
             <tr>
                 <th scope="row">{{ $good->id }}</th>
-                <td>{{ $good->name }}</td>
-                <td>{{ $good->description }}</td>
-                <td>{{ $good->cost }}</td>
+                <td>{{ $good->description }}</td>               
                 <td>{{ $good->status ==1?'SI':'NO'}}</td>
                 <td>{{ $good->created_at }}</td>
                 <td>{{ $good->updated_at }}</td>
-                <td>{{ $good->service_orders->delivery_date }}</td>
+                <td>{{ $good->service_orders->id }}</td>
                 <td>{{ $good->services->name }}</td>
+                <td>{{ $good->cost }}</td>
 
                 <td>
+                    <a href="{{ route('goods.edit', ['good' => $good->id]) }}" class="btn btn-primary">Editar</a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $good->id }}">Eliminar</button>
                     
                     <div class="modal fade" id="modal{{ $good->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

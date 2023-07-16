@@ -39,9 +39,9 @@
                 </td>
 
                 <td>                  
+                    <a href="{{ route('service_orders.edit', ['service_order' => $service_order->id]) }}" class="btn btn-primary">Editar</a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $service_order->id }}">Eliminar</button>
 
-                    <!-- Modal -->
                     <div class="modal fade" id="modal{{ $service_order->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

@@ -46,6 +46,16 @@ class Controller extends BaseController
         'not_access_update_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-UPDATE',
         'access_update_module' => 'SECURITY/MODULE/AUTHORIZED-UPDATE',
 
+        'not_access_index_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-INDEX',
+        'access_index_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-INDEX',
+        'not_access_change_status_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-CHANGE-STATUS',
+        'not_access_edit_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-UPDATE',
+        'access_update_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-UPDATE',
+
+
         // ---------------Audit Trail-----------------
         'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',
         'access_index_audit' => 'AUDIT/AUDIT-TRAIL/AUTHORIZED-INDEX',

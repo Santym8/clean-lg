@@ -21,8 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -52,8 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -69,8 +67,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -113,8 +110,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_user'], 'user_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -149,8 +145,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_user'], 'user_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

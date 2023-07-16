@@ -90,10 +90,6 @@ class ModuleAndActionSeeder extends Seeder
                 'menu_text' => 'Usuarios'
             ],
             [
-                'name' => 'USER/CHANGE-STATUS',
-                'route' => 'users.changeStatus',
-            ],
-            [
                 'name' => 'USER/EDIT',
                 'route' => 'users.edit',
             ],

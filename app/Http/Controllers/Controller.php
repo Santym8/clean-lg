@@ -25,6 +25,14 @@ class Controller extends BaseController
         'access_index_role' => 'SECURITY/ROLE/AUTHORIZED-INDEX',
         'not_access_status_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-CHANGE-STATUS',
         'access_status_role' => 'SECURITY/ROLE/CHANGE-STATUS',
+        'not_access_create_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_role' => 'SECURITY/ROLE/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-STORE',
+        'access_store_role' => 'SECURITY/ROLE/AUTHORIZED-STORE',
+        'not_access_edit_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_role' => 'SECURITY/ROLE/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-UPDATE',
+        'access_update_role' => 'SECURITY/ROLE/AUTHORIZED-UPDATE',
 
         'not_access_index_user' => 'SECURITY/USER/NOT-AUTHORIZED-INDEX',
         'access_index_user' => 'SECURITY/USER/AUTHORIZED-INDEX',
@@ -36,6 +44,25 @@ class Controller extends BaseController
         'access_edit_user' => 'SECURITY/USER/AUTHORIZED-EDIT-VIEW',
         'not_access_update_user' => 'SECURITY/USER/NOT-AUTHORIZED-UPDATE',
         'access_update_user' => 'SECURITY/USER/AUTHORIZED-UPDATE',
+
+        'not_access_index_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-INDEX',
+        'access_index_module' => 'SECURITY/MODULE/AUTHORIZED-INDEX',
+        'not_access_change_status_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_module' => 'SECURITY/MODULE/AUTHORIZED-CHANGE-STATUS',
+        'not_access_edit_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_module' => 'SECURITY/MODULE/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-UPDATE',
+        'access_update_module' => 'SECURITY/MODULE/AUTHORIZED-UPDATE',
+
+        'not_access_index_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-INDEX',
+        'access_index_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-INDEX',
+        'not_access_change_status_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-CHANGE-STATUS',
+        'not_access_edit_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_module_action' => 'SECURITY/MODULE-ACTION/NOT-AUTHORIZED-UPDATE',
+        'access_update_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-UPDATE',
+
 
         // ---------------Audit Trail-----------------
         'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',

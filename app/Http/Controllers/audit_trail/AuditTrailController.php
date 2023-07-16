@@ -11,8 +11,7 @@ class AuditTrailController extends Controller
 {
     public function index()
     {
-        $roleNames = array("AUDITOR");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['AUDIT/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_audit'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta página');
         }

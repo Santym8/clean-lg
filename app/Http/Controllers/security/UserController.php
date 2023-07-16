@@ -13,13 +13,15 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+
+    private $pathViews = 'security.system-administrator.users';
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -39,7 +41,7 @@ class UserController extends Controller
 
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_user'], '');
-        return view('users.index', [
+        return view($this->pathViews . '.index', [
             'users' => $users,
         ]);
     }
@@ -49,8 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -58,7 +59,7 @@ class UserController extends Controller
 
         $available_roles = Role::all()->where('status', 1);
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_user'], '');
-        return view('users.create', ['available_roles' => $available_roles]);
+        return view($this->pathViews . '.create', ['available_roles' => $available_roles]);
     }
 
     /**
@@ -66,8 +67,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_user'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -110,8 +110,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_user'], 'user_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -138,7 +137,7 @@ class UserController extends Controller
         $available_roles = Role::all()->where('status', 1)->whereNotIn('id', $id_active_roles);
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_user'], 'user_id: ' . $id);
-        return view('users.update', ['user' => $user, 'available_roles' => $available_roles]);
+        return view($this->pathViews . '.update', ['user' => $user, 'available_roles' => $available_roles]);
     }
 
     /**
@@ -146,8 +145,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['USER/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_user'], 'user_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -172,25 +170,27 @@ class UserController extends Controller
 
         // Todo - Validate if role is active
 
-        // Delete roles that are not selected
-        foreach ($user->roles as $role) {
-            if (!in_array($role->pivot['role_id'], $userValidated['selected_roles'])) {
-                $role->pivot['status'] = false;
-                $role->pivot->save();
-            }
-        }
+        // // Delete roles that are not selected
+        // foreach ($user->roles as $role) {
+        //     if (!in_array($role->pivot['role_id'], $userValidated['selected_roles'])) {
+        //         $role->pivot['status'] = false;
+        //         $role->pivot->save();
+        //     }
+        // }
 
-        foreach ($userValidated['selected_roles'] as $role_id) {
-            // Check if the user already has the role
-            if ($user->roles->pluck('id')->contains($role_id)) {
-                continue;
-            }
+        // foreach ($userValidated['selected_roles'] as $role_id) {
+        //     // Check if the user already has the role
+        //     if ($user->roles->pluck('id')->contains($role_id)) {
+        //         continue;
+        //     }
 
-            // Check if the role is new
-            if (!$user->roles->pluck('id')->contains($role_id)) {
-                $user->roles()->attach($role_id);
-            }
-        }
+        //     // Check if the role is new
+        //     if (!$user->roles->pluck('id')->contains($role_id)) {
+        //         $user->roles()->attach($role_id);
+        //     }
+        // }
+
+        $user->roles()->sync($userValidated['selected_roles']);
 
         $user->save();
 

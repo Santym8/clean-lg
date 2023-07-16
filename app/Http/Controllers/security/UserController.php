@@ -170,25 +170,27 @@ class UserController extends Controller
 
         // Todo - Validate if role is active
 
-        // Delete roles that are not selected
-        foreach ($user->roles as $role) {
-            if (!in_array($role->pivot['role_id'], $userValidated['selected_roles'])) {
-                $role->pivot['status'] = false;
-                $role->pivot->save();
-            }
-        }
+        // // Delete roles that are not selected
+        // foreach ($user->roles as $role) {
+        //     if (!in_array($role->pivot['role_id'], $userValidated['selected_roles'])) {
+        //         $role->pivot['status'] = false;
+        //         $role->pivot->save();
+        //     }
+        // }
 
-        foreach ($userValidated['selected_roles'] as $role_id) {
-            // Check if the user already has the role
-            if ($user->roles->pluck('id')->contains($role_id)) {
-                continue;
-            }
+        // foreach ($userValidated['selected_roles'] as $role_id) {
+        //     // Check if the user already has the role
+        //     if ($user->roles->pluck('id')->contains($role_id)) {
+        //         continue;
+        //     }
 
-            // Check if the role is new
-            if (!$user->roles->pluck('id')->contains($role_id)) {
-                $user->roles()->attach($role_id);
-            }
-        }
+        //     // Check if the role is new
+        //     if (!$user->roles->pluck('id')->contains($role_id)) {
+        //         $user->roles()->attach($role_id);
+        //     }
+        // }
+
+        $user->roles()->sync($userValidated['selected_roles']);
 
         $user->save();
 

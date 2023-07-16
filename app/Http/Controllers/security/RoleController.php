@@ -20,8 +20,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_role'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -37,8 +36,7 @@ class RoleController extends Controller
      */
     public function changeStatus(Request $request, string $id)
     {
-        $roleNames = array("ADMINSTRADOR_DE_SISTEMA");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/CHANGE-STATUS'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_status_role'], 'Se intento modificar el estado del rol con id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -59,6 +57,10 @@ class RoleController extends Controller
 
     public function edit(Request $request, string $id)
     {
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/EDIT'])) {
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
         $role = Role::findOrFail($id);
         $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
             $query->where('status', true);
@@ -79,8 +81,14 @@ class RoleController extends Controller
 
     public function update(Request $request, string $id)
     {
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/UPDATE'])) {
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
         $role = Role::findOrFail($id);
+        $role->name = $request->name;
         $role->moduleActions()->sync($request->selected_module_actions);
+        $role->save();
 
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
     }

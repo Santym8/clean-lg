@@ -4,6 +4,7 @@ use App\Http\Controllers\customer\JobsController;
 use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use App\Http\Controllers\security\ModuleController;
+use App\Http\Controllers\security\SecModuleActionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
 use App\Http\Controllers\security\LoginController;
@@ -53,6 +54,11 @@ Route::put('roles/{id}/change-status', [RoleController::class, 'changeStatus'])-
 // ------------Modules----------------
 Route::get('modules', [ModuleController::class, 'index'])->name('modules.index')->middleware('auth');
 Route::put('modules/{id}/change-status', [ModuleController::class, 'changeStatus'])->name('modules.changeStatus')->middleware('auth');
+
+// ------------Module Actions----------------
+Route::get('module-actions', [SecModuleActionController::class, 'index'])->name('module_actions.index')->middleware('auth');
+Route::put('module-actions/{id}/change-status', [SecModuleActionController::class, 'changeStatus'])->name('module_actions.changeStatus')->middleware('auth');
+
 
 // ------------Login----------------
 Route::get('/login', function () {

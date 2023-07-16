@@ -44,15 +44,19 @@
                         <td>{{ $moduleAction->updated_at }}</td>
                         <td>{{ $moduleAction->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            <form action="{{ route('module_actions.changeStatus', [$moduleAction->id]) }}" method="post">
-                                @csrf
-                                @method('PUT')
-                                @if ($moduleAction->status == 1)
-                                    <button type="submit" class="btn btn-danger">Desactivar</button>
-                                @else
-                                    <button type="submit" class="btn btn-success">Activar</button>
-                                @endif
-                            </form>
+                            @if ($moduleAction->module->name != 'SECURITY')
+                                <form action="{{ route('module_actions.changeStatus', [$moduleAction->id]) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    @if ($moduleAction->status == 1)
+                                        <button type="submit" class="btn btn-danger">Desactivar</button>
+                                    @else
+                                        <button type="submit" class="btn btn-success">Activar</button>
+                                    @endif
+                                </form>
+                            @endif
+
 
                             @if ($moduleAction->displayable_menu)
                                 <a href="{{ route('module_actions.edit', [$moduleAction->id]) }}"

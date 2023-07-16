@@ -52,7 +52,13 @@ class ModuleActionController extends Controller
         if (!Gate::allows('action-allowed-to-user', ['MODULE-ACTION/CHANGE-STATUS'])) {
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para realizar esta accion.');
         }
+
         $action = ModuleAction::find($id);
+
+        if ($action->module->name == 'SECURITY') {
+            return redirect()->route('module_actions.index')->with('error', 'No se puede desactivar las acciones del modulo seguridad.');
+        }
+
         $action->status = !$action->status;
         $action->save();
 

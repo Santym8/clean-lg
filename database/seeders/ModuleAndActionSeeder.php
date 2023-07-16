@@ -128,7 +128,28 @@ class ModuleAndActionSeeder extends Seeder
                 ],
             ]
         ],
-        'AUDIT',
+        'AUDIT' => [
+            'menu_text' => 'AUDITORIA',
+            'icon_name' => 'mdi mdi-eye',
+            'actions' => [
+                //---------------Audit------------
+                [
+                    'name' => 'AUDIT/INDEX',
+                    'route' => 'audit_trails.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-routes',
+                    'menu_text' => 'PISTAS DE AUDITORIA'
+                ],
+                [
+                    'name' => 'AUDIT/USER-ACTIONS',
+                    'route' => 'audit_trails.userActions',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-account-star',
+                    'menu_text' => 'ACCIONES DE USUARIO'
+                ]
+            ]
+        ],
+
         'INVENTORY',
         'CUSTOMERS',
         'BILLING',

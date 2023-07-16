@@ -64,7 +64,10 @@ class RoleAndActionSeeder extends Seeder
             'USER/CREATE',
             'USER/STORE',
         ],
-        'AUDITOR',
+        'AUDITOR' => [
+            'AUDIT/INDEX',
+            'AUDIT/USER-ACTIONS'
+        ],
         'OPERADOR_CLIENTE',
         'OPERADOR_TRABAJO',
         'BODEGUERO_INVENTARIO',

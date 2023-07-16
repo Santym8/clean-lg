@@ -14,8 +14,7 @@ class AuditStatisticsController extends Controller
     public function userActions()
     {
 
-        $roleNames = array("AUDITOR");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['AUDIT/USER-ACTIONS'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_user_actions'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta página');
         }

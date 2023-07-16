@@ -32,5 +32,16 @@ class AuthServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+        Gate::define('action-allowed-to-user', function (User $user, $action_name){
+            foreach($user->roles as $role){
+                foreach($role->moduleActions as $action){
+                    if($action->name == $action_name){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
     }
 }

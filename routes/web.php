@@ -58,7 +58,8 @@ Route::put('modules/{id}/change-status', [ModuleController::class, 'changeStatus
 // ------------Module Actions----------------
 Route::get('module-actions', [SecModuleActionController::class, 'index'])->name('module_actions.index')->middleware('auth');
 Route::put('module-actions/{id}/change-status', [SecModuleActionController::class, 'changeStatus'])->name('module_actions.changeStatus')->middleware('auth');
-
+Route::get('module-actions/{id}/edit', [SecModuleActionController::class, 'edit'])->name('module_actions.edit')->middleware('auth');
+Route::patch('module-actions/{id}/update', [SecModuleActionController::class, 'update'])->name('module_actions.update')->middleware('auth');
 
 // ------------Login----------------
 Route::get('/login', function () {

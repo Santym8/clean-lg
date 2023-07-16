@@ -20,6 +20,19 @@ class SecModuleActionController extends Controller
         return view($this->viewsPath . '.index', compact('moduleActions'));
     }
 
+    public function edit(Request $request, string $id){
+        $moduleAction = SecModuleAction::find($id);
+        return view($this->viewsPath . '.edit', compact('moduleAction'));
+    }
+
+    public function update(Request $request, string $id){
+        $action = SecModuleAction::find($id);
+        $action->icon_name = $request->icon_name;
+        $action->save();
+
+        return redirect()->route('module_actions.index');
+    }
+
     public function changeStatus(Request $request, string $id)
     {
         $action = SecModuleAction::find($id);

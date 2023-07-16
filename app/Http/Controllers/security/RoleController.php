@@ -57,6 +57,7 @@ class RoleController extends Controller
 
     public function create(){
         if (!Gate::allows('action-allowed-to-user', ['ROLE/CREATE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_role'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -64,6 +65,7 @@ class RoleController extends Controller
             $query->where('status', true);
         })->get()->sortBy('module.name');
 
+        $this->addAudit(Auth::user(), $this->typeAudit['access_create_role'], '');
         return view($this->pathViews . '.create', [
             'available_module_actions' => $availableModuleActions,
         ]);
@@ -71,6 +73,7 @@ class RoleController extends Controller
 
     public function store(Request $request){
         if (!Gate::allows('action-allowed-to-user', ['ROLE/STORE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_role'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -79,13 +82,14 @@ class RoleController extends Controller
         $role->save();
         $role->moduleActions()->sync($request->selected_module_actions);
 
-
+        $this->addAudit(Auth::user(), $this->typeAudit['access_store_role'], '');
         return redirect()->route('roles.index')->with('success', 'Rol creado exitosamente.');
     }
 
     public function edit(Request $request, string $id)
     {
         if (!Gate::allows('action-allowed-to-user', ['ROLE/EDIT'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_role'], 'Se intento editar el rol con id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -101,6 +105,7 @@ class RoleController extends Controller
             });
         }
 
+        $this->addAudit(Auth::user(), $this->typeAudit['access_edit_role'], 'Se edito el rol con id: ' . $id);
         return view($this->pathViews . '.edit', [
             'role' => $role,
             'available_module_actions' => $availableModuleActions,
@@ -110,6 +115,7 @@ class RoleController extends Controller
     public function update(Request $request, string $id)
     {
         if (!Gate::allows('action-allowed-to-user', ['ROLE/UPDATE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol con id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -118,6 +124,7 @@ class RoleController extends Controller
         $role->moduleActions()->sync($request->selected_module_actions);
         $role->save();
 
+        $this->addAudit(Auth::user(), $this->typeAudit['access_update_role'], 'Se actualizo el rol con id: ' . $id);
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
     }
 }

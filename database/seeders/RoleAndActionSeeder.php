@@ -70,6 +70,35 @@ class RoleAndActionSeeder extends Seeder
         ],
         'OPERADOR_CLIENTE',
         'OPERADOR_TRABAJO',
-        'BODEGUERO_INVENTARIO',
+        'BODEGUERO_INVENTARIO'=>[
+            //WAREHOUSE
+            'WAREHOUSE/INDEX',
+            'WAREHOUSE/EDIT',
+            'WAREHOUSE/UPDATE',
+            'WAREHOUSE/CREATE',
+            'WAREHOUSE/STORE',
+            'WAREHOUSE/DESTROY',
+            //PRODUCT
+            'PRODUCT/INDEX',
+            'PRODUCT/EDIT',
+            'PRODUCT/UPDATE',
+            'PRODUCT/CREATE',
+            'PRODUCT/STORE',
+            'PRODUCT/DESTROY',
+            //CATEGORY
+            'CATEGORY/INDEX',
+            'CATEGORY/EDIT',
+            'CATEGORY/UPDATE',
+            'CATEGORY/CREATE',
+            'CATEGORY/STORE',
+            'CATEGORY/DESTROY',
+            //PRODUCT-WAREHOUSE
+            'PRODUCT-WAREHOUSE/INDEX',
+            'PRODUCT-WAREHOUSE/EDIT',
+            'PRODUCT-WAREHOUSE/UPDATE',
+            'PRODUCT-WAREHOUSE/CREATE',
+            'PRODUCT-WAREHOUSE/STORE',
+            'PRODUCT-WAREHOUSE/DESTROY',
+        ],
     ];
 }

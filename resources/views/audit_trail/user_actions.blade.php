@@ -28,7 +28,7 @@
                 </table>
                 <br>
                 <table id="user-action-table" class="table table-bordered">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th class="title-actions">Identificaci&oacute;n Usuario</th>
                             <th class="title-actions">Nombre Usuario</th>

@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <h1>Auditor&iacute;a</h1>
                 <table id="audit-table" class="table table-bordered">
-                    <thead>
+                    <thead class="thead-dark">
                         <tr>
                             <th>Identificaci&oacute;n Usuario</th>
                             <th>Usuario</th>

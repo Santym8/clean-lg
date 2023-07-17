@@ -17,8 +17,7 @@ class ProductWarehouseController extends Controller
      */
     public function index()
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -32,8 +31,7 @@ class ProductWarehouseController extends Controller
      */
     public function create()
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -48,8 +46,7 @@ class ProductWarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -82,8 +79,7 @@ class ProductWarehouseController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -100,8 +96,7 @@ class ProductWarehouseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -126,8 +121,7 @@ class ProductWarehouseController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

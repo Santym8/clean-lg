@@ -151,7 +151,7 @@ class ModuleAndActionSeeder extends Seeder
         ],
 
         'INVENTORY',
-        'CUSTOMERS'=> [
+        'CUSTOMERS' => [
             'menu_text' => 'CLIENTES',
             'icon_name' => 'mdi mdi-account',
             'actions' => [
@@ -187,8 +187,8 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'CUSTOMERS/DESTROY',
                     'route' => 'customers.destroy',
                 ],
-                 //---------------JOBS------------
-                 [
+                //---------------JOBS------------
+                [
                     'name' => 'JOBS/INDEX',
                     'route' => 'job.index',
                     'displayable_menu' => true,
@@ -218,6 +218,125 @@ class ModuleAndActionSeeder extends Seeder
 
             ]
         ],
+        'INVENTORY' => [
+            'menu_text' => 'INVENTARIO',
+            'icon_name' => 'mdi mdi-package-variant-closed',
+            'actions' => [
+                //--------------------WAREHOUSE--------------------
+                [
+                    'name' => 'WAREHOUSE/INDEX',
+                    'route' => 'warehouse.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-home',
+                    'menu_text' => 'BODEGAS'
+                ],
+                [
+                    'name' => 'WAREHOUSE/DESTROY',
+                    'route' => 'warehouse.destroy',
+                ],
+                [
+                    'name' => 'WAREHOUSE/EDIT',
+                    'route' => 'warehouse.edit',
+                ],
+                [
+                    'name' => 'WAREHOUSE/UPDATE',
+                    'route' => 'warehouse.update',
+                ],
+                [
+                    'name' => 'WAREHOUSE/CREATE',
+                    'route' => 'warehouse.create',
+                ],
+                [
+                    'name' => 'WAREHOUSE/STORE',
+                    'route' => 'warehouse.store',
+                ],
+                //--------------------PRODUCT--------------------
+                [
+                    'name' => 'PRODUCT/INDEX',
+                    'route' => 'product.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-cup-water',
+                    'menu_text' => 'PRODUCTOS'
+                ],
+                [
+                    'name' => 'PRODUCT/DESTROY',
+                    'route' => 'product.destroy',
+                ],
+                [
+                    'name' => 'PRODUCT/EDIT',
+                    'route' => 'product.edit',
+                ],
+                [
+                    'name' => 'PRODUCT/UPDATE',
+                    'route' => 'product.update',
+                ],
+                [
+                    'name' => 'PRODUCT/CREATE',
+                    'route' => 'product.create',
+                ],
+                [
+                    'name' => 'PRODUCT/STORE',
+                    'route' => 'product.store',
+                ],
+                //------------CATEGORY----------------
+                [
+                    'name' => 'CATEGORY/INDEX',
+                    'route' => 'category.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-format-list-bulleted',
+                    'menu_text' => 'CATEGORIAS'
+                ],
+                [
+                    'name' => 'CATEGORY/DESTROY',
+                    'route' => 'category.destroy',
+                ],
+                [
+                    'name' => 'CATEGORY/EDIT',
+                    'route' => 'category.edit',
+                ],
+                [
+                    'name' => 'CATEGORY/UPDATE',
+                    'route' => 'category.update',
+                ],
+                [
+                    'name' => 'CATEGORY/CREATE',
+                    'route' => 'category.create',
+                ],
+                [
+                    'name' => 'CATEGORY/STORE',
+                    'route' => 'category.store',
+                ],
+                //----------------PRODUCT-WAREHOUSE--------------------
+                [
+                    'name' => 'PRODUCT-WAREHOUSE/INDEX',
+                    'route' => 'product_warehouse.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-package-variant-closed',
+                    'menu_text' => 'PRODUCTOS EN BODEGA'
+                ],
+                [
+                    'name' => 'PRODUCT-WAREHOUSE/DESTROY',
+                    'route' => 'product_warehouse.destroy',
+                ],
+                [
+                    'name' => 'PRODUCT-WAREHOUSE/EDIT',
+                    'route' => 'product_warehouse.edit',
+                ],
+                [
+                    'name' => 'PRODUCT-WAREHOUSE/UPDATE',
+                    'route' => 'product_warehouse.update',
+                ],
+                [
+                    'name' => 'PRODUCT-WAREHOUSE/CREATE',
+                    'route' => 'product_warehouse.create',
+                ],
+                [
+                    'name' => 'PRODUCT-WAREHOUSE/STORE',
+                    'route' => 'product_warehouse.store',
+                ],
+            ]
+        ],
+        'CUSTOMERS',
         'BILLING',
         'SERVICE ORDERS'
     ];

@@ -27,8 +27,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -42,8 +41,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -57,8 +55,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -81,14 +78,13 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
-        $product = Product::find($id);
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
-        return view('inventory.product.show', ['product' => $product]);
+        // if (!Gate::allows('action-allowed-to-user', ['PRODUCT/SHOW'])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+        // $product = Product::find($id);
+        // $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        // return view('inventory.product.show', ['product' => $product]);
     }
 
     /**
@@ -96,8 +92,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -112,8 +107,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -136,8 +130,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

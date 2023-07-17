@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Create Bodega</h2>
+        <h2>Crear Bodega</h2>
 
         @if ($errors->any())
             <div class="alert alert-danger">

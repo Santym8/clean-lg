@@ -68,7 +68,7 @@ class RoleAndActionSeeder extends Seeder
             'AUDIT/INDEX',
             'AUDIT/USER-ACTIONS'
         ],
-        'OPERADOR_CLIENTE'=> [
+        'OPERADOR_CLIENTE' => [
             'CUSTOMERS/INDEX',
             'CUSTOMERS/CREATE',
             'CUSTOMERS/STORE',
@@ -77,7 +77,7 @@ class RoleAndActionSeeder extends Seeder
             'CUSTOMERS/SHOW',
             'CUSTOMERS/DESTROY',
         ],
-        'OPERADOR_TRABAJO'=> [
+        'OPERADOR_TRABAJO' => [
             'JOBS/INDEX',
             'JOBS/CREATE',
             'JOBS/STORE',
@@ -86,5 +86,37 @@ class RoleAndActionSeeder extends Seeder
             'JOBS/DESTROY',
         ],
         'BODEGUERO_INVENTARIO',
+        'OPERADOR_CLIENTE',
+        'OPERADOR_TRABAJO',
+        'BODEGUERO_INVENTARIO' => [
+            //WAREHOUSE
+            'WAREHOUSE/INDEX',
+            'WAREHOUSE/EDIT',
+            'WAREHOUSE/UPDATE',
+            'WAREHOUSE/CREATE',
+            'WAREHOUSE/STORE',
+            'WAREHOUSE/DESTROY',
+            //PRODUCT
+            'PRODUCT/INDEX',
+            'PRODUCT/EDIT',
+            'PRODUCT/UPDATE',
+            'PRODUCT/CREATE',
+            'PRODUCT/STORE',
+            'PRODUCT/DESTROY',
+            //CATEGORY
+            'CATEGORY/INDEX',
+            'CATEGORY/EDIT',
+            'CATEGORY/UPDATE',
+            'CATEGORY/CREATE',
+            'CATEGORY/STORE',
+            'CATEGORY/DESTROY',
+            //PRODUCT-WAREHOUSE
+            'PRODUCT-WAREHOUSE/INDEX',
+            'PRODUCT-WAREHOUSE/EDIT',
+            'PRODUCT-WAREHOUSE/UPDATE',
+            'PRODUCT-WAREHOUSE/CREATE',
+            'PRODUCT-WAREHOUSE/STORE',
+            'PRODUCT-WAREHOUSE/DESTROY',
+        ],
     ];
 }

@@ -1,0 +1,16 @@
+ /* Estilos personalizados para DataTable */
+ .dataTables_wrapper .dataTables_filter input {
+    background-color: #fff !important;
+}
+
+.dataTables_length label {
+    color: #298bc3 !important;
+    font-weight: bold !important;
+    font-size: 1.3rem !important;
+    margin-top: 15px !important;
+}
+.dataTables_filter label{
+    color: #298bc3 !important;
+    font-weight: bold !important;
+    font-size: 1.3rem !important;
+}

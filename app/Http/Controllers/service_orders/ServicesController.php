@@ -15,8 +15,9 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        
+
+        if (!Gate::allows('action-allowed-to-user', ['SERVICES/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_services'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -31,8 +32,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        $roleNames = array("OPERADOR_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['SERVICES/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_services'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -46,8 +46,7 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['SERVICES/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_services'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -78,8 +77,7 @@ class ServicesController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("OPERADOR_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['SERVICES/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_services'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -94,8 +92,7 @@ class ServicesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("OPERADOR_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['SERVICES/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_services'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -118,8 +115,7 @@ class ServicesController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['SERVICES/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_services'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="cost" class="mr-2">Costo:</label>
-                                        <input id="cost" type="number" step="0.01" class="form-control mr-2" name="cost[]" >
+                                        <input id="cost" type="number" step="0.01" class="form-control mr-2" name="cost" >
                                     </div>
 
                                   

@@ -5,10 +5,13 @@
     <table class="table">
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
+        
         @endif
+        @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/CREATE']))
         <form action="{{ route('service_orders_goods.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>

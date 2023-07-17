@@ -15,9 +15,11 @@
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
+        @if (Gate::allows('action-allowed-to-user', ['SERVICES/CREATE']))
         <form action="{{ route('services.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -40,10 +42,12 @@
                 <td>{{ $service->updated_at }}</td>
 
                 <td>
+                    @if (Gate::allows('action-allowed-to-user', ['SERVICES/EDIT']))
                     <a href="{{ route('services.edit', ['service' => $service->id]) }}" class="btn btn-primary">Editar</a>
-
+                    @endif
+                    @if (Gate::allows('action-allowed-to-user', ['SERVICES/DESTROY']))
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $service->id }}">Eliminar</button>
-
+                   
                     <!-- Modal -->
                     <div class="modal fade" id="modal{{ $service->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -69,6 +73,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </td>
             </tr>
             @endforeach

@@ -17,11 +17,11 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['GOODS/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
+
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_goods'], '');
         $goods = Goods::all();
         return view('service_orders.goods.index', ['goods' => $goods]);
@@ -32,9 +32,8 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_goods'], '');
+        if (!Gate::allows('action-allowed-to-user', ['GOODS/CREATE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_create_index_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -50,8 +49,7 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['GOODS/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -79,8 +77,8 @@ class GoodsController extends Controller
      */
     public function show(string $id)
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+
+       if (!Gate::allows('action-allowed-to-user', ['GOODS/SHOW'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -95,8 +93,7 @@ class GoodsController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['GOODS/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -113,8 +110,7 @@ class GoodsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['GOODS/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -143,8 +139,7 @@ class GoodsController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['GOODS/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

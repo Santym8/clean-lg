@@ -17,11 +17,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_customer'], '');
         $customers = Customer::all();
         return view('customer.customers.index', ['customers' => $customers]);
@@ -32,11 +32,11 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
 
         $customers = Customer::all();
         $job = Job::all();
@@ -49,11 +49,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
 
         $request->validate([
             'first_name' => 'required',
@@ -84,11 +84,11 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
 
         $customers = Customer::find($id);
         $this->addAudit(Auth::user(), $this->typeAudit['access_show_customer'], '');
@@ -100,11 +100,11 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
 
         $customer = Customer::find($id);
         $job = Job::all();
@@ -117,11 +117,11 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
 
         $request->validate([
             'first_name' => 'required',
@@ -153,11 +153,11 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_customer'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
+        // $roleNames = array("OPERADOR_CLIENTE");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_customer'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
 
         $customer = Customer::find($id);
         $customer->status = 0;

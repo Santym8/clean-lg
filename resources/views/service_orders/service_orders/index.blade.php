@@ -6,9 +6,11 @@
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
+        @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/CREATE']))
         <form action="{{ route('service_orders.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -38,8 +40,11 @@
                     
                 </td>
 
-                <td>                  
+                <td>  
+                    @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/EDIT']))                
                     <a href="{{ route('service_orders.edit', ['service_order' => $service_order->id]) }}" class="btn btn-primary">Editar</a>
+                    @endif
+                    @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/DESTROY']))
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $service_order->id }}">Eliminar</button>
 
                     <div class="modal fade" id="modal{{ $service_order->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,10 +71,11 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-@endsection
+@endsection     

@@ -19,12 +19,17 @@ class ServiceOrderGoodsController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        // $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_service_orders_goods'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+        
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        
+
         $goods = Goods::all();
         $services = Services::all();
         $service_order_goods = ServiceOrders::all();
@@ -34,12 +39,18 @@ class ServiceOrderGoodsController extends Controller
 
     public function create()
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        // $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_service_orders_goods'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+        // Aquí puedes cargar los datos necesarios para tu vista, como los clientes y usuarios disponibles
+
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        // Aquí puedes cargar los datos necesarios para tu vista, como los clientes y usuarios disponibles
+
         $customers = Customer::all();
         $users = User::all();
         $services = Services::all();
@@ -53,8 +64,13 @@ class ServiceOrderGoodsController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        // $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_service_orders_goods'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

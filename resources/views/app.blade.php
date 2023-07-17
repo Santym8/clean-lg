@@ -8,11 +8,10 @@
     <title>Lavandería Gabrielito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
-    </script>
     <!-- Style Sheets -->
+    @stack('styles')
     @include('auth.includes.styles')
+    <link href="{{ asset('assets/auth/css/dataTable.css') }}" rel="stylesheet">
 </head>
 
 <body class="navbar-fixed sidebar-fixed" id="body">
@@ -61,7 +60,8 @@
                                                         <a class="sidenav-item-link"
                                                             href="{{ route($moduleAction->route) }}">
                                                             <i class="{{ $moduleAction->icon_name }}"></i>
-                                                            <span class="nav-text">{{ $moduleAction->menu_text }}</span>
+                                                            <span
+                                                                class="nav-text">{{ $moduleAction->menu_text }}</span>
                                                         </a>
                                                     </li>
                                                 @endif
@@ -279,8 +279,11 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
+    </script>
     @include('auth.includes.scripts')
-    @yield('scripts')
+    @stack('scripts')
 
 </body>
 

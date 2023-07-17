@@ -1,0 +1,35 @@
+.likert-cell {
+    color: #000 !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    font-size: 20px !important;
+}
+.bg-muy-inactivo {
+    background-color: #ff000094 !important;
+}
+
+.bg-inactivo {
+    background-color: #ffa60094 !important;
+}
+
+.bg-moderado {
+    background-color: #ffff0094 !important;
+}
+
+.bg-activo {
+    background-color: #00FF0094 !important;
+}
+
+.bg-muy-activo {
+    background-color: #01690194 !important;
+}
+.level-actions{
+    color: #2e2e2e;
+    font-size: 18px;
+    font-weight: bold;
+}
+.title-actions{
+    font-weight: bold;
+    color: #000;
+    font-size: 20px;
+}

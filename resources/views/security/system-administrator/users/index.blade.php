@@ -2,25 +2,25 @@
 
 @section('content')
     <div class="container">
-        <table class="table table-bordered">
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
 
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
+        @error('color')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
-            @error('color')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+        @if (session('success'))
+            <h6 class="alert alert-success">{{ session('success') }}</h6>
+        @endif
 
-            @if (session('success'))
-                <h6 class="alert alert-success">{{ session('success') }}</h6>
-            @endif
+        @if (Gate::allows('action-allowed-to-user', ['USER/CREATE']))
+            <form action="{{ route('users.create') }}" method="GET">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+        @endif
 
-            @if (Gate::allows('action-allowed-to-user', ['USER/CREATE']))
-                <form action="{{ route('users.create') }}" method="GET">
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                </form>
-            @endif
+        <table class="table table-bordered" id="users-table">
 
 
             <thead class="thead-dark">
@@ -48,9 +48,13 @@
                         <td>{{ $user->phone_number }}</td>
                         <td>{{ $user->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            @foreach ($user->roles as $role)
-                                {{ $role->name }}
-                            @endforeach
+                            <ul>
+                                @foreach ($user->roles as $role)
+                                    <li>
+                                        {{ $role->name }}
+                                    </li>
+                                @endforeach
+                            </ul>
                         </td>
                         <td>
                             @if (Gate::allows('action-allowed-to-user', ['USER/EDIT']))
@@ -68,3 +72,22 @@
         </table>
     </div>
 @endsection
+
+@push('styles')
+    <link href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+@endpush
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#users-table').DataTable({
+                // Configuración personalizada de DataTables
+            });
+        });
+    </script>
+@endpush

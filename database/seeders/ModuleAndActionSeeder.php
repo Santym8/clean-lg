@@ -150,7 +150,75 @@ class ModuleAndActionSeeder extends Seeder
             ]
         ],
 
-        'INVENTORY'=> [
+        'INVENTORY',
+        'CUSTOMERS' => [
+            'menu_text' => 'CLIENTES',
+            'icon_name' => 'mdi mdi-account',
+            'actions' => [
+                //---------------CUSTOMERS------------
+                [
+                    'name' => 'CUSTOMERS/INDEX',
+                    'route' => 'customers.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi  mdi-account',
+                    'menu_text' => 'CLIENTES'
+                ],
+                [
+                    'name' => 'CUSTOMERS/CREATE',
+                    'route' => 'customers.create',
+                ],
+                [
+                    'name' => 'CUSTOMERS/STORE',
+                    'route' => 'customers.store',
+                ],
+                [
+                    'name' => 'CUSTOMERS/EDIT',
+                    'route' => 'customers.edit',
+                ],
+                [
+                    'name' => 'CUSTOMERS/UPDATE',
+                    'route' => 'customers.update',
+                ],
+                [
+                    'name' => 'CUSTOMERS/SHOW',
+                    'route' => 'customers.show',
+                ],
+                [
+                    'name' => 'CUSTOMERS/DESTROY',
+                    'route' => 'customers.destroy',
+                ],
+                //---------------JOBS------------
+                [
+                    'name' => 'JOBS/INDEX',
+                    'route' => 'job.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi  mdi-tie',
+                    'menu_text' => 'TRABAJOS'
+                ],
+                [
+                    'name' => 'JOBS/CREATE',
+                    'route' => 'job.create',
+                ],
+                [
+                    'name' => 'JOBS/STORE',
+                    'route' => 'job.store',
+                ],
+                [
+                    'name' => 'JOBS/EDIT',
+                    'route' => 'job.edit',
+                ],
+                [
+                    'name' => 'JOBS/UPDATE',
+                    'route' => 'job.update',
+                ],
+                [
+                    'name' => 'JOBS/DESTROY',
+                    'route' => 'job.destroy',
+                ],
+
+            ]
+        ],
+        'INVENTORY' => [
             'menu_text' => 'INVENTARIO',
             'icon_name' => 'mdi mdi-package-variant-closed',
             'actions' => [

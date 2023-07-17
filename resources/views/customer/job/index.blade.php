@@ -15,9 +15,13 @@
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
+
+        @if (Gate::allows('action-allowed-to-user', ['JOBS/CREATE']))
         <form action="{{ route('job.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
+
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -29,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($jobs as $job)
+            @foreach ($job as $job)
             <tr>
                 <th scope="row">{{ $job->id }}</th>
                 <td>{{ $job->name }}</td>
@@ -38,8 +42,11 @@
                 <td>{{ $job->updated_at }}</td>
 
                 <td>
+                    @if (Gate::allows('action-allowed-to-user', ['JOBS/EDIT']))
                     <a href="{{ route('job.edit', ['job' => $job->id]) }}" class="btn btn-primary">Editar</a>
+                    @endif
 
+                    @if (Gate::allows('action-allowed-to-user', ['JOBS/DESTROY']))
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $job->id }}">Eliminar</button>
 
                     <!-- Modal -->
@@ -67,6 +74,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </td>
             </tr>
             @endforeach

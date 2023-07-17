@@ -12,20 +12,21 @@ use Illuminate\Support\Facades\Gate;
 
 class JobsController extends Controller
 {
+    private $pathViews = 'customer.job';
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_TRABAJO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['JOBS/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_job'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
-        $job = Job::all();
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_job'], '');
-        return view('customer.job.index', ['jobs' => $job]);
+        return view($this->pathViews . '.index', [
+            'job' => Job::all(),
+        ]);
     }
 
     /**
@@ -33,8 +34,7 @@ class JobsController extends Controller
      */
     public function create()
     {
-        $roleNames = array("OPERADOR_TRABAJO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['JOBS/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_job'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -48,8 +48,7 @@ class JobsController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_TRABAJO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['JOBS/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_job'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -80,15 +79,14 @@ class JobsController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("OPERADOR_TRABAJO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['JOBS/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_job'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
         $job = Job::find($id);
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_job'], '');
-        return view('customer.job.edit', ['job' => $job]);
+        return view($this->pathViews . '.edit', ['job' => $job]);
     }
 
     /**
@@ -96,8 +94,7 @@ class JobsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("OPERADOR_TRABAJO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['JOBS/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_job'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -120,8 +117,7 @@ class JobsController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_TRABAJO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['JOBS/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_job'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

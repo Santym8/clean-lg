@@ -2,25 +2,25 @@
 
 @section('content')
     <div class="container">
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @error('color')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        @if (session('success'))
+            <h6 class="alert alert-success">{{ session('success') }}</h6>
+        @endif
+
+        @if (Gate::allows('action-allowed-to-user', ['USER/CREATE']))
+            <form action="{{ route('users.create') }}" method="GET">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+        @endif
+
         <table class="table table-bordered" id="users-table">
-
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
-            @error('color')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-            @if (session('success'))
-                <h6 class="alert alert-success">{{ session('success') }}</h6>
-            @endif
-
-            @if (Gate::allows('action-allowed-to-user', ['USER/CREATE']))
-                <form action="{{ route('users.create') }}" method="GET">
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                </form>
-            @endif
 
 
             <thead class="thead-dark">
@@ -82,6 +82,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#users-table').DataTable({

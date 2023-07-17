@@ -2,20 +2,20 @@
 
 @section('content')
     <div class="container">
+
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @error('color')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        @if (session('success'))
+            <h6 class="alert alert-success">{{ session('success') }}</h6>
+        @endif
+
         <table class="table" id="module-actions-table">
-
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
-            @error('color')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-            @if (session('success'))
-                <h6 class="alert alert-success">{{ session('success') }}</h6>
-            @endif
-
             <thead class="thead-dark">
                 <tr>
                     <th>Modulo</th>
@@ -44,7 +44,9 @@
                         <td>{{ $moduleAction->updated_at }}</td>
                         <td>{{ $moduleAction->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>
-                            @if ($moduleAction->module->name != 'SECURITY' && Gate::allows('action-allowed-to-user', ['MODULE-ACTION/CHANGE-STATUS']))
+                            @if (
+                                $moduleAction->module->name != 'SECURITY' &&
+                                    Gate::allows('action-allowed-to-user', ['MODULE-ACTION/CHANGE-STATUS']))
                                 <form action="{{ route('module_actions.changeStatus', [$moduleAction->id]) }}"
                                     method="post">
                                     @csrf

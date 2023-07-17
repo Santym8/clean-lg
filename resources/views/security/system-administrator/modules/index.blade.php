@@ -2,20 +2,19 @@
 
 @section('content')
     <div class="container">
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @error('color')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        @if (session('success'))
+            <h6 class="alert alert-success">{{ session('success') }}</h6>
+        @endif
+
         <table class="table" id="modules-table">
-
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
-
-            @error('color')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-            @if (session('success'))
-                <h6 class="alert alert-success">{{ session('success') }}</h6>
-            @endif
-
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Nombre</th>

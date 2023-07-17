@@ -40,18 +40,18 @@
                                         <input id="name" type="text" class="form-control mr-2" name="name" readonly>
                                     </div>
 
-                                   
+
                                 </div>
                             </div>
                             <hr>
                             <h5 class="col-md-12 col-form-label text-md-left">Bienes</h5>
 
-                            <div id="bienes-container">
+                            <div id="bienes-container" class="goods-container">
                                 <div class="good form-inline">
 
                                     <div class="form-group">
                                         <label for="description" class="mr-2">Descripción:</label>
-                                        <input id="description" type="text" class="form-control mr-2" name="description[]"  >                                    
+                                        <input id="description" type="text" class="form-control mr-2" name="description[]"  >
                                     </div>
 
                                     <div class="form-group">
@@ -65,10 +65,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="cost" class="mr-2">Costo:</label>
-                                        <input id="cost" type="number" step="0.01" class="form-control mr-2" name="cost" >
+                                        <input id="cost[]" type="number" step="0.01" class="form-control mr-2" name="cost[]" >
                                     </div>
 
-                                  
+
                                 </div>
                             </div>
                             <hr>
@@ -78,10 +78,10 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <input type="submit" class="btn btn-primary" value="Guardar">
                                 </div>
                             </div>
-                            <button type="button" id="agregar-bien">Agregar Bien</button>
+                            <input type="button" id="agregar-bien" onclick="addGood()" value="Agregar Bien">
                         </form>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
 
         function updateCost(select) {
             const container = select.parentNode.parentNode;
-            const costInput = container.querySelector('input[name="cost"]');
+            const costInput = container.querySelector('input[name="cost[]"]');
             const price = select.options[select.selectedIndex].getAttribute('data-price');
             costInput.value = price;
         }
@@ -129,7 +129,7 @@
             <h6>Por favor corregir los siguientes errores:</h6>
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li> 
+                    <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>

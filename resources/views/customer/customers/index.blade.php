@@ -6,9 +6,11 @@
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
+        @if (Gate::allows('action-allowed-to-user', ['CUSTOMERS/CREATE']))
         <form action="{{ route('customers.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -39,12 +41,15 @@
                 <td>{{ $customer->created_at }}</td>
                 <td>{{ $customer->updated_at }}</td>
                 <td>{{ $customer->job->name }}
-                    
+
                 </td>
 
                 <td>
+                    @if (Gate::allows('action-allowed-to-user', ['CUSTOMERS/EDIT']))
                     <a href="{{ route('customers.edit', ['customer' => $customer->id]) }}" class="btn btn-primary">Editar</a>
+                    @endif
 
+                    @if (Gate::allows('action-allowed-to-user', ['CUSTOMERS/DESTROY']))
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $customer->id }}">Eliminar</button>
 
                     <!-- Modal -->
@@ -72,6 +77,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </td>
             </tr>
             @endforeach

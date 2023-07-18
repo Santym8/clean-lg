@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name',50)->unique();
             $table->boolean('status') -> default(true);
             $table->timestamps();
-           // $table->string('status',50);
         });
     }
 

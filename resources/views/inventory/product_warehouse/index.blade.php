@@ -8,6 +8,9 @@
         <form action="{{ route('product_warehouse.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        <form action="{{ route('product_movement.create') }}" method="GET">
+            <button type="submit" class="btn btn-secondary">Realizar Movimiento</button>
+        </form>
         <table id="product-warehouse-table" class="table">
             <thead class="thead-dark">
                 <tr>

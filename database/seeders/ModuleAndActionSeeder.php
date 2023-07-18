@@ -150,7 +150,6 @@ class ModuleAndActionSeeder extends Seeder
             ]
         ],
 
-        'INVENTORY',
         'CUSTOMERS' => [
             'menu_text' => 'CLIENTES',
             'icon_name' => 'mdi mdi-account',
@@ -333,6 +332,30 @@ class ModuleAndActionSeeder extends Seeder
                 [
                     'name' => 'PRODUCT-WAREHOUSE/STORE',
                     'route' => 'product_warehouse.store',
+                ],
+                //-------------PRODUCT-MOVEMENT---------------
+                [
+                    'name' => 'PRODUCT-MOVEMENT/INDEX',
+                    'route' => 'product_movement.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-package-variant-closed',
+                    'menu_text' => 'MOVIMIENTOS'
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/EDIT',
+                    'route' => 'product_movement.edit',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/UPDATE',
+                    'route' => 'product_movement.update',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/CREATE',
+                    'route' => 'product_movement.create',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/STORE',
+                    'route' => 'product_movement.store',
                 ],
             ]
         ],

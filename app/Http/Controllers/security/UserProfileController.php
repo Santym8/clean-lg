@@ -11,7 +11,8 @@ use Illuminate\Validation\Rule;
 class UserProfileController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         $logedUser = Auth::user();
 
         $user = User::findOrFail($logedUser->id);
@@ -19,7 +20,8 @@ class UserProfileController extends Controller
         return view('security.user-profile.index', compact('user'));
     }
 
-    public function updateProfile(Request $request){
+    public function updateProfile(Request $request)
+    {
         $logedUser = Auth::user();
 
         $user = User::findOrFail($logedUser->id);
@@ -39,5 +41,47 @@ class UserProfileController extends Controller
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_update_user_profile'], 'user_id: ' . $user->id);
         return redirect()->route('dashboard')->with('success', 'Perfil actualizado con exito.');
+    }
+
+
+    public function editPassword()
+    {
+        return view('security.user-profile.edit-password');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $logedUser = Auth::user();
+        $user = User::findOrFail($logedUser->id);
+
+        if (!password_verify($request['current_password'], $user->password)) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_user_password'], 'user_id: ' . $user->id);
+            return redirect()->route('user_profile.editPassword')->with('error', 'La contraseña actual no es correcta.');
+        }
+
+        $request->validate([
+            'new_password' => [
+                'required', 'string', 'min:8', 'max:255',
+                'regex:/[a-z]/',      // must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // must contain at least one uppercase letter
+                'regex:/[0-9]/',      // must contain at least one digit
+                'regex:/[@$!%*#?&_-]/', // must contain a special character,
+            ],
+        ], [
+            'new_password.required' => 'Contraseña requerida.',
+            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password.max' => 'La contraseña debe tener máximo 255 caracteres.',
+            'new_password.regex' => 'La contraseña debe tener al menos una letra mayúscula, una minúscula, un número y un caracter especial @$!%*#?&_-.',
+        ]);
+
+        if ($request['new_password'] != $request['password_confirmation']) {
+            return redirect()->route('user_profile.editPassword')->with('error', 'Las contraseñas no coinciden.');
+        }
+
+        $user->password = $request['new_password'];
+        $user->save();
+
+        $this->addAudit(Auth::user(), $this->typeAudit['access_update_user_password'], 'user_id: ' . $user->id);
+        return redirect()->route('dashboard')->with('success', 'Contraseña actualizada con exito.');
     }
 }

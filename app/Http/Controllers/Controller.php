@@ -66,6 +66,8 @@ class Controller extends BaseController
         'access_update_module_action' => 'SECURITY/MODULE-ACTION/AUTHORIZED-UPDATE',
 
         'access_update_user_profile' => 'SECURITY/USER-PROFILE/AUTHORIZED-UPDATE',
+        'access_update_user_password' => 'SECURITY/USER-PASSWORD/AUTHORIZED-UPDATE',
+        'not_access_update_user_password' => 'SECURITY/USER-PASSWORD/NOT-AUTHORIZED-UPDATE',
 
         // ---------------Audit Trail-----------------
         'not_access_index_audit' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-INDEX',

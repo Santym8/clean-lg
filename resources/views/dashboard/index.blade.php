@@ -28,8 +28,9 @@
                             {{ auth()->user()->name }} {{ auth()->user()->last_name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a></li>
                             <li><a class="dropdown-item" href="{{ route('user_profile.index') }}">Actualizar Perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user_profile.editPassword') }}">Cambiar Contraseña</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>

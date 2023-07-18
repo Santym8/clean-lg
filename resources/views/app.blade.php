@@ -100,16 +100,21 @@
                             <!-- User Account -->
                             <li class="dropdown user-menu">
                                 <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                    <span class="d-none d-lg-inline-block">{{ auth()->user()->name }} {{ auth()->user()->last_name }}</span>
+                                    <span class="d-none d-lg-inline-block">{{ auth()->user()->name }}
+                                        {{ auth()->user()->last_name }}</span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li class="dropdown-link-item">
-                                        <a class="dropdown-link-item" href="{{ route('logout') }}"> <i
-                                                class="mdi mdi-logout"></i> Cerrar Sesión </a>
-                                    </li>
-                                    <li class="dropdown-link-item">
                                         <a class="dropdown-link-item" href="{{ route('user_profile.index') }}"> <i
                                                 class="mdi mdi-account-box-outline"></i> Actualizar Perfil </a>
+                                    </li>
+                                    <li class="dropdown-link-item">
+                                        <a class="dropdown-link-item" href="{{ route('user_profile.editPassword') }}">
+                                            <i class="mdi mdi-shield"></i> Cambiar Contraseña </a>
+                                    </li>
+                                    <li class="dropdown-link-item">
+                                        <a class="dropdown-link-item" href="{{ route('logout') }}"> <i
+                                                class="mdi mdi-logout"></i> Cerrar Sesión </a>
                                     </li>
                                 </ul>
                             </li>

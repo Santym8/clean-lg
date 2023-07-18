@@ -73,7 +73,8 @@ Route::patch('users/{id}/reset-password', [UserController::class, 'resetPassword
 // ------------User Profile----------------
 Route::get('user-profile', [UserProfileController::class, 'index'])->name('user_profile.index')->middleware('auth');
 Route::patch('user-profile/update-profile', [UserProfileController::class, 'updateProfile'])->name('user_profile.updateProfile')->middleware('auth');
-
+Route::get('user-profile/edit-password', [UserProfileController::class, 'editPassword'])->name('user_profile.editPassword')->middleware('auth');
+Route::patch('user-profile/update-password', [UserProfileController::class, 'updatePassword'])->name('user_profile.updatePassword')->middleware('auth');
 // ------------Login----------------
 Route::get('/login', function () {
     return view('auth.login');

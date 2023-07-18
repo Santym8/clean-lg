@@ -7,6 +7,7 @@ use App\Http\Controllers\security\ModuleController;
 use App\Http\Controllers\security\ModuleActionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
+use App\Http\Controllers\customer\DiscountController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;
@@ -36,6 +37,7 @@ Route::get('/', function () {
 // ------------------------------Module Customer-----------------------------
 Route::resource('job', JobsController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
+Route::resource('discounts', DiscountController::class)->middleware('auth');
 
 // -----------------------------Module Inventory-------------------------------
 Route::resource("warehouse", WarehouseController::class)->middleware('auth');

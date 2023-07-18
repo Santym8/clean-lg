@@ -68,7 +68,8 @@ class RoleAndActionSeeder extends Seeder
             'AUDIT/INDEX',
             'AUDIT/USER-ACTIONS'
         ],
-        'OPERADOR_CLIENTE' => [
+        'OPERADOR_CLIENTES' => [
+            //CUSTOMERS
             'CUSTOMERS/INDEX',
             'CUSTOMERS/CREATE',
             'CUSTOMERS/STORE',
@@ -76,14 +77,21 @@ class RoleAndActionSeeder extends Seeder
             'CUSTOMERS/UPDATE',
             'CUSTOMERS/SHOW',
             'CUSTOMERS/DESTROY',
-        ],
-        'OPERADOR_TRABAJO' => [
+            //JOBS
             'JOBS/INDEX',
             'JOBS/CREATE',
             'JOBS/STORE',
             'JOBS/EDIT',
             'JOBS/UPDATE',
             'JOBS/DESTROY',
+            //DISCOUNTS
+            'DISCOUNTS/INDEX',
+            'DISCOUNTS/CREATE',
+            'DISCOUNTS/STORE',
+            'DISCOUNTS/EDIT',
+            'DISCOUNTS/UPDATE',
+            'DISCOUNTS/SHOW',
+            'DISCOUNTS/DESTROY',
         ],
         'BODEGUERO_INVENTARIO',
         'OPERADOR_CLIENTE',

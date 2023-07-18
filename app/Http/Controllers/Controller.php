@@ -152,6 +152,22 @@ class Controller extends BaseController
         'not_access_destroy_job' => 'JOB/JOB/NOT-AUTHORIZED-DESTROY',
         'access_destroy_job' => 'JOB/JOB/AUTHORIZED-DESTROY',
 
+        // ---------------Discounts-----------------
+        'not_access_index_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-INDEX',
+        'access_index_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-INDEX',
+        'not_access_create_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-CREATE-VIEW',
+        'access_create_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-CREATE-VIEW',
+        'not_access_store_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-STORE',
+        'access_store_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-STORE',
+        'not_access_show_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-SHOW',
+        'access_show_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-SHOW',
+        'not_access_edit_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-EDIT-VIEW',
+        'access_edit_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-EDIT-VIEW',
+        'not_access_update_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-UPDATE',
+        'access_update_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-UPDATE',
+        'not_access_destroy_discounts' => 'CUSTOMER/DISCOUNTS/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_discounts' => 'CUSTOMER/DISCOUNTS/AUTHORIZED-DESTROY',
+
          // ---------------Services-----------------
          'not_access_index_services' => 'SERVICE_ORDERS/SERVICES/NOT-AUTHORIZED-INDEX',
          'access_index_services' => 'SERVICE_ORDERS/SERVICES/AUTHORIZED-INDEX',

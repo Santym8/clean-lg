@@ -14,6 +14,7 @@ use App\Http\Controllers\inventory\WarehouseController;
 use App\Http\Controllers\inventory\ProductWarehouseController;
 use App\Http\Controllers\inventory\CategoryController;
 use App\Http\Controllers\inventory\ProductController;
+use App\Http\Controllers\inventory\ProductMovementController;
 use App\Http\Controllers\service_orders\GoodsController;
 use App\Http\Controllers\service_orders\ServicesController;
 use App\Http\Controllers\service_orders\ServiceOrderGoodsController;
@@ -42,6 +43,12 @@ Route::resource("warehouse", WarehouseController::class)->middleware('auth');
 Route::resource("product_warehouse", ProductWarehouseController::class)->middleware('auth');
 Route::resource("category", CategoryController::class)->middleware('auth');
 Route::resource("product", ProductController::class)->middleware('auth');
+Route::get('/product-movement', [ProductMovementController::class, 'index'])->name('product_movement.index')->middleware('auth');
+Route::get('/product-movement/create', [ProductMovementController::class, 'create'])->name('product_movement.create')->middleware('auth');
+Route::post('/product-movement', [ProductMovementController::class, 'store'])->name('product_movement.store')->middleware('auth');
+Route::get('/product-movement/{id}/edit', [ProductMovementController::class, 'edit'])->name('product_movement.edit')->middleware('auth');
+Route::put('/product-movement/{id}', [ProductMovementController::class, 'update'])->name('product_movement.update')->middleware('auth');
+Route::delete('/product-movement/{id}', [ProductMovementController::class, 'destroy'])->name('product_movement.destroy')->middleware('auth');
 
 // ------------------------------Module Security--------------------------------
 // ------------Modules----------------

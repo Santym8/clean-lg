@@ -5,18 +5,13 @@
         @if (session('success'))
             <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
-        <form action="{{ route('product_warehouse.create') }}" method="GET">
-            <button type="submit" class="btn btn-primary">Crear</button>
-        </form>
-        <form action="{{ route('product_movement.create') }}" method="GET">
-            <button type="submit" class="btn btn-secondary">Realizar Movimiento</button>
-        </form>
-        <table id="product-warehouse-table" class="table">
+        <table id="product-movement-table" class="table">
             <thead class="thead-dark">
                 <tr>
+                    <th scope="col">Tipo</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col">Producto</th>
                     <th scope="col">Bodega</th>
+                    <th scope="col">Producto</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Creado en</th>
                     <th scope="col">Actualizado en</th>
@@ -24,45 +19,57 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($product_warehouses as $prod_ware)
-                    @if ($prod_ware->status == 1)
+                @foreach ($movements as $prod_mov)
+                    @if ($prod_mov->status == 1)
                         <tr>
-                            <td>{{ $prod_ware->cantidad }}</td>
-                            <td>{{ $prod_ware->product->name }}</td>
-                            <td>{{ $prod_ware->warehouse->name }}</td>
-                            <td>Activo</td>
-                            <td>{{ $prod_ware->created_at }}</td>
-                            <td>{{ $prod_ware->updated_at }}</td>
+                            <td>
+                                @if ($prod_mov->incoming == 1)
+                                    Entrada
+                                @else
+                                    Salida
+                                @endif
+                            </td>
+                            <td>{{ $prod_mov->quantity }}</td>
+                            <td>{{ $prod_mov->productWarehouse->warehouse->name }}</td>
+                            <td>{{ $prod_mov->productWarehouse->product->name }}</td>
+                            <td>
+                                @if ($prod_mov->status == 1)
+                                    Activo
+                                @else
+                                    Inactivo
+                                @endif
+                            </td>
+                            <td>{{ $prod_mov->created_at }}</td>
+                            <td>{{ $prod_mov->updated_at }}</td>
 
                             <td>
-                                <a href="{{ route('product_warehouse.edit', ['product_warehouse' => $prod_ware->id]) }}"
+                                <a href="{{ route('product_movement.edit', ['id' => $prod_mov->id]) }}"
                                     class="btn btn-primary">Editar</a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#modal{{ $prod_ware->id }}">Eliminar</button>
+                                    data-bs-target="#modal{{ $prod_mov->id }}">Eliminar</button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="modal{{ $prod_ware->id }}" tabindex="-1"
+                                <div class="modal fade" id="modal{{ $prod_mov->id }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar producto en bodega
+                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar movimiento
                                                 </h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ¿Está seguro que desea eliminar el producto de la bodega
-                                                <strong>{{ $prod_ware->warehouse->name }}</strong>?
+                                                ¿Está seguro que desea eliminar el movimiento de producto de la bodega
+                                                <strong>{{ $prod_mov->productWarehouse->warehouse->name }}</strong>?
                                                 <br>
-                                                Producto: <strong>{{ $prod_ware->product->name }}</strong>
-                                                Id: <strong>{{ $prod_ware->product_id }}</strong>
+                                                Producto: <strong>{{ $prod_mov->productWarehouse->product->name }}</strong>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
                                                     cancelar</button>
                                                 <form
-                                                    action="{{ route('product_warehouse.destroy', ['product_warehouse' => $prod_ware->id]) }}"
+                                                    action="{{ route('product_movement.destroy', ['id' => $prod_mov->id]) }}"
                                                     method="POST">
                                                     @method('DELETE')
                                                     @csrf
@@ -91,7 +98,7 @@
     <script src="//cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#product-warehouse-table').DataTable({
+            $('#product-movement-table').DataTable({
                 // Configuración personalizada de DataTables
             });
         });

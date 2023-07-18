@@ -32,7 +32,9 @@
                     <tr>
                         <td>{{ $module->name }}</td>
                         <td>{{ $module->menu_text }}</td>
-                        <td>{{ $module->icon_name }}</td>
+                        <td class="justify-content-center">
+                            <i class="{{ $module->icon_name }}"></i>
+                        </td>
                         <td>{{ $module->created_at }}</td>
                         <td>{{ $module->updated_at }}</td>
                         <td>{{ $module->status == 1 ? 'SI' : 'NO' }}</td>

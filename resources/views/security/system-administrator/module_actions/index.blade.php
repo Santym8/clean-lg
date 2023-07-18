@@ -38,7 +38,13 @@
                         <td>{{ $moduleAction->name }}</td>
                         <td>{{ $moduleAction->route }}</td>
                         <td>{{ $moduleAction->displayable_menu == 1 ? 'SI' : 'NO' }}</td>
-                        <td>{{ $moduleAction->icon_name }}</td>
+                        <td>
+                            @if ($moduleAction->icon_name)
+                                <i class="{{ $moduleAction->icon_name }}"></i>
+                            @else
+                                -
+                            @endif
+                        </td>
                         <td> {{ $moduleAction->menu_text }}</td>
                         <td>{{ $moduleAction->created_at }}</td>
                         <td>{{ $moduleAction->updated_at }}</td>

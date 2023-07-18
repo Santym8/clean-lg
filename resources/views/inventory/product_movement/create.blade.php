@@ -37,16 +37,6 @@
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="status">Estado:</label>
-                <select name="status" class="form-control" id="status" required>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
-            </div>
-
-            <!-- Add other fields as needed -->
-
             <button type="submit" class="btn btn-primary">Realizar Movimiento</button>
             <a class="btn btn-secondary" href="{{ route('product_warehouse.index') }}">Cancelar</a>
         </form>

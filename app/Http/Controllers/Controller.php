@@ -133,6 +133,8 @@ class Controller extends BaseController
         'access_edit_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/AUTHORIZED-EDIT-VIEW',
         'not_access_update_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/NOT-AUTHORIZED-UPDATE',
         'access_update_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/AUTHORIZED-UPDATE',
+        'not_access_destroy_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/AUTHORIZED-DESTROY',
         
         // ---------------Customer-----------------
         'not_access_index_customer' => 'CUSTOMER/CUSTOMER/NOT-AUTHORIZED-INDEX',

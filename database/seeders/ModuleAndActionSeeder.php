@@ -357,6 +357,10 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'PRODUCT-MOVEMENT/STORE',
                     'route' => 'product_movement.store',
                 ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/DESTROY',
+                    'route' => 'product_movement.destroy',
+                ],
             ]
         ],
         'CUSTOMERS',

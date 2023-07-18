@@ -123,6 +123,7 @@ class RoleAndActionSeeder extends Seeder
             'PRODUCT-MOVEMENT/UPDATE',
             'PRODUCT-MOVEMENT/CREATE',
             'PRODUCT-MOVEMENT/STORE',
+            'PRODUCT-MOVEMENT/DESTROY',
         ],
     ];
 }

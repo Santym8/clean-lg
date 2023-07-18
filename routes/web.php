@@ -48,6 +48,7 @@ Route::get('/product-movement/create', [ProductMovementController::class, 'creat
 Route::post('/product-movement', [ProductMovementController::class, 'store'])->name('product_movement.store')->middleware('auth');
 Route::get('/product-movement/{id}/edit', [ProductMovementController::class, 'edit'])->name('product_movement.edit')->middleware('auth');
 Route::put('/product-movement/{id}', [ProductMovementController::class, 'update'])->name('product_movement.update')->middleware('auth');
+Route::delete('/product-movement/{id}', [ProductMovementController::class, 'destroy'])->name('product_movement.destroy')->middleware('auth');
 
 // ------------------------------Module Security--------------------------------
 // ------------Modules----------------

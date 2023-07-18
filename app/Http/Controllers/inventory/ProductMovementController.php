@@ -44,7 +44,6 @@ class ProductMovementController extends Controller
             'product_warehouse_id' => 'required|exists:product_warehouses,id',
             'incoming' => 'required|boolean',
             'quantity' => 'required|integer',
-            'status' => 'required|boolean',
         ]);
 
         $productWarehouse = ProductWarehouse::findOrFail($request->product_warehouse_id);
@@ -57,7 +56,6 @@ class ProductMovementController extends Controller
         $movement->product_warehouse_id = $request->product_warehouse_id;
         $movement->incoming = $request->incoming;
         $movement->quantity = $request->quantity;
-        $movement->status = $request->status;
 
         $movement->save();
         // Actualizar la cantidad en ProductWarehouse
@@ -98,9 +96,7 @@ class ProductMovementController extends Controller
 
         $request->validate([
             'product_warehouse_id' => 'required|exists:product_warehouses,id',
-            'incoming' => 'required|boolean',
             'quantity' => 'required|integer',
-            'status' => 'required|boolean',
         ]);
 
         $productWarehouse = ProductWarehouse::findOrFail($request->product_warehouse_id);
@@ -113,9 +109,7 @@ class ProductMovementController extends Controller
         $previousQuantity = $movement->quantity;
 
         $movement->product_warehouse_id = $request->product_warehouse_id;
-        $movement->incoming = $request->incoming;
         $movement->quantity = $request->quantity;
-        $movement->status = $request->status;
 
         $movement->save();
 
@@ -131,4 +125,32 @@ class ProductMovementController extends Controller
         $this->addAudit(Auth::user(), $this->typeAudit['access_update_product_movement'], '');
         return redirect()->route('product_warehouse.index')->with('success', 'Movimiento de producto actualizado exitosamente.');
     }
+    public function destroy(string $id)
+    {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-MOVEMENT/DESTROY'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_product_movement'], '');
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
+        $movement = ProductMovement::findOrFail($id);
+        $productWarehouse = ProductWarehouse::findOrFail($movement->product_warehouse_id);
+
+        if ($movement->status) {
+            if ($movement->incoming) {
+                if($productWarehouse->cantidad < $movement->quantity){
+                    return redirect()->back()->with('error', 'La cantidad del movimiento excede la cantidad disponible en el almacén.');
+                }
+                $productWarehouse->cantidad -= $movement->quantity;
+            } else {
+                $productWarehouse->cantidad += $movement->quantity;
+            }
+            $productWarehouse->save();
+        }
+
+        $movement->delete();
+
+        $this->addAudit(Auth::user(), $this->typeAudit['access_destroy_product_movement'], '');
+        return redirect()->route('product_warehouse.index')->with('success', 'Movimiento de producto eliminado exitosamente.');
+    }
+    
 }

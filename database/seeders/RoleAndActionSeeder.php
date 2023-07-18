@@ -66,7 +66,8 @@ class RoleAndActionSeeder extends Seeder
         ],
         'AUDITOR' => [
             'AUDIT/INDEX',
-            'AUDIT/USER-ACTIONS'
+            'AUDIT/USER-ACTIONS',
+            'AUDIT/GRAPHICS',
         ],
         'OPERADOR_CLIENTE' => [
             'CUSTOMERS/INDEX',

@@ -146,7 +146,14 @@ class ModuleAndActionSeeder extends Seeder
                     'displayable_menu' => true,
                     'icon_name' => 'mdi mdi-account-star',
                     'menu_text' => 'ACCIONES DE USUARIO'
-                ]
+                ],
+                [
+                    'name' => 'AUDIT/GRAPHICS',
+                    'route' => 'audit_trails.graphics',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-account-star',
+                    'menu_text' => 'GRAFICOS ESTADISTICOS'
+                ],
             ]
         ],
 

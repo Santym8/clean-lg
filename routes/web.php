@@ -67,6 +67,7 @@ Route::resource('users', UserController::class)->except(
     'show',
     'destroy'
 )->middleware('auth');
+Route::patch('users/{id}/reset-password', [UserController::class, 'resetPassword'])->name('users.resetPassword')->middleware('auth');
 
 // ------------Login----------------
 Route::get('/login', function () {

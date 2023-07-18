@@ -125,6 +125,9 @@ class ModuleAndActionSeeder extends Seeder
                 [
                     'name' => 'USER/STORE',
                     'route' => 'users.store',
+                ],[
+                    'name' => 'USER/RESET_PASSWORD',
+                    'route' => 'users.resetPassword',
                 ],
             ]
         ],

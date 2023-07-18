@@ -44,6 +44,8 @@ class Controller extends BaseController
         'access_edit_user' => 'SECURITY/USER/AUTHORIZED-EDIT-VIEW',
         'not_access_update_user' => 'SECURITY/USER/NOT-AUTHORIZED-UPDATE',
         'access_update_user' => 'SECURITY/USER/AUTHORIZED-UPDATE',
+        'not_access_reset_password_user' => 'SECURITY/USER/NOT-AUTHORIZED-RESET-PASSWORD',
+        'access_reset_password_user' => 'SECURITY/USER/AUTHORIZED-RESET-PASSWORD',
 
         'not_access_index_module' => 'SECURITY/MODULE/NOT-AUTHORIZED-INDEX',
         'access_index_module' => 'SECURITY/MODULE/AUTHORIZED-INDEX',

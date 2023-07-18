@@ -56,7 +56,7 @@ class CategoryController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:categories|max:25',
         ]);
         $category = new Category();
         $category->name = $request->name;
@@ -97,7 +97,7 @@ class CategoryController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request -> validate([
-            'name' => 'required',
+            'name' => 'required|max:25|unique:categories,name,' . $id,
         ]);
         $category = Category::find($id);
         $category->name = $request->name;

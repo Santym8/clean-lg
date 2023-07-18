@@ -53,7 +53,7 @@ class WarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'name' => 'required | unique:warehouses|max:50',
         ]);
 
         $warehouse = new Warehouse();
@@ -95,7 +95,7 @@ class WarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'name' => 'required | max:50 | unique:warehouses,name,' . $id . ',id',
         ]);
 
         $warehouse = Warehouse::find($id);

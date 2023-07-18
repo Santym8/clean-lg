@@ -19,8 +19,7 @@
             @method('PUT')
             <div class="form-group">
                 <label for="cantidad">Cantidad:</label>
-                <input type="text" name="cantidad" class="form-control" id="cantidad"
-                    value="{{ $product_warehouse->cantidad }}" required>
+                <label>{{$product_warehouse->cantidad}}</label>
             </div>
 
             <div class="form-group">

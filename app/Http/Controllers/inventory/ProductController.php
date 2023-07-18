@@ -60,7 +60,7 @@ class ProductController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => 'required',
+            'name' => 'required | unique:products|max:25',
             'category' => 'required|exists:categories,id',
         ]);
 
@@ -112,7 +112,7 @@ class ProductController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => 'required',
+            'name' => 'required | max:25 | unique:products,name,' . $id . ',id',
             'category' => 'required|exists:categories,id',
         ]);
 

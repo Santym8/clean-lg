@@ -51,13 +51,12 @@ class ProductWarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'cantidad' => 'required',
-            'product_id' => 'required',
+            'product_id' => 'required|unique:product_warehouses,product_id,NULL,id,warehouse_id,' . $request->warehouse_id,
             'warehouse_id' => 'required',
         ]);
 
         $product_warehouse = new ProductWarehouse();
-        $product_warehouse->cantidad = $request->cantidad;
+        $product_warehouse->cantidad = 0;
         $product_warehouse->product_id = $request->product_id;
         $product_warehouse->warehouse_id = $request->warehouse_id;
         $product_warehouse->save();
@@ -86,7 +85,7 @@ class ProductWarehouseController extends Controller
         $product_warehouse = ProductWarehouse::find($id);
         $products = Product::all();
         $warehouses = Warehouse::all();
-        
+
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_product_warehouse'], 'product_warehouse_id: ' . $id);
         return view('inventory.product_warehouse.edit', compact('product_warehouse', 'products', 'warehouses'));
     }
@@ -101,13 +100,11 @@ class ProductWarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'cantidad' => 'required',
-            'product_id' => 'required',
+            'product_id' => 'required|unique:product_warehouses,product_id,' . $id . ',id,warehouse_id,' . $request->warehouse_id,
             'warehouse_id' => 'required',
         ]);
 
         $product_warehouse = ProductWarehouse::find($id);
-        $product_warehouse->cantidad = $request->cantidad;
         $product_warehouse->product_id = $request->product_id;
         $product_warehouse->warehouse_id = $request->warehouse_id;
         $product_warehouse->save();

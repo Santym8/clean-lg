@@ -43,7 +43,7 @@ class ProductMovementController extends Controller
         $request->validate([
             'product_warehouse_id' => 'required|exists:product_warehouses,id',
             'incoming' => 'required|boolean',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:1',
         ]);
 
         $productWarehouse = ProductWarehouse::findOrFail($request->product_warehouse_id);
@@ -96,14 +96,10 @@ class ProductMovementController extends Controller
 
         $request->validate([
             'product_warehouse_id' => 'required|exists:product_warehouses,id',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:1',
         ]);
 
         $productWarehouse = ProductWarehouse::findOrFail($request->product_warehouse_id);
-
-        if (!$request->incoming && $request->quantity > $productWarehouse->cantidad) {
-            return redirect()->back()->with('error', 'La cantidad del movimiento excede la cantidad disponible en el almacén.');
-        }
 
         $movement = ProductMovement::findOrFail($id);
         $previousQuantity = $movement->quantity;

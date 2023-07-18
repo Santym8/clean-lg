@@ -25,9 +25,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ auth()->user()->name }}
+                            {{ auth()->user()->name }} {{ auth()->user()->last_name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{ route('user_profile.index') }}">Actualizar Perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user_profile.editPassword') }}">Cambiar Contraseña</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -38,10 +40,17 @@
 
     <div class="container-error-dashboard">
         @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+            <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
+
+        @error('color')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        @if (session('success'))
+            <h6 class="alert alert-success">{{ session('success') }}</h6>
+        @endif
+
     </div>
     <div class="container mt-4 content-container">
         <div class="module-container">
@@ -53,7 +62,7 @@
             </div>
             <div class="module-box module-box-link">
                 <a class="module-box-link"
-                    @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']])) href="{{ route('job.index') }}">  
+                    @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']])) href="{{ route('job.index') }}">
                     @else href="{{ route('customers.index') }}"> @endif
                     <i class="mdi mdi-account-multiple module-icon"></i>
                     <h5 class="module-title">Clientes</h5>
@@ -78,7 +87,7 @@
                 </a>
             </div>
             <div class="module-box module-box-link">
-                <a class="module-box-link" href="{{route('audit_trails.index')}}">
+                <a class="module-box-link" href="{{ route('audit_trails.index') }}">
                     <i class="mdi mdi-eye module-icon"></i>
                     <h5 class="module-title">Auditoría</h5>
                 </a>

@@ -63,6 +63,7 @@ class RoleAndActionSeeder extends Seeder
             'USER/UPDATE',
             'USER/CREATE',
             'USER/STORE',
+            'USER/RESET_PASSWORD',
         ],
         'AUDITOR' => [
             'AUDIT/INDEX',

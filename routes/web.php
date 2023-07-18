@@ -5,6 +5,7 @@ use App\Http\Controllers\audit_trail\AuditStatisticsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use App\Http\Controllers\security\ModuleController;
 use App\Http\Controllers\security\ModuleActionController;
+use App\Http\Controllers\security\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
 use App\Http\Controllers\security\LoginController;
@@ -68,6 +69,10 @@ Route::resource('users', UserController::class)->except(
     'destroy'
 )->middleware('auth');
 Route::patch('users/{id}/reset-password', [UserController::class, 'resetPassword'])->name('users.resetPassword')->middleware('auth');
+
+// ------------User Profile----------------
+Route::get('user-profile', [UserProfileController::class, 'index'])->name('user_profile.index')->middleware('auth');
+Route::patch('user-profile/update-profile', [UserProfileController::class, 'updateProfile'])->name('user_profile.updateProfile')->middleware('auth');
 
 // ------------Login----------------
 Route::get('/login', function () {

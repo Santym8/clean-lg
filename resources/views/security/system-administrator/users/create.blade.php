@@ -53,30 +53,35 @@
             <input type="text" name="phone_number" id="phone_number" class="form-control"
                 placeholder="N&uacute;mero de Tel&eacute;fono" value="{{ old('phone_number') }}">
 
+            <br>
+            <div class="row">
+                <div class="col-md-5 .d-inline-flex">
+                    <label for="available_roles">Roles Disponibles</label>
+                    <select style="height: 300px;" name="available_roles[]" id="available_roles" multiple class="form-control">
+                        @foreach ($available_roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <label for="available_roles">Roles Disponibles</label>
-            <select name="available_roles[]" id="available_roles" multiple class="form-control">
-                @foreach ($available_roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                @endforeach
-            </select>
+                <div class="col-md-1 d-flex align-items-center">
+                    <div class="text-center">
+                        <button type="button" id="add_role" class="btn btn-primary">&gt;</button>
+                        <br><br>
+                        <button type="button" id="remove_role" class="btn btn-primary">&lt;</button>
+                    </div>
+                </div>
 
+                <div class="col-md-5 .d-inline-flex">
+                    <label for="available_roles">Roles Asignados</label>
+                    <select style="height: 300px;" name="selected_roles[]" id="selected_roles" multiple class="form-control">
 
-            <div class="col-md-2 d-flex align-items-center">
-                <div class="text-center">
-                    <button type="button" id="add_role" class="btn btn-primary">&gt;</button>
-                    <br><br>
-                    <button type="button" id="remove_role" class="btn btn-primary">&lt;</button>
+                    </select>
                 </div>
             </div>
 
-            <label for="available_roles">Roles Asignados</label>
-            <select name="selected_roles[]" id="selected_roles" multiple class="form-control">
-
-            </select>
-
-
-            <input type="submit" class="btn btn-primary" value="Guardar" />
+            <br>
+            <input id="submit" type="submit" class="btn btn-primary" value="Guardar" />
 
 
         </form>
@@ -92,6 +97,13 @@
             var removeButton = document.getElementById('remove_role');
             var availableItemsList = document.getElementById('available_roles');
             var selectedItemsList = document.getElementById('selected_roles');
+            var submitButton = document.getElementById('submit');
+
+            submitButton.addEventListener('click', function() {
+                Array.from(selectedItemsList.options).forEach(function(option) {
+                    option.selected = true;
+                });
+            });
 
             addButton.addEventListener('click', function() {
                 moveSelectedItems(availableItemsList, selectedItemsList);

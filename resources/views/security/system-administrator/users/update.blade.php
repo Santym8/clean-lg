@@ -54,34 +54,36 @@
                 <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>SI</option>
                 <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>NO</option>
             </select>
+            <br>
+            <div class="row">
+                <div class="col-md-5 .d-inline-flex">
+                    <label for="available_roles">Roles Disponibles</label>
+                    <select style="height: 300px;" name="available_roles[]" id="available_roles" multiple class="form-control">
+                        @foreach ($available_roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
 
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <div class="text-center">
+                        <button type="button" id="add_role" class="btn btn-primary">&gt;</button>
+                        <br><br>
+                        <button type="button" id="remove_role" class="btn btn-primary">&lt;</button>
+                    </div>
+                </div>
 
-            <label for="available_roles">Roles Disponibles</label>
-            <select name="available_roles[]" id="available_roles" multiple class="form-control">
-                @foreach ($available_roles as $role)
-                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                @endforeach
-            </select>
-
-            <div class="col-md-2 d-flex align-items-center">
-                <div class="text-center">
-                    <button type="button" id="add_role" class="btn btn-primary">&gt;</button>
-                    <br><br>
-                    <button type="button" id="remove_role" class="btn btn-primary">&lt;</button>
+                <div class="col-md-5 .d-inline-flex">
+                    <label for="selected_roles">Roles Asignados</label>
+                    <select style="height: 300px;" name="selected_roles[]" id="selected_roles" multiple class="form-control" readonly>
+                        @foreach ($user->roles as $role)
+                            <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-
-            <label for="selected_roles">Roles Asignados</label>
-            <select name="selected_roles[]" id="selected_roles" multiple class="form-control" readonly>
-                @foreach ($user->roles as $role)
-                    <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
-                @endforeach
-            </select>
-
-
-
-
-            <input type="submit" class="btn btn-primary" value="Guardar" />
+            <br>
+            <input id="submit" type="submit" class="btn btn-primary" value="Guardar" />
 
 
         </form>
@@ -97,6 +99,14 @@
             var removeButton = document.getElementById('remove_role');
             var availableItemsList = document.getElementById('available_roles');
             var selectedItemsList = document.getElementById('selected_roles');
+            var submitButton = document.getElementById('submit');
+
+
+            submitButton.addEventListener('click', function() {
+                Array.from(selectedItemsList.options).forEach(function(option) {
+                    option.selected = true;
+                });
+            });
 
             addButton.addEventListener('click', function() {
                 moveSelectedItems(availableItemsList, selectedItemsList);

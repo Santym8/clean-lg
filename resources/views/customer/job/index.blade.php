@@ -24,10 +24,10 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Creación</th>
+                    <th scope="col">Actualización</th>
                     <th>Actions</th>
                 </tr>
             </thead>

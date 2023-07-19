@@ -44,12 +44,12 @@
                                     <div class="form-group">
                                         <input id="email" type="text" class="form-control form-control-user"
                                             name="identification" id="identification" required autofocus
-                                            placeholder="Enter Email Address.">
+                                            placeholder="Identificación">
                                     </div>
                                     <div class="form-group">
                                         <input id="password" type="password" class="form-control form-control-user"
                                             name="password" id="password" required autocomplete="current-password"
-                                            placeholder="Password">
+                                            placeholder="Contraseña">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -72,41 +72,6 @@
         </div>
 
     </div>
-
-
-
-    {{-- Login Form --}}
-    {{-- <form action="{{ route('auth') }}" method="GET">
-
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @csrf
-
-        <div class="form-group">
-            <label for="identification">Identificacion</label>
-            <input type="text" name="identification" id="identification" placeholder="Identificaion"
-                class="form-control" required>
-        </div>
-
-        <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control"
-                required>
-        </div>
-
-        <input type="submit" class="btn btn-primary" value="Ingresar">
-
-    </form>
-
- --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">

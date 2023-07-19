@@ -24,8 +24,6 @@ class DashboardController extends Controller
             $module->routeFirstDisplayableAction = $this->routeFirstDisplayableAction($module);
         }
 
-        error_log($modules);
-
         return view('dashboard.index', compact('modules'));
     }
 

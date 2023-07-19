@@ -1,5 +1,4 @@
 @extends('app')
-<script src="{{ asset('js/goods.js') }}"></script>
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">

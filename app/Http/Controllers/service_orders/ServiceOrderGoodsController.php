@@ -124,9 +124,25 @@ class ServiceOrderGoodsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
+         if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/SHOW'])) {
+             $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_service_orders_goods'], 'service_orders_goods: ' . $id);
+             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+         }
+
+         //$goods = Goods::findOrFail($id);
+         $services = Services::find($id);
+         $service_order_goods = ServiceOrders::findOrFail($id);
+         $goods= Goods::where('service_order_id', $id)->get();
+         $customers = Customer::find($id);
+         //$this->addAudit(Auth::user(), $this->typeAudit['access_show_service_orders_goods'], 'service_orders_goods: ' . $id);
+         return view('service_orders.service_orders_goods.show', ['service_order_goods' => $service_order_goods, 'goods' => $goods, 'services' => $services,
+         'customers' => $customers]);
+
     }
+
+
 
     public function update(Request $request, string $id)
     {

@@ -89,4 +89,5 @@ Route::get('audit-trails/user-actions', [AuditStatisticsController::class, 'user
 Route::resource('services', ServicesController::class)->middleware('auth');
 Route::resource('goods', GoodsController::class)->middleware('auth');
 Route::resource('service_orders_goods', ServiceOrderGoodsController::class)->middleware('auth');
+//Route::get('service_orders_goods/{service_order_goods}/goods', 'OrderServiceController@showGoods')->name('order_services.show_goods');
 Route::resource('service_orders', ServiceOrderController::class)->middleware('auth');

@@ -13,7 +13,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Las 5 primeros acciones más realizadas'
+                text: 'Las 5 Acciones Más Realizadas'
             },
             series: [{
                 name: 'Cantidad',
@@ -27,7 +27,7 @@
                 type: 'bar'
             },
             title: {
-                text: 'Usuarios y módulos visitados'
+                text: 'Usuarios y Módulos Visitados'
             },
             xAxis: {
                 categories: <?php echo json_encode(array_column($chartData2, 'name')); ?>
@@ -57,7 +57,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Accesos Exitosos por Usuario'
+                text: 'Accesos de Usuario Exitosos'
             },
             xAxis: {
                 categories: <?php echo json_encode(array_column($chartData3, 'name')); ?>
@@ -73,7 +73,7 @@
                 verticalAlign: 'middle'
             },
             series: [{
-                name: 'Successful Accesses',
+                name: 'Accesos Exitosos',
                 data: <?php echo $chartDataJson3; ?>
             }]
         });
@@ -97,12 +97,41 @@
             },
             yAxis: {
                 title: {
-                    text: 'Cantidad de visitas'
+                    text: 'Cantidad de  Visitas'
                 }
             },
             series: [{
                 name: 'Cantidad',
                 data: <?php echo $allChartDataJson; ?> // Sin las llaves de Blade
+            }]
+        });
+    </script>
+
+    <div id="userAccessColumnChartContainer2"></div>
+    <script>
+        Highcharts.chart('userAccessColumnChartContainer2', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Accesos Exitosos a Módulos'
+            },
+            xAxis: {
+                categories: <?php echo json_encode(array_column($chartData4, 'name')); ?>
+            },
+            yAxis: {
+                title: {
+                    text: 'Número de Accesos Exitosos'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            series: [{
+                name: 'Acceso Exitoso',
+                data: <?php echo $chartDataJson4; ?>
             }]
         });
     </script>

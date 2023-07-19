@@ -59,6 +59,7 @@ class AudiGraphicsController extends Controller
 
         $chartDataJson2 = json_encode(array_values($chartData2));
 
+        //acceso login exitoso
         $results3 = AuditTrail::selectRaw('users.name as user_name, COUNT(*) as count')
             ->where('type', 'LIKE', '%SUCCESSFUL%')
             ->join('users', 'audit_trails.user_id', '=', 'users.id')
@@ -74,6 +75,27 @@ class AudiGraphicsController extends Controller
         }
 
         $chartDataJson3 = json_encode($chartData3);
+
+        //Acceso a los 10 primeros modulos exitosos
+
+        $results4 = AuditTrail::selectRaw('users.name as user_name, SUBSTRING_INDEX(type, "/", -2) as module, COUNT(*) as count')
+            ->join('users', 'audit_trails.user_id', '=', 'users.id')
+            ->where('type', 'LIKE', '%AUTHORIZED%')
+            ->where('type', 'NOT LIKE', '%NOT-AUTHORIZED-INDEX%')
+            ->groupBy('user_name', 'module')
+            ->limit(5)
+            ->get();
+
+        $chartData4 = [];
+        foreach ($results4 as $row) {
+            $user = $row->user_name;
+            $module = $row->module;
+            $visits = intval($row->count);
+
+            $chartData4[] = ['name' => $user . ' - ' . $module, 'y' => $visits];
+        }
+
+        $chartDataJson4 = json_encode($chartData4);
 
         // Obtener todos los módulos más visitados con la cantidad de visitas
         $allResults = DB::table('audit_trails')
@@ -91,6 +113,6 @@ class AudiGraphicsController extends Controller
         $allChartDataJson = json_encode($allChartData);
 
         // Retorna la vista con los datos para la gráfica de pastel
-        return view('audit_trail.graphics', compact('chartDataJson', 'chartDataJson2', 'chartData2', 'chartDataJson3', 'chartData3', 'allChartDataJson', 'allChartData'));
+        return view('audit_trail.graphics', compact('chartDataJson', 'chartDataJson2', 'chartData2', 'chartDataJson3', 'chartData3', 'allChartDataJson', 'allChartData', 'chartDataJson4', 'chartData4'));
     }
 }

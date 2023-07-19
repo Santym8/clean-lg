@@ -43,9 +43,13 @@ Route::resource('customers', CustomerController::class)->middleware('auth');
 
 // -----------------------------Module Inventory-------------------------------
 Route::resource("warehouse", WarehouseController::class)->middleware('auth');
+Route::put('warehouse/{id}/change-status', [WarehouseController::class, 'changeStatus'])->name('warehouse.changeStatus')->middleware('auth');
 Route::resource("product_warehouse", ProductWarehouseController::class)->middleware('auth');
+Route::put('product_warehouse/{id}/change-status', [ProductWarehouseController::class, 'changeStatus'])->name('product_warehouse.changeStatus')->middleware('auth');
 Route::resource("category", CategoryController::class)->middleware('auth');
+Route::put('category/{id}/change-status', [CategoryController::class, 'changeStatus'])->name('category.changeStatus')->middleware('auth');
 Route::resource("product", ProductController::class)->middleware('auth');
+Route::put('product/{id}/change-status', [ProductController::class, 'changeStatus'])->name('product.changeStatus')->middleware('auth');
 Route::get('/product-movement', [ProductMovementController::class, 'index'])->name('product_movement.index')->middleware('auth');
 Route::get('/product-movement/create', [ProductMovementController::class, 'create'])->name('product_movement.create')->middleware('auth');
 Route::post('/product-movement', [ProductMovementController::class, 'store'])->name('product_movement.store')->middleware('auth');

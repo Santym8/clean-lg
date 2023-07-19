@@ -238,8 +238,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'BODEGAS'
                 ],
                 [
-                    'name' => 'WAREHOUSE/DESTROY',
-                    'route' => 'warehouse.destroy',
+                    'name' => 'WAREHOUSE/CHANGE-STATUS',
+                    'route' => 'warehouse.changeStatus',
                 ],
                 [
                     'name' => 'WAREHOUSE/EDIT',
@@ -266,8 +266,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'PRODUCTOS'
                 ],
                 [
-                    'name' => 'PRODUCT/DESTROY',
-                    'route' => 'product.destroy',
+                    'name' => 'PRODUCT/CHANGE-STATUS',
+                    'route' => 'product.changeStatus',
                 ],
                 [
                     'name' => 'PRODUCT/EDIT',
@@ -294,8 +294,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'CATEGORIAS'
                 ],
                 [
-                    'name' => 'CATEGORY/DESTROY',
-                    'route' => 'category.destroy',
+                    'name' => 'CATEGORY/CHANGE-STATUS',
+                    'route' => 'category.changeStatus',
                 ],
                 [
                     'name' => 'CATEGORY/EDIT',
@@ -322,8 +322,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'PRODUCTOS EN BODEGA'
                 ],
                 [
-                    'name' => 'PRODUCT-WAREHOUSE/DESTROY',
-                    'route' => 'product_warehouse.destroy',
+                    'name' => 'PRODUCT-WAREHOUSE/CHANGE-STATUS',
+                    'route' => 'product_warehouse.changeStatus',
                 ],
                 [
                     'name' => 'PRODUCT-WAREHOUSE/EDIT',

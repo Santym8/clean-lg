@@ -90,7 +90,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
 
                     <span class="page-title"
-                        style="margin-left: 20px">{{ ucfirst(str_replace('_', ' ', explode('.', Route::currentRouteName())[0])) }}</span>
+                        style="margin-left: 60px">{{ ucfirst(str_replace('_', ' ', explode('.', Route::currentRouteName())[0])) }}</span>
 
 
                     <div class="navbar-right ">

@@ -13535,10 +13535,11 @@ label {
 /*  sub-menu dropdowns */
 .sidebar .sub-menu {
   list-style-type: none;
-  padding: 0.625rem 0 0.625rem 2.81rem;
+  padding: 0.625rem 0 0.625rem 1.81rem;
   margin: 0;
   position: relative;
 }
+
 .sidebar .sub-menu > .active .sidenav-item-link {
   color: #ffffff;
 }
@@ -13596,6 +13597,7 @@ label {
 .sidebar .sidenav-item-link .badge {
   padding: 0.4em 0.6em;
 }
+
 
 /* Sidebar for Mobile */
 .sidebar-mobile-in .left-sidebar {
@@ -13937,6 +13939,7 @@ label {
 @media (prefers-reduced-motion: reduce) {
   .sidebar-minified-out .left-sidebar {
     transition: none;
+    width: 50% !important;
   }
 }
 .sidebar-minified-out .page-wrapper {
@@ -13966,6 +13969,7 @@ label {
     bottom: 0;
     right: 0;
     z-index: 1050;
+    width: 300px;
   }
 }
 .sidebar-fixed-offcanvas .left-sidebar .sidebar-with-footer,

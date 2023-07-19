@@ -2,19 +2,20 @@
 
 @section('content')
 <div class="container">
+    @if (session('success'))
+    <h6 class="alert alert-success">{{ session('success') }}</h6>
+    @endif
+    @if (Gate::allows('action-allowed-to-user', ['GOODS/CREATE']))
+    <form action="{{ route('goods.create') }}" method="GET">
+        <button type="submit" class="btn btn-primary">Crear</button>
+    </form>
+    @endif
     <table class="table" id="goods-table">
-        @if (session('success'))
-        <h6 class="alert alert-success">{{ session('success') }}</h6>
-        @endif
-        @if (Gate::allows('action-allowed-to-user', ['GOODS/CREATE']))
-        <form action="{{ route('goods.create') }}" method="GET">
-            <button type="submit" class="btn btn-primary">Crear</button>
-        </form>
-        @endif
+
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Descripción</th>        
+                <th scope="col">Descripción</th>
                 <th scope="col">Status</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
@@ -28,7 +29,7 @@
             @foreach ($goods as $good)
             <tr>
                 <th scope="row">{{ $good->id }}</th>
-                <td>{{ $good->description }}</td>               
+                <td>{{ $good->description }}</td>
                 <td>{{ $good->status ==1?'SI':'NO'}}</td>
                 <td>{{ $good->created_at }}</td>
                 <td>{{ $good->updated_at }}</td>
@@ -43,7 +44,7 @@
 
                     @if (Gate::allows('action-allowed-to-user', ['GOODS/DESTROY']))
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $good->id }}">Eliminar</button>
-                    
+
                     <div class="modal fade" id="modal{{ $good->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

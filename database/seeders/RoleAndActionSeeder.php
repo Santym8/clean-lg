@@ -56,6 +56,7 @@ class RoleAndActionSeeder extends Seeder
             'ROLE/UPDATE',
             'ROLE/CREATE',
             'ROLE/STORE',
+            'ROLE/DESTROY',
             //USERS
             'USER/INDEX',
             'USER/CHANGE-STATUS',
@@ -94,9 +95,6 @@ class RoleAndActionSeeder extends Seeder
             'DISCOUNTS/SHOW',
             'DISCOUNTS/DESTROY',
         ],
-        'BODEGUERO_INVENTARIO',
-        'OPERADOR_CLIENTE',
-        'OPERADOR_TRABAJO',
         'OPERADOR_SERVICIOS' => [
             'SERVICES/INDEX',
             'SERVICES/CREATE',

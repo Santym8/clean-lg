@@ -33,6 +33,8 @@ class Controller extends BaseController
         'access_edit_role' => 'SECURITY/ROLE/AUTHORIZED-EDIT-VIEW',
         'not_access_update_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-UPDATE',
         'access_update_role' => 'SECURITY/ROLE/AUTHORIZED-UPDATE',
+        'not_access_destroy_role' => 'SECURITY/ROLE/NOT-AUTHORIZED-DESTROY',
+        'access_destroy_role' => 'SECURITY/ROLE/AUTHORIZED-DESTROY',
 
         'not_access_index_user' => 'SECURITY/USER/NOT-AUTHORIZED-INDEX',
         'access_index_user' => 'SECURITY/USER/AUTHORIZED-INDEX',

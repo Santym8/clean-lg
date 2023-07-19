@@ -56,7 +56,8 @@ class RoleController extends Controller
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
     }
 
-    public function create(){
+    public function create()
+    {
         if (!Gate::allows('action-allowed-to-user', ['ROLE/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_role'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
@@ -64,7 +65,7 @@ class RoleController extends Controller
 
         $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
             $query->where('status', true);
-        })->get()->sortBy('module.name');
+        })->get()->sortBy('module.name')->sortBy('name');
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_role'], '');
         return view($this->pathViews . '.create', [
@@ -72,7 +73,8 @@ class RoleController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         if (!Gate::allows('action-allowed-to-user', ['ROLE/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_role'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
@@ -99,7 +101,7 @@ class RoleController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
-        if($id == 1){
+        if ($id == 1) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
             return redirect()->route('roles.index')->with('error', 'No se puede actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
         }
@@ -107,7 +109,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
             $query->where('status', true);
-        })->get()->sortBy('module.name');
+        })->get()->sortBy('module.name')->sortBy('name');
 
         //Delete from the list all the actions that the role already has
         foreach ($role->moduleActions as $moduleAction) {
@@ -130,7 +132,7 @@ class RoleController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
-        if($id == 1){
+        if ($id == 1) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
             return redirect()->route('roles.index')->with('error', 'No se puede actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
         }
@@ -148,5 +150,31 @@ class RoleController extends Controller
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_update_role'], 'Se actualizo el rol con id: ' . $id);
         return redirect()->route('roles.index')->with('success', 'Rol actualizado exitosamente.');
+    }
+
+    public function destroy(Request $request, string $id)
+    {
+        if (!Gate::allows('action-allowed-to-user', ['ROLE/DESTROY'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_role'], 'Se intento eliminar el rol con id: ' . $id);
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
+        if ($id == 1) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_role'], 'Se intento eliminar el rol ADMINSTRADOR_DE_SISTEMA.');
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol ADMINSTRADOR_DE_SISTEMA.');
+        }
+
+        $role = Role::findOrFail($id);
+
+        // Delete all relationships with users
+        $role->users()->detach();
+
+        // Delete all relationships with module actions
+        $role->moduleActions()->detach();
+
+        $role->delete();
+
+        $this->addAudit(Auth::user(), $this->typeAudit['access_destroy_role'], 'Se elimino el rol con id: ' . $id);
+        return redirect()->route('roles.index')->with('success', 'Rol eliminado exitosamente.');
     }
 }

@@ -104,6 +104,10 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'ROLE/STORE',
                     'route' => 'roles.store',
                 ],
+                [
+                    'name' => 'ROLE/DESTROY',
+                    'route' => 'roles.destroy',
+                ],
                 //---------------User------------
                 [
                     'name' => 'USER/INDEX',
@@ -127,7 +131,7 @@ class ModuleAndActionSeeder extends Seeder
                 [
                     'name' => 'USER/STORE',
                     'route' => 'users.store',
-                ],[
+                ], [
                     'name' => 'USER/RESET_PASSWORD',
                     'route' => 'users.resetPassword',
                 ],
@@ -403,7 +407,6 @@ class ModuleAndActionSeeder extends Seeder
                 ],
             ]
         ],
-        'BILLING',
         'SERVICE_ORDERS' => [
             'menu_text' => 'ORDENES DE SERVICIO',
             'icon_name' => 'mdi mdi-clipboard-text',
@@ -440,7 +443,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'SERVICE_ORDERS/DELETE',
                     'route' => 'service_orders.destroy',
                 ],
-               
+
                 //---------------Services--------------
                 [
                     'name' => 'SERVICES/INDEX',

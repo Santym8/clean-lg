@@ -56,7 +56,6 @@ class ProductWarehouseController extends Controller
         ]);
 
         $product_warehouse = new ProductWarehouse();
-        $product_warehouse->cantidad = 0;
         $product_warehouse->product_id = $request->product_id;
         $product_warehouse->warehouse_id = $request->warehouse_id;
         $product_warehouse->save();

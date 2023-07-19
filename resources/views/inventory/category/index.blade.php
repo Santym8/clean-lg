@@ -13,9 +13,11 @@
         @if (session('success'))
             <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
-        <form action="{{ route('category.create') }}" method="GET">
-            <button type="submit" class="btn btn-primary">Crear</button>
-        </form>
+        @if (Gate::allows('action-allowed-to-user', ['CATEGORY/CREATE']))
+            <form action="{{ route('category.create') }}" method="GET">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+        @endif
         <table id="category-table" class="table">
             <thead class="thead-dark">
                 <tr>
@@ -37,53 +39,61 @@
                                 Inactivo
                             @endif
                         </td>
-                </td>
-                <td>{{ $category->created_at }}</td>
-                <td>{{ $category->updated_at }}</td>
+                        </td>
+                        <td>{{ $category->created_at }}</td>
+                        <td>{{ $category->updated_at }}</td>
 
-                <td>
-                    <a href="{{ route('category.edit', ['category' => $category->id]) }}" class="btn btn-primary">Editar</a>
-                    @if ($category->status == 1)
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#modal{{ $category->id }}">Eliminar</button>
-                    @else
-                        <form action="{{ route('category.changeStatus', ['id' => $category->id]) }}" method="post">
-                            @method('PUT')
-                            @csrf
-                            <button type="submit" class="btn btn-success">Restaurar</button>
-                        </form>
-                    @endif
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="modal{{ $category->id }}" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar categoría</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Está seguro de que desea eliminar la categoría
-                                    <strong>{{ $category->name }}</strong>?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
-                                        cancelar</button>
+                        <td>
+                            @if (Gate::allows('action-allowed-to-user', ['CATEGORY/EDIT']))
+                                <a href="{{ route('category.edit', ['category' => $category->id]) }}"
+                                    class="btn btn-primary">Editar</a>
+                            @endif
+                            @if (Gate::allows('action-allowed-to-user', ['CATEGORY/CHANGE-STATUS']))
+                                @if ($category->status == 1)
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#modal{{ $category->id }}">Eliminar</button>
+                                @else
                                     <form action="{{ route('category.changeStatus', ['id' => $category->id]) }}"
-                                        method="POST">
+                                        method="post">
                                         @method('PUT')
                                         @csrf
-                                        <button type="submit" class="btn btn-primary">Sí, eliminar
-                                            categoría</button>
+                                        <button type="submit" class="btn btn-success">Restaurar</button>
                                     </form>
+                                @endif
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal{{ $category->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar categoría</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Está seguro de que desea eliminar la categoría
+                                                <strong>{{ $category->name }}</strong>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
+                                                    cancelar</button>
+                                                <form
+                                                    action="{{ route('category.changeStatus', ['id' => $category->id]) }}"
+                                                    method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary">Sí, eliminar
+                                                        categoría</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                </tr>
+                            @endif
+
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

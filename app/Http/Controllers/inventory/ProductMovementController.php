@@ -48,7 +48,7 @@ class ProductMovementController extends Controller
 
         $productWarehouse = ProductWarehouse::findOrFail($request->product_warehouse_id);
 
-        if (!$request->incoming && $request->quantity > $productWarehouse->cantidad) {
+        if (!$request->incoming && $request->quantity > $productWarehouse->stock) {
             return redirect()->back()->withInput()->with('error', 'La cantidad del movimiento excede la cantidad disponible en el almacén.');
         }
 
@@ -60,9 +60,9 @@ class ProductMovementController extends Controller
         $movement->save();
         // Actualizar la cantidad en ProductWarehouse
         if ($movement->incoming) {
-            $productWarehouse->cantidad += $movement->quantity;
+            $productWarehouse->stock += $movement->quantity;
         } else {
-            $productWarehouse->cantidad -= $movement->quantity;
+            $productWarehouse->stock -= $movement->quantity;
         }
         $productWarehouse->save();
 
@@ -112,9 +112,9 @@ class ProductMovementController extends Controller
         // Actualizar la cantidad en ProductWarehouse
         $quantityDiff = $request->quantity - $previousQuantity;
         if ($movement->incoming) {
-            $productWarehouse->cantidad += $quantityDiff;
+            $productWarehouse->stock += $quantityDiff;
         } else {
-            $productWarehouse->cantidad -= $quantityDiff;
+            $productWarehouse->stock -= $quantityDiff;
         }
         $productWarehouse->save();
 
@@ -133,12 +133,12 @@ class ProductMovementController extends Controller
 
         if ($movement->status) {
             if ($movement->incoming) {
-                if($productWarehouse->cantidad < $movement->quantity){
+                if($productWarehouse->stock < $movement->quantity){
                     return redirect()->back()->with('error', 'La cantidad del movimiento excede la cantidad disponible en el almacén.');
                 }
-                $productWarehouse->cantidad -= $movement->quantity;
+                $productWarehouse->stock -= $movement->quantity;
             } else {
-                $productWarehouse->cantidad += $movement->quantity;
+                $productWarehouse->stock += $movement->quantity;
             }
             $productWarehouse->save();
         }

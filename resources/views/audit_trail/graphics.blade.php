@@ -21,6 +21,7 @@
             }]
         });
     </script>
+    <br>
     <script>
         Highcharts.chart('barChartContainer', {
             chart: {
@@ -50,6 +51,7 @@
             series: <?php echo $chartDataJson2; ?> // Sin las llaves de Blade
         });
     </script>
+    <br>
     <div id="userAccessColumnChartContainer"></div>
     <script>
         Highcharts.chart('userAccessColumnChartContainer', {
@@ -78,6 +80,7 @@
             }]
         });
     </script>
+    <br>
     <div id="basicLineChartContainer"></div>
     <script>
         // ... existing code ...
@@ -106,7 +109,7 @@
             }]
         });
     </script>
-
+    <br>
     <div id="userAccessColumnChartContainer2"></div>
     <script>
         Highcharts.chart('userAccessColumnChartContainer2', {
@@ -132,6 +135,35 @@
             series: [{
                 name: 'Acceso Exitoso',
                 data: <?php echo $chartDataJson4; ?>
+            }]
+        });
+    </script>
+    <br>
+    <div id="userAccessColumnChartContainer3"></div>
+    <script>
+        Highcharts.chart('userAccessColumnChartContainer3', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Negación de Accesos a Módulos'
+            },
+            xAxis: {
+                categories: <?php echo json_encode(array_column($chartData5, 'name')); ?>
+            },
+            yAxis: {
+                title: {
+                    text: 'Número de Negaciones'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            series: [{
+                name: 'Negación',
+                data: <?php echo $chartDataJson5; ?>
             }]
         });
     </script>

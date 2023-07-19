@@ -112,7 +112,41 @@ class AudiGraphicsController extends Controller
 
         $allChartDataJson = json_encode($allChartData);
 
+
+
+        //Negacion acceso a los 10 primeros modulos exitosos
+
+        $results5 = AuditTrail::selectRaw('users.name as user_name, SUBSTRING_INDEX(type, "/", -2) as module, COUNT(*) as count')
+            ->join('users', 'audit_trails.user_id', '=', 'users.id')
+            ->where('type', 'LIKE', '%NOT-AUTHORIZED-INDEX%')
+            ->groupBy('user_name', 'module')
+            ->limit(5)
+            ->get();
+
+        $chartData5 = [];
+        foreach ($results5 as $row) {
+            $user = $row->user_name;
+            $module = $row->module;
+            $visits = intval($row->count);
+
+            $chartData5[] = ['name' => $user . ' - ' . $module, 'y' => $visits];
+        }
+
+        $chartDataJson5 = json_encode($chartData5);
+
         // Retorna la vista con los datos para la gráfica de pastel
-        return view('audit_trail.graphics', compact('chartDataJson', 'chartDataJson2', 'chartData2', 'chartDataJson3', 'chartData3', 'allChartDataJson', 'allChartData', 'chartDataJson4', 'chartData4'));
+        return view('audit_trail.graphics', compact(
+            'chartDataJson',
+            'chartDataJson2',
+            'chartData2',
+            'chartDataJson3',
+            'chartData3',
+            'allChartDataJson',
+            'allChartData',
+            'chartDataJson4',
+            'chartData4',
+            'chartData5',
+            'chartDataJson5'
+        ));
     }
 }

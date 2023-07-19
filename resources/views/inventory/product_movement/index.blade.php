@@ -43,42 +43,48 @@
                             <td>{{ $prod_mov->updated_at }}</td>
 
                             <td>
-                                <a href="{{ route('product_movement.edit', ['id' => $prod_mov->id]) }}"
-                                    class="btn btn-primary">Editar</a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#modal{{ $prod_mov->id }}">Eliminar</button>
+                                @if (Gate::allows('action-allowed-to-user', ['PRODUCT-MOVEMENT/EDIT']))
+                                    <a href="{{ route('product_movement.edit', ['id' => $prod_mov->id]) }}"
+                                        class="btn btn-primary">Editar</a>
+                                @endif
+                                @if (Gate::allows('action-allowed-to-user', ['PRODUCT-MOVEMENT/DESTROY']))
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#modal{{ $prod_mov->id }}">Eliminar</button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="modal{{ $prod_mov->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar movimiento
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ¿Está seguro que desea eliminar el movimiento de producto de la bodega
-                                                <strong>{{ $prod_mov->productWarehouse->warehouse->name }}</strong>?
-                                                <br>
-                                                Producto: <strong>{{ $prod_mov->productWarehouse->product->name }}</strong>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
-                                                    cancelar</button>
-                                                <form
-                                                    action="{{ route('product_movement.destroy', ['id' => $prod_mov->id]) }}"
-                                                    method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary">Sí, eliminar</button>
-                                                </form>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modal{{ $prod_mov->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Eliminar movimiento
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Está seguro que desea eliminar el movimiento de producto de la bodega
+                                                    <strong>{{ $prod_mov->productWarehouse->warehouse->name }}</strong>?
+                                                    <br>
+                                                    Producto:
+                                                    <strong>{{ $prod_mov->productWarehouse->product->name }}</strong>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">No,
+                                                        cancelar</button>
+                                                    <form
+                                                        action="{{ route('product_movement.destroy', ['id' => $prod_mov->id]) }}"
+                                                        method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary">Sí, eliminar</button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             </td>
                         </tr>
                     @endif

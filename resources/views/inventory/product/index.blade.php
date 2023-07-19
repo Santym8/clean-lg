@@ -10,9 +10,12 @@
         @if (session('success'))
             <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
-        <form action="{{ route('product.create') }}" method="GET">
-            <button type="submit" class="btn btn-primary">Crear</button>
-        </form>
+        @if (Gate::allows('action-allowed-to-user', ['PRODUCT/CREATE']))
+            <form action="{{ route('product.create') }}" method="GET">
+                <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+        @endif
+
         <table id="product-table" class="table">
             <thead class="thead-dark">
                 <tr>
@@ -34,47 +37,53 @@
                         <td>{{ $product->updated_at }}</td>
 
                         <td>
-                            <a href="{{ route('product.edit', ['product' => $product->id]) }}"
-                                class="btn btn-primary">Editar</a>
-                            @if ($product->status == 1)
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#modal{{ $product->id }}">Eliminar</button>
-                            @else
-                                <form action="{{ route('product.changeStatus', ['id' => $product->id]) }}" method="post">
-                                    @method('PUT')
-                                    @csrf
-                                    <button type="submit" class="btn btn-success">Restaurar</button>
-                                </form>
+                            @if (Gate::allows('action-allowed-to-user', ['PRODUCT/EDIT']))
+                                <a href="{{ route('product.edit', ['product' => $product->id]) }}"
+                                    class="btn btn-primary">Editar</a>
                             @endif
+                            @if (Gate::allows('action-allowed-to-user', ['PRODUCT/CHANGE-STATUS']))
+                                @if ($product->status == 1)
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#modal{{ $product->id }}">Eliminar</button>
+                                @else
+                                    <form action="{{ route('product.changeStatus', ['id' => $product->id]) }}"
+                                        method="post">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">Restaurar</button>
+                                    </form>
+                                @endif
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="modal{{ $product->id }}" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Eliminar producto</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            ¿Está seguro de que desea eliminar el producto
-                                            <strong>{{ $product->name }}</strong>?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
-                                                cancelar</button>
-                                            <form action="{{ route('product.changeStatus', ['id' => $product->id]) }}"
-                                                method="POST">
-                                                @method('PUT')
-                                                @csrf
-                                                <button type="submit" class="btn btn-primary">Sí, eliminar
-                                                    producto</button>
-                                            </form>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal{{ $product->id }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar producto</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Está seguro de que desea eliminar el producto
+                                                <strong>{{ $product->name }}</strong>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
+                                                    cancelar</button>
+                                                <form action="{{ route('product.changeStatus', ['id' => $product->id]) }}"
+                                                    method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary">Sí, eliminar
+                                                        producto</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
                         </td>
                     </tr>
                 @endforeach

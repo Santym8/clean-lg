@@ -17,8 +17,8 @@ class ServiceOrderController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -32,8 +32,8 @@ class ServiceOrderController extends Controller
      */
     public function create()
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -50,8 +50,8 @@ class ServiceOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -78,8 +78,8 @@ class ServiceOrderController extends Controller
      */
     public function show(string $id)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+       
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/SHOW'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -94,9 +94,9 @@ class ServiceOrderController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_services'], '');
+        
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/EDIT'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
@@ -112,11 +112,12 @@ class ServiceOrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_services'], '');
+       
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/UPDATE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
+
         $request->validate([
             'delivery_date' => 'required',
             'prepayment' => 'required',
@@ -140,8 +141,8 @@ class ServiceOrderController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+       
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_service_orders'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

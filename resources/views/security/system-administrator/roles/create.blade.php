@@ -18,34 +18,42 @@
             </div>
         </div>
 
-        <form action="{{ route('roles.store') }}" method="POST">
+        <form id="role-form" action="{{ route('roles.store') }}" method="POST">
             @csrf
             <label for="name">Nombre</label>
             <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
 
-
-
-            <label for="available_module_actions">Acciones Disponibles</label>
-            <select name="available_module_actions[]" id="available_module_actions" multiple class="form-control">
-                @foreach ($available_module_actions as $module_action)
-                    <option value="{{ $module_action->id }}">{{ $module_action->name }}</option>
-                @endforeach
-            </select>
-
-            <div class="col-md-2 d-flex align-items-center">
-                <div class="text-center">
-                    <button type="button" id="add_action" class="btn btn-primary">&gt;</button>
-                    <br><br>
-                    <button type="button" id="remove_action" class="btn btn-primary">&lt;</button>
+            <br>
+            <div class="row">
+                <div class="col-md-5 .d-inline-flex">
+                    <label for="available_module_actions">Acciones Disponibles</label>
+                    <select style="height: 300px;" name="available_module_actions[]" id="available_module_actions" multiple
+                        class="form-control">
+                        @foreach ($available_module_actions as $module_action)
+                            <option value="{{ $module_action->id }}">{{ $module_action->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
+
+                <div class="col-md-1 d-flex align-items-center">
+                    <div class="text-center">
+                        <button type="button" id="add_action" class="btn btn-primary">&gt;</button>
+                        <br><br>
+                        <button type="button" id="remove_action" class="btn btn-primary">&lt;</button>
+                    </div>
+                </div>
+
+                <div class="col-md-5 .d-inline-flex">
+                    <label for="selected_module_actions">Acciones Asignadas</label>
+                    <select style="height: 300px;" name="selected_module_actions[]" id="selected_module_actions" multiple
+                        class="form-control">
+                    </select>
+                </div>
+
             </div>
 
-            <label for="selected_module_actions">Acciones Asignadas</label>
-            <select name="selected_module_actions[]" id="selected_module_actions" multiple class="form-control" readonly>
-            </select>
-
-
-            <input type="submit" class="btn btn-primary" value="Guardar" />
+            <br>
+            <input id="submit" type="submit" class="btn btn-primary" value="Guardar" />
 
 
         </form>
@@ -57,6 +65,13 @@
             var removeButton = document.getElementById('remove_action');
             var availableItemsList = document.getElementById('available_module_actions');
             var selectedItemsList = document.getElementById('selected_module_actions');
+            var submitButton = document.getElementById('submit');
+
+            submitButton.addEventListener('click', function() {
+                Array.from(selectedItemsList.options).forEach(function(option) {
+                    option.selected = true;
+                });
+            });
 
             addButton.addEventListener('click', function() {
                 moveSelectedItems(availableItemsList, selectedItemsList);

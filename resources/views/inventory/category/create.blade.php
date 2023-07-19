@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Crear Categoria</h2>
+        <h2>Crear Categoría</h2>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -21,8 +21,9 @@
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter category name"
                     required>
             </div>
-            <!-- Add other fields as needed -->
+            
             <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-secondary" href="{{ route('category.index') }}">Cancelar</a>
         </form>
     </div>
 

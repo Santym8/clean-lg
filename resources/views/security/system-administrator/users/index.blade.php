@@ -56,7 +56,7 @@
                                 @endforeach
                             </ul>
                         </td>
-                        <td>
+                        <td class="text-center">
                             @if (Gate::allows('action-allowed-to-user', ['USER/EDIT']))
                                 <form action="{{ route('users.edit', [$user->id]) }}" method="GET">
                                     @csrf
@@ -64,7 +64,14 @@
                                     <button class="btn btn-primary" type="submit">Editar</button>
                                 </form>
                             @endif
-
+                            <br>
+                            @if (Gate::allows('action-allowed-to-user', ['USER/RESET_PASSWORD']))
+                                <form action="{{ route('users.resetPassword', [$user->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button class="btn btn-danger " type="submit">Resetear Contraseña</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

@@ -51,13 +51,12 @@ class ProductWarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'cantidad' => 'required',
-            'product_id' => 'required',
+            'product_id' => 'required|unique:product_warehouses,product_id,NULL,id,warehouse_id,' . $request->warehouse_id,
             'warehouse_id' => 'required',
         ]);
 
         $product_warehouse = new ProductWarehouse();
-        $product_warehouse->cantidad = $request->cantidad;
+        $product_warehouse->cantidad = 0;
         $product_warehouse->product_id = $request->product_id;
         $product_warehouse->warehouse_id = $request->warehouse_id;
         $product_warehouse->save();
@@ -86,7 +85,7 @@ class ProductWarehouseController extends Controller
         $product_warehouse = ProductWarehouse::find($id);
         $products = Product::all();
         $warehouses = Warehouse::all();
-        
+
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_product_warehouse'], 'product_warehouse_id: ' . $id);
         return view('inventory.product_warehouse.edit', compact('product_warehouse', 'products', 'warehouses'));
     }
@@ -101,13 +100,11 @@ class ProductWarehouseController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'cantidad' => 'required',
-            'product_id' => 'required',
+            'product_id' => 'required|unique:product_warehouses,product_id,' . $id . ',id,warehouse_id,' . $request->warehouse_id,
             'warehouse_id' => 'required',
         ]);
 
         $product_warehouse = ProductWarehouse::find($id);
-        $product_warehouse->cantidad = $request->cantidad;
         $product_warehouse->product_id = $request->product_id;
         $product_warehouse->warehouse_id = $request->warehouse_id;
         $product_warehouse->save();
@@ -121,14 +118,24 @@ class ProductWarehouseController extends Controller
      */
     public function destroy(string $id)
     {
-        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/DESTROY'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_product_warehouse'], '');
+    }
+    function changeStatus(Request $request, string $id)
+    {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/CHANGE-STATUS'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_change_status_product_warehouse'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $product_warehouse = ProductWarehouse::find($id);
+        if($product_warehouse->status==0){
+            $product_warehouse->status = 1;
+            $product_warehouse->save();
+            $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_product_warehouse'], 'product_warehouse_id: ' . $id);
+            return redirect()->route('product_warehouse.index')->with('success', 'Producto en Bodega activado con éxito');
+        }
         $product_warehouse->status = 0;
         $product_warehouse->save();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_destroy_product_warehouse'], 'product_warehouse_id: ' . $id);
-        return redirect()->route('product_warehouse.index')->with('success', 'Producto en Bodega eliminado con éxito');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_product_warehouse'], 'product_warehouse_id: ' . $id);
+        return redirect()->route('product_warehouse.index')->with('success', 'Producto en Bodega eliminado con éxito');   
     }
+    
 }

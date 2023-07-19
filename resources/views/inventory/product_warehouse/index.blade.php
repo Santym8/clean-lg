@@ -8,6 +8,9 @@
         <form action="{{ route('product_warehouse.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        <form action="{{ route('product_movement.create') }}" method="GET">
+            <button type="submit" class="btn btn-secondary">Realizar Movimiento</button>
+        </form>
         <table id="product-warehouse-table" class="table">
             <thead class="thead-dark">
                 <tr>
@@ -22,56 +25,69 @@
             </thead>
             <tbody>
                 @foreach ($product_warehouses as $prod_ware)
-                    @if ($prod_ware->status == 1)
-                        <tr>
-                            <td>{{ $prod_ware->cantidad }}</td>
-                            <td>{{ $prod_ware->product->name }}</td>
-                            <td>{{ $prod_ware->warehouse->name }}</td>
-                            <td>Activo</td>
-                            <td>{{ $prod_ware->created_at }}</td>
-                            <td>{{ $prod_ware->updated_at }}</td>
+                    <tr>
+                        <td>{{ $prod_ware->cantidad }}</td>
+                        <td>{{ $prod_ware->product->name }}</td>
+                        <td>{{ $prod_ware->warehouse->name }}</td>
+                        <td>
+                            @if ($prod_ware->status == 1)
+                                Activo
+                            @else
+                                Inactivo
+                            @endif
+                        </td>
+                        <td>{{ $prod_ware->created_at }}</td>
+                        <td>{{ $prod_ware->updated_at }}</td>
 
-                            <td>
-                                <a href="{{ route('product_warehouse.edit', ['product_warehouse' => $prod_ware->id]) }}"
-                                    class="btn btn-primary">Editar</a>
+                        <td>
+                            <a href="{{ route('product_warehouse.edit', ['product_warehouse' => $prod_ware->id]) }}"
+                                class="btn btn-primary">Editar</a>
+                            @if ($prod_ware->status == 1)
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#modal{{ $prod_ware->id }}">Eliminar</button>
+                            @else
+                                <form action="{{ route('product_warehouse.changeStatus', ['id' => $prod_ware->id]) }}"
+                                    method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Restaurar</button>
+                                </form>
+                            @endif
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="modal{{ $prod_ware->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Eliminar producto en bodega
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ¿Está seguro que desea eliminar el producto de la bodega
-                                                <strong>{{ $prod_ware->warehouse->name }}</strong>?
-                                                <br>
-                                                Producto: <strong>{{ $prod_ware->product->name }}</strong>
-                                                Id: <strong>{{ $prod_ware->product_id }}</strong>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
-                                                    cancelar</button>
-                                                <form
-                                                    action="{{ route('product_warehouse.destroy', ['product_warehouse' => $prod_ware->id]) }}"
-                                                    method="POST">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary">Sí, eliminar</button>
-                                                </form>
-                                            </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modal{{ $prod_ware->id }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Eliminar producto en bodega
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Está seguro que desea eliminar el producto de la bodega
+                                            <strong>{{ $prod_ware->warehouse->name }}</strong>?
+                                            <br>
+                                            Producto: <strong>{{ $prod_ware->product->name }}</strong>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
+                                                cancelar</button>
+                                            <form
+                                                action="{{ route('product_warehouse.changeStatus', ['id' => $prod_ware->id]) }}"
+                                                method="POST">
+                                                @method('PUT')
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">Sí, eliminar</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                    @endif
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

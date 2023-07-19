@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Ingresar producto en bodega</h2>
+        <h2>Registrar producto en bodega</h2>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -16,11 +16,7 @@
 
         <form action="{{ route('product_warehouse.store') }}" method="POST">
             @csrf
-            <div class="form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="text" name="cantidad" class="form-control" id="cantidad" required>
-            </div>
-
+            
             <div class="form-group">
                 <label for="product_id">Producto:</label>
                 <select name="product_id" class="form-control" id="product_id" required>

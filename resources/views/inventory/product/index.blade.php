@@ -36,9 +36,16 @@
                         <td>
                             <a href="{{ route('product.edit', ['product' => $product->id]) }}"
                                 class="btn btn-primary">Editar</a>
-
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#modal{{ $product->id }}">Eliminar</button>
+                            @if ($product->status == 1)
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#modal{{ $product->id }}">Eliminar</button>
+                            @else
+                                <form action="{{ route('product.changeStatus', ['id' => $product->id]) }}" method="post">
+                                    @method('PUT')
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Restaurar</button>
+                                </form>
+                            @endif
 
                             <!-- Modal -->
                             <div class="modal fade" id="modal{{ $product->id }}" tabindex="-1"
@@ -57,9 +64,9 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
                                                 cancelar</button>
-                                            <form action="{{ route('product.destroy', ['product' => $product->id]) }}"
+                                            <form action="{{ route('product.changeStatus', ['id' => $product->id]) }}"
                                                 method="POST">
-                                                @method('DELETE')
+                                                @method('PUT')
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary">Sí, eliminar
                                                     producto</button>

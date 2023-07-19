@@ -19,33 +19,44 @@ class ServiceOrderGoodsController extends Controller
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        // $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_service_orders_goods'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        
+
         $goods = Goods::all();
         $services = Services::all();
         $service_order_goods = ServiceOrders::all();
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_service_orders_goods'], '');
-        return view('service_orders.service_orders_goods.index', ['service_order_goods' => $service_order_goods,'goods' => $goods,'services' => $services]);
+        return view('service_orders.service_orders_goods.index', ['service_order_goods' => $service_order_goods, 'goods' => $goods, 'services' => $services]);
     }
 
     public function create()
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        // $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_service_orders_goods'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+        // Aquí puedes cargar los datos necesarios para tu vista, como los clientes y usuarios disponibles
+
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
-        // Aquí puedes cargar los datos necesarios para tu vista, como los clientes y usuarios disponibles
+
         $customers = Customer::all();
         $users = User::all();
         $services = Services::all();
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_service_orders_goods'], '');
-        return view('service_orders.service_orders_goods.create', compact('customers', 'users','services'));
+        return view('service_orders.service_orders_goods.create', compact('customers', 'users', 'services'));
     }
 
     /**
@@ -53,8 +64,13 @@ class ServiceOrderGoodsController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        // $roleNames = array("OPERADOR_ORDENES_SERVICIOS_BIENES");
+        // if (!Gate::allows('has-rol', [$roleNames])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_service_orders_goods'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+
+        if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_service_orders_goods'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -62,14 +78,14 @@ class ServiceOrderGoodsController extends Controller
         $request->validate([
             //SeoGoods
             //'name' => 'required',
-            'description' => 'required',
-            'cost' => 'required|numeric',
-            'service_id' => 'required',
+            'description' => 'array|required',
+            'cost' => 'array|required',
+            'service_id' => 'array|required',
             //'service_order_id' => 'required',
             //SeoServiceOrders
             'delivery_date' => 'required',
             'prepayment' => 'required|numeric',
-            'customer_id'=>'required',
+            'customer_id' => 'required',
             //'user_id'=>'required',
         ]);
 
@@ -82,12 +98,12 @@ class ServiceOrderGoodsController extends Controller
 
 
         if ($request->has('service_id') && $request->has('description') && $request->has('cost')) {
-            
+
             $serviceIds = $request->service_id;
             $descriptions = $request->description;
             $costs = $request->cost;
             foreach ($serviceIds as $index => $serviceId) {
-            
+
                 $goods = new Goods();
                 //$goods->name = $request->name;
                 $goods->description = $descriptions[$index];
@@ -98,8 +114,8 @@ class ServiceOrderGoodsController extends Controller
                 $goods->save();
             }
         }
-      
-       
+
+
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_store_service_orders_goods'], '');
         return redirect()->route('service_orders_goods.index')->with('success', 'Orden y bien creado con éxito');
@@ -108,14 +124,28 @@ class ServiceOrderGoodsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $id)
     {
+         if (!Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/SHOW'])) {
+             $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_service_orders_goods'], 'service_orders_goods: ' . $id);
+             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+         }
+
+         //$goods = Goods::findOrFail($id);
+         $services = Services::find($id);
+         $service_order_goods = ServiceOrders::findOrFail($id);
+         $goods= Goods::where('service_order_id', $id)->get();
+         $customers = Customer::find($id);
+         //$this->addAudit(Auth::user(), $this->typeAudit['access_show_service_orders_goods'], 'service_orders_goods: ' . $id);
+         return view('service_orders.service_orders_goods.show', ['service_order_goods' => $service_order_goods, 'goods' => $goods, 'services' => $services,
+         'customers' => $customers]);
 
     }
 
+
+
     public function update(Request $request, string $id)
     {
-        
     }
 
     /**
@@ -123,6 +153,5 @@ class ServiceOrderGoodsController extends Controller
      */
     public function destroy(string $id)
     {
-    
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->string('menu_text', 50)->nullable();
             $table->string('icon_name', 50)->nullable();
+            $table->string('color', 50)->nullable();
         });
     }
 

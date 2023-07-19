@@ -54,7 +54,7 @@
                                 </form>
                             @endif
 
-                            @if (Gate::allows('action-allowed-to-user', ['ROLE/EDIT']))
+                            @if ($role->name != 'ADMINSTRADOR_DE_SISTEMA' && Gate::allows('action-allowed-to-user', ['ROLE/EDIT']))
                                 <form action="{{ route('roles.edit', [$role->id]) }}">
                                     @csrf
                                     <input type="submit" class="btn btn-primary" value="Editar">

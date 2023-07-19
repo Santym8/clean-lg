@@ -17,6 +17,7 @@ class ModuleAndActionSeeder extends Seeder
                 'name' => $moduleName,
                 'menu_text' => $moduleData['menu_text'] ?? null,
                 'icon_name' => $moduleData['icon_name'] ?? null,
+                'color' => $moduleData['color'] ?? null,
             ]);
 
             if (is_array($moduleData)) {
@@ -33,6 +34,7 @@ class ModuleAndActionSeeder extends Seeder
         'SECURITY' => [
             'menu_text' => 'SEGURIDAD',
             'icon_name' => 'mdi mdi-lock',
+            'color' => '#000066',
             'actions' => [
                 //---------------Module------------
                 [
@@ -79,7 +81,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'ROLE/INDEX',
                     'route' => 'roles.index',
                     'displayable_menu' => true,
-                    'icon_name' => 'mdi mdi-account-card-details',
+                    'icon_name' => 'mdi mdi-account-check',
                     'menu_text' => 'ROLES'
                 ],
                 [
@@ -125,12 +127,16 @@ class ModuleAndActionSeeder extends Seeder
                 [
                     'name' => 'USER/STORE',
                     'route' => 'users.store',
+                ],[
+                    'name' => 'USER/RESET_PASSWORD',
+                    'route' => 'users.resetPassword',
                 ],
             ]
         ],
         'AUDIT' => [
             'menu_text' => 'AUDITORIA',
             'icon_name' => 'mdi mdi-eye',
+            'color' => '#660099',
             'actions' => [
                 //---------------Audit------------
                 [
@@ -150,10 +156,10 @@ class ModuleAndActionSeeder extends Seeder
             ]
         ],
 
-        'INVENTORY',
         'CUSTOMERS' => [
             'menu_text' => 'CLIENTES',
             'icon_name' => 'mdi mdi-account',
+            'color' => '#33cc33',
             'actions' => [
                 //---------------CUSTOMERS------------
                 [
@@ -253,6 +259,7 @@ class ModuleAndActionSeeder extends Seeder
         'INVENTORY' => [
             'menu_text' => 'INVENTARIO',
             'icon_name' => 'mdi mdi-package-variant-closed',
+            'color' => '#0099cc',
             'actions' => [
                 //--------------------WAREHOUSE--------------------
                 [
@@ -263,8 +270,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'BODEGAS'
                 ],
                 [
-                    'name' => 'WAREHOUSE/DESTROY',
-                    'route' => 'warehouse.destroy',
+                    'name' => 'WAREHOUSE/CHANGE-STATUS',
+                    'route' => 'warehouse.changeStatus',
                 ],
                 [
                     'name' => 'WAREHOUSE/EDIT',
@@ -291,8 +298,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'PRODUCTOS'
                 ],
                 [
-                    'name' => 'PRODUCT/DESTROY',
-                    'route' => 'product.destroy',
+                    'name' => 'PRODUCT/CHANGE-STATUS',
+                    'route' => 'product.changeStatus',
                 ],
                 [
                     'name' => 'PRODUCT/EDIT',
@@ -319,8 +326,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'CATEGORIAS'
                 ],
                 [
-                    'name' => 'CATEGORY/DESTROY',
-                    'route' => 'category.destroy',
+                    'name' => 'CATEGORY/CHANGE-STATUS',
+                    'route' => 'category.changeStatus',
                 ],
                 [
                     'name' => 'CATEGORY/EDIT',
@@ -347,8 +354,8 @@ class ModuleAndActionSeeder extends Seeder
                     'menu_text' => 'PRODUCTOS EN BODEGA'
                 ],
                 [
-                    'name' => 'PRODUCT-WAREHOUSE/DESTROY',
-                    'route' => 'product_warehouse.destroy',
+                    'name' => 'PRODUCT-WAREHOUSE/CHANGE-STATUS',
+                    'route' => 'product_warehouse.changeStatus',
                 ],
                 [
                     'name' => 'PRODUCT-WAREHOUSE/EDIT',
@@ -366,10 +373,174 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'PRODUCT-WAREHOUSE/STORE',
                     'route' => 'product_warehouse.store',
                 ],
+                //-------------PRODUCT-MOVEMENT---------------
+                [
+                    'name' => 'PRODUCT-MOVEMENT/INDEX',
+                    'route' => 'product_movement.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-package-variant-closed',
+                    'menu_text' => 'MOVIMIENTOS'
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/EDIT',
+                    'route' => 'product_movement.edit',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/UPDATE',
+                    'route' => 'product_movement.update',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/CREATE',
+                    'route' => 'product_movement.create',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/STORE',
+                    'route' => 'product_movement.store',
+                ],
+                [
+                    'name' => 'PRODUCT-MOVEMENT/DESTROY',
+                    'route' => 'product_movement.destroy',
+                ],
             ]
         ],
-        'CUSTOMERS',
         'BILLING',
-        'SERVICE ORDERS'
+        'SERVICE_ORDERS' => [
+            'menu_text' => 'ORDENES DE SERVICIO',
+            'icon_name' => 'mdi mdi-clipboard-text',
+            'actions' => [
+                //---------------Service Order------------
+                [
+                    'name' => 'SERVICE_ORDERS/INDEX',
+                    'route' => 'service_orders.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-file-document',
+                    'menu_text' => 'ORDENES DE SERVICIO'
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/EDIT',
+                    'route' => 'service_orders.edit',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/UPDATE',
+                    'route' => 'service_orders.update',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/CREATE',
+                    'route' => 'service_orders.create',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/STORE',
+                    'route' => 'service_orders.store',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/SHOW',
+                    'route' => 'service_orders.show',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/DELETE',
+                    'route' => 'service_orders.destroy',
+                ],
+               
+                //---------------Services--------------
+                [
+                    'name' => 'SERVICES/INDEX',
+                    'route' => 'services.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-file-document',
+                    'menu_text' => 'SERVICIOS'
+                ],
+                [
+                    'name' => 'SERVICES/EDIT',
+                    'route' => 'services.edit',
+                ],
+                [
+                    'name' => 'SERVICES/UPDATE',
+                    'route' => 'services.update',
+                ],
+                [
+                    'name' => 'SERVICES/CREATE',
+                    'route' => 'services.create',
+                ],
+                [
+                    'name' => 'SERVICES/STORE',
+                    'route' => 'services.store',
+                ],
+                [
+                    'name' => 'SERVICES/SHOW',
+                    'route' => 'services.show',
+                ],
+                [
+                    'name' => 'SERVICES/DELETE',
+                    'route' => 'services.destroy',
+                ],
+
+                //-----------------Goods-------------
+                [
+                    'name' => 'GOODS/INDEX',
+                    'route' => 'goods.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mmdi mdi-file-document',
+                    'menu_text' => 'BIENES'
+                ],
+                [
+                    'name' => 'GOODS/EDIT',
+                    'route' => 'goods.edit',
+                ],
+                [
+                    'name' => 'GOODS/UPDATE',
+                    'route' => 'goods.update',
+                ],
+                [
+                    'name' => 'GOODS/CREATE',
+                    'route' => 'goods.create',
+                ],
+                [
+                    'name' => 'GOODS/STORE',
+                    'route' => 'goods.store',
+                ],
+                [
+                    'name' => 'GOODS/SHOW',
+                    'route' => 'goods.show',
+                ],
+                [
+                    'name' => 'GOODS/DELETE',
+                    'route' => 'goods.destroy',
+                ],
+
+                //-----------------SERVICE_ORDERS_GOODS-----------
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/INDEX',
+                    'route' => 'service_orders_goods.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-file-document',
+                    'menu_text' => 'ORDENES DE SERVICIO - BIENES'
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/EDIT',
+                    'route' => 'service_orders_goods.edit',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/UPDATE',
+                    'route' => 'service_orders_goods.update',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/CREATE',
+                    'route' => 'service_orders_goods.create',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/STORE',
+                    'route' => 'service_orders_goods.store',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/SHOW',
+                    'route' => 'service_orders_goods.show',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/DELETE',
+                    'route' => 'service_orders_goods.destroy',
+                ],
+
+            ]
+        ]
     ];
 }

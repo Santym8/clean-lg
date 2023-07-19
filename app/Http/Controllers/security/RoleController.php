@@ -99,6 +99,11 @@ class RoleController extends Controller
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
 
+        if($id == 1){
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
+            return redirect()->route('roles.index')->with('error', 'No se puede actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
+        }
+
         $role = Role::findOrFail($id);
         $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
             $query->where('status', true);
@@ -123,6 +128,11 @@ class RoleController extends Controller
         if (!Gate::allows('action-allowed-to-user', ['ROLE/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol con id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
+        if($id == 1){
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_role'], 'Se intento actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
+            return redirect()->route('roles.index')->with('error', 'No se puede actualizar el rol ADMINSTRADOR_DE_SISTEMA.');
         }
 
         $request->validate([

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('identification_type');
-            $table->string('identification');
+            $table->string('identification',10)->unique();
             $table->string('phone_number');
             $table->string('address');
             $table->boolean('status')->default(true);

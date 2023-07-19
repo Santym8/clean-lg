@@ -54,13 +54,12 @@ class JobsController extends Controller
         }
 
         $request->validate([
-            'name' => 'required',
+            'name' => 'required | unique:jobs|max:50',
 
         ]);
 
         $job = new Job;
         $job->name = $request->name;
-        // $job->status=$request->status;
         $job->save();
         $this->addAudit(Auth::user(), $this->typeAudit['access_store_job'], '');
         return redirect()->route('job.index')->with('success', 'Trabajo Creado con éxito.');

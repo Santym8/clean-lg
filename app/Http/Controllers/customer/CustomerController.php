@@ -58,9 +58,9 @@ class CustomerController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'identification_type' => 'required',
-            'identification' => 'required|unique:customers',
-            'phone_number' => 'required',
-            'address' => 'required',
+            'identification' => 'required|min:10|max:10|unique:customers',
+            'phone_number' => 'required|min:10|max:10',
+            'address' => 'required|unique:customers|max:50',
             'jobs' => 'required',
         ]);
 

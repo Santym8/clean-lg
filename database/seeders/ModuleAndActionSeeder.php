@@ -221,6 +221,38 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'JOBS/DESTROY',
                     'route' => 'job.destroy',
                 ],
+                //---------------DISCOUNTS------------
+                [
+                    'name' => 'DISCOUNTS/INDEX',
+                    'route' => 'discounts.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi  mdi-ticket',
+                    'menu_text' => 'DESCUENTOS'
+                ],
+                [
+                    'name' => 'DISCOUNTS/CREATE',
+                    'route' => 'discounts.create',
+                ],
+                [
+                    'name' => 'DISCOUNTS/STORE',
+                    'route' => 'discounts.store',
+                ],
+                [
+                    'name' => 'DISCOUNTS/EDIT',
+                    'route' => 'discounts.edit',
+                ],
+                [
+                    'name' => 'DISCOUNTS/UPDATE',
+                    'route' => 'discounts.update',
+                ],
+                [
+                    'name' => 'DISCOUNTS/SHOW',
+                    'route' => 'discounts.show',
+                ],
+                [
+                    'name' => 'DISCOUNTS/DESTROY',
+                    'route' => 'discounts.destroy',
+                ],
 
             ]
         ],

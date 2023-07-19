@@ -30,8 +30,9 @@
                     @endforeach
                 </select>
             </div>
-            <!-- Add other fields as needed -->
+            
             <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a class="btn btn-secondary" href="{{ route('product.index') }}">Cancelar</a>
         </form>
     </div>
 

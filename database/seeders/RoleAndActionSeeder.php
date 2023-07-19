@@ -89,7 +89,7 @@ class RoleAndActionSeeder extends Seeder
         'BODEGUERO_INVENTARIO',
         'OPERADOR_CLIENTE',
         'OPERADOR_TRABAJO',
-        'OPERADOR_SERVICIOS'=> [
+        'OPERADOR_SERVICIOS' => [
             'SERVICES/INDEX',
             'SERVICES/CREATE',
             'SERVICES/STORE',
@@ -98,7 +98,7 @@ class RoleAndActionSeeder extends Seeder
             'SERVICES/SHOW',
             'SERVICES/DESTROY',
         ],
-        'OPERADOR_BIENES'=> [
+        'OPERADOR_BIENES' => [
             'GOODS/INDEX',
             'GOODS/CREATE',
             'GOODS/STORE',
@@ -107,7 +107,7 @@ class RoleAndActionSeeder extends Seeder
             'GOODS/SHOW',
             'GOODS/DESTROY',
         ],
-        'OPERADOR_ORDENES_SERVICIOS'=> [
+        'OPERADOR_ORDENES_SERVICIOS' => [
             'SERVICE_ORDERS/INDEX',
             'SERVICE_ORDERS/CREATE',
             'SERVICE_ORDERS/STORE',
@@ -116,7 +116,7 @@ class RoleAndActionSeeder extends Seeder
             'SERVICE_ORDERS/SHOW',
             'SERVICE_ORDERS/DESTROY',
         ],
-        'OPERADOR_ORDENES_SERVICIOS_BIENES'=> [
+        'OPERADOR_ORDENES_SERVICIOS_BIENES' => [
             'SERVICE_ORDERS_GOODS/INDEX',
             'SERVICE_ORDERS_GOODS/CREATE',
             'SERVICE_ORDERS_GOODS/STORE',
@@ -124,6 +124,7 @@ class RoleAndActionSeeder extends Seeder
             'SERVICE_ORDERS_GOODS/UPDATE',
             'SERVICE_ORDERS_GOODS/SHOW',
             'SERVICE_ORDERS_GOODS/DESTROY',
+        ],
         'BODEGUERO_INVENTARIO' => [
             //WAREHOUSE
             'WAREHOUSE/INDEX',

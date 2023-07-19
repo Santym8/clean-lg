@@ -56,6 +56,7 @@ class RoleAndActionSeeder extends Seeder
             'ROLE/UPDATE',
             'ROLE/CREATE',
             'ROLE/STORE',
+            'ROLE/DESTROY',
             //USERS
             'USER/INDEX',
             'USER/CHANGE-STATUS',

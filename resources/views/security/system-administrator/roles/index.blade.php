@@ -60,6 +60,14 @@
                                     <input type="submit" class="btn btn-primary" value="Editar">
                                 </form>
                             @endif
+
+                            @if ($role->name != 'ADMINSTRADOR_DE_SISTEMA' && Gate::allows('action-allowed-to-user', ['ROLE/DESTROY']))
+                                <form action="{{ route('roles.destroy', [$role->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-danger" value="Eliminar">
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

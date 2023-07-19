@@ -104,6 +104,10 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'ROLE/STORE',
                     'route' => 'roles.store',
                 ],
+                [
+                    'name' => 'ROLE/DESTROY',
+                    'route' => 'roles.destroy',
+                ],
                 //---------------User------------
                 [
                     'name' => 'USER/INDEX',
@@ -127,7 +131,7 @@ class ModuleAndActionSeeder extends Seeder
                 [
                     'name' => 'USER/STORE',
                     'route' => 'users.store',
-                ],[
+                ], [
                     'name' => 'USER/RESET_PASSWORD',
                     'route' => 'users.resetPassword',
                 ],

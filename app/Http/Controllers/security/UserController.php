@@ -57,7 +57,7 @@ class UserController extends Controller
         }
 
 
-        $available_roles = Role::all()->where('status', 1);
+        $available_roles = Role::all()->where('status', 1)->sortBy('name');
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_user'], '');
         return view($this->pathViews . '.create', ['available_roles' => $available_roles]);
     }
@@ -134,7 +134,7 @@ class UserController extends Controller
         }
 
         // Get only available roles
-        $available_roles = Role::all()->where('status', 1)->whereNotIn('id', $id_active_roles);
+        $available_roles = Role::all()->where('status', 1)->whereNotIn('id', $id_active_roles)->sortBy('name') ;
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_user'], 'user_id: ' . $id);
         return view($this->pathViews . '.update', ['user' => $user, 'available_roles' => $available_roles]);

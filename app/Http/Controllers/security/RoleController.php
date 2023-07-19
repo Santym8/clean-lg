@@ -64,7 +64,7 @@ class RoleController extends Controller
 
         $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
             $query->where('status', true);
-        })->get()->sortBy('module.name');
+        })->get()->sortBy('module.name')->sortBy('name');
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_role'], '');
         return view($this->pathViews . '.create', [
@@ -107,7 +107,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $availableModuleActions = ModuleAction::whereHas('module', function ($query) {
             $query->where('status', true);
-        })->get()->sortBy('module.name');
+        })->get()->sortBy('module.name')->sortBy('name');
 
         //Delete from the list all the actions that the role already has
         foreach ($role->moduleActions as $moduleAction) {

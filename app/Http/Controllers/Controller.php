@@ -77,6 +77,9 @@ class Controller extends BaseController
         'acces_user_actions' => 'AUDIT/AUDIT-TRAIL/USER-ACTIONS',
         'not_access_user_actions' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-USER-ACTIONS',
 
+        'acces_graphics' => 'AUDIT/AUDIT-TRAIL/GRAPHICS',
+        'not_access_graphics' => 'AUDIT/AUDIT-TRAIL/NOT-AUTHORIZED-GRAPHICS',
+
         //----------------Inventory-------------------
         'not_access_index_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-INDEX',
         'access_index_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-INDEX',

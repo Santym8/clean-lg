@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\customer\JobsController;
 use App\Http\Controllers\audit_trail\AuditStatisticsController;
+use App\Http\Controllers\audit_trail\AudiGraphicsController;
 use App\Http\Controllers\audit_trail\AuditTrailController;
 use App\Http\Controllers\security\ModuleController;
 use App\Http\Controllers\security\ModuleActionController;
@@ -105,6 +106,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 // ------------------------------Module Auditory--------------------------------
 Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');
 Route::get('audit-trails/user-actions', [AuditStatisticsController::class, 'userActions'])->name('audit_trails.userActions')->middleware('auth');
+Route::get('audit-trails/graphics', [AudiGraphicsController::class, 'graphics'])->name('audit_trails.graphics')->middleware('auth');
 
 // ------------------------------Module Service Orders-----------------------------
 Route::resource('services', ServicesController::class)->middleware('auth');

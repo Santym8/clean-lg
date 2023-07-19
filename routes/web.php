@@ -8,6 +8,7 @@ use App\Http\Controllers\security\ModuleActionController;
 use App\Http\Controllers\security\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\CustomerController;
+use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\security\LoginController;
 use App\Http\Controllers\security\UserController;
 use App\Http\Controllers\security\RoleController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\service_orders\GoodsController;
 use App\Http\Controllers\service_orders\ServicesController;
 use App\Http\Controllers\service_orders\ServiceOrderGoodsController;
 use App\Http\Controllers\service_orders\ServiceOrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,9 +93,7 @@ Route::get('auth', [LoginController::class, 'authenticate'])->name('auth');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 // ------------------------------Module Auditory--------------------------------
 Route::get('audit-trails', [AuditTrailController::class, 'index'])->name('audit_trails.index')->middleware('auth');

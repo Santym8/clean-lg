@@ -29,6 +29,10 @@
             <input type="text" name="icon_name" id="icon_name" class="form-control" placeholder="Nombre Icono"
                 value="{{ $module->icon_name }}">
 
+            <label for="color">Color</label>
+            <input type="color" name="color" id="color" class="form-control" placeholder="Color"
+                value="{{ $module->color }}">
+
             <input type="submit" class="btn btn-primary" value="Guardar" />
         </form>
     </div>

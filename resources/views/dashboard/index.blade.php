@@ -28,8 +28,10 @@
                             {{ auth()->user()->name }} {{ auth()->user()->last_name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('user_profile.index') }}">Actualizar Perfil</a></li>
-                            <li><a class="dropdown-item" href="{{ route('user_profile.editPassword') }}">Cambiar Contraseña</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user_profile.index') }}">Actualizar Perfil</a>
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('user_profile.editPassword') }}">Cambiar
+                                    Contraseña</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -52,48 +54,21 @@
         @endif
 
     </div>
-    <div class="container mt-4 content-container">
+    <div class="container content-container">
+
         <div class="module-container">
-            <div class="module-box module-box-link">
-                <a class="module-box-link" href="{{ route('product_warehouse.index') }}">
-                    <i class="mdi mdi-package-variant module-icon"></i>
-                    <h5 class="module-title">Inventario</h5>
-                </a>
-            </div>
-            <div class="module-box module-box-link">
-                <a class="module-box-link"
-                    @if (Gate::allows('has-rol', [['OPERADOR_TRABAJO']])) href="{{ route('job.index') }}">
-                    @else href="{{ route('customers.index') }}"> @endif
-                    <i class="mdi mdi-account-multiple module-icon"></i>
-                    <h5 class="module-title">Clientes</h5>
-                </a>
-            </div>
-            <div class="module-box module-box-link">
-                <a class="module-box-link" href="{{ route('users.index') }}">
-                    <i class="mdi mdi-account-lock module-icon"></i>
-                    <h5 class="module-title">Usuarios</h5>
-                </a>
-            </div>
-            <div class="module-box module-box-link">
-                <a class="module-box-link" href="#">
-                    <i class="mdi mdi-file-check module-icon"></i>
-                    <h5 class="module-title">Ordenes de Servicio</h5>
-                </a>
-            </div>
-            <div class="module-box module-box-link">
-                <a class="module-box-link" href="#">
-                    <i class="mdi mdi-receipt module-icon"></i>
-                    <h5 class="module-title">Facturación</h5>
-                </a>
-            </div>
-            <div class="module-box module-box-link">
-                <a class="module-box-link" href="{{ route('audit_trails.index') }}">
-                    <i class="mdi mdi-eye module-icon"></i>
-                    <h5 class="module-title">Auditoría</h5>
-                </a>
-            </div>
+            @foreach ($modules as $module)
+                <div class="module-box module-box-link" style="background-color: {{ $module->color }}">
+                    <a class="module-box-link" href="{{ route($module->routeFirstDisplayableAction) }}">
+                        <i class="{{ $module->icon_name }} module-icon"></i>
+                        <h5 class="module-title">{{ $module->menu_text }}</h5>
+                    </a>
+                </div>
+            @endforeach
         </div>
+
     </div>
+
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

@@ -20,6 +20,7 @@
                     <th scope="col">Nombre</th>
                     <th>Texto menu</th>
                     <th>Icono</th>
+                    <th>Color</th>
                     <th scope="col">Fecha Creaci&oacute;n</th>
                     <th scope="col">Fecha Actulizaci&oacute;n</th>
                     <th scope="col">Estado</th>
@@ -32,8 +33,11 @@
                     <tr>
                         <td>{{ $module->name }}</td>
                         <td>{{ $module->menu_text }}</td>
-                        <td class="justify-content-center">
+                        <td style="text-align: center">
                             <i class="{{ $module->icon_name }}"></i>
+                        </td>
+                        <td style="background-color: {{ $module->color }}; color:white; text-align: center;">
+                            {{ $module->color }}
                         </td>
                         <td>{{ $module->created_at }}</td>
                         <td>{{ $module->updated_at }}</td>

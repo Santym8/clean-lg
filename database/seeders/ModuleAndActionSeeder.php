@@ -17,6 +17,7 @@ class ModuleAndActionSeeder extends Seeder
                 'name' => $moduleName,
                 'menu_text' => $moduleData['menu_text'] ?? null,
                 'icon_name' => $moduleData['icon_name'] ?? null,
+                'color' => $moduleData['color'] ?? null,
             ]);
 
             if (is_array($moduleData)) {
@@ -33,6 +34,7 @@ class ModuleAndActionSeeder extends Seeder
         'SECURITY' => [
             'menu_text' => 'SEGURIDAD',
             'icon_name' => 'mdi mdi-lock',
+            'color' => '#000066',
             'actions' => [
                 //---------------Module------------
                 [
@@ -79,7 +81,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'ROLE/INDEX',
                     'route' => 'roles.index',
                     'displayable_menu' => true,
-                    'icon_name' => 'mdi mdi-account-card-details',
+                    'icon_name' => 'mdi mdi-account-check',
                     'menu_text' => 'ROLES'
                 ],
                 [
@@ -134,6 +136,7 @@ class ModuleAndActionSeeder extends Seeder
         'AUDIT' => [
             'menu_text' => 'AUDITORIA',
             'icon_name' => 'mdi mdi-eye',
+            'color' => '#660099',
             'actions' => [
                 //---------------Audit------------
                 [
@@ -156,6 +159,7 @@ class ModuleAndActionSeeder extends Seeder
         'CUSTOMERS' => [
             'menu_text' => 'CLIENTES',
             'icon_name' => 'mdi mdi-account',
+            'color' => '#33cc33',
             'actions' => [
                 //---------------CUSTOMERS------------
                 [
@@ -223,6 +227,7 @@ class ModuleAndActionSeeder extends Seeder
         'INVENTORY' => [
             'menu_text' => 'INVENTARIO',
             'icon_name' => 'mdi mdi-package-variant-closed',
+            'color' => '#0099cc',
             'actions' => [
                 //--------------------WAREHOUSE--------------------
                 [
@@ -366,7 +371,6 @@ class ModuleAndActionSeeder extends Seeder
                 ],
             ]
         ],
-        'CUSTOMERS',
         'BILLING',
         'SERVICE ORDERS'
     ];

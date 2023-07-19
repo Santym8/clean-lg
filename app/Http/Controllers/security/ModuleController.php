@@ -67,6 +67,7 @@ class ModuleController extends \App\Http\Controllers\Controller
         $module = Module::findOrFail($id);
         $module->menu_text = $request->menu_text;
         $module->icon_name = $request->icon_name;
+        $module->color = $request->color;
         $module->save();
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_update_module'], 'Se actualizo el modulo con id: ' . $id);

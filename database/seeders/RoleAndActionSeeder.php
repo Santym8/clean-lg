@@ -66,107 +66,143 @@ class RoleAndActionSeeder extends Seeder
             'USER/STORE',
             'USER/RESET_PASSWORD',
         ],
+
         'AUDITOR' => [
             'AUDIT/INDEX',
             'AUDIT/USER-ACTIONS',
             'AUDIT/GRAPHICS',
         ],
-        'OPERADOR_CLIENTES' => [
-            //CUSTOMERS
+
+        'CLIENTES_USUARIO' => [
+            // CUSTOMERS
             'CUSTOMERS/INDEX',
             'CUSTOMERS/CREATE',
             'CUSTOMERS/STORE',
+            // JOBS
+            'JOBS/INDEX',
+            'JOBS/CREATE',
+            'JOBS/STORE',
+            // DISCOUNTS
+            'DISCOUNTS/INDEX',
+            'DISCOUNTS/CREATE',
+            'DISCOUNTS/STORE',
+        ],
+
+        'CLIENTES_OPERADOR' => [
+            // CUSTOMERS
+            'CUSTOMERS/INDEX',
             'CUSTOMERS/EDIT',
             'CUSTOMERS/UPDATE',
             'CUSTOMERS/SHOW',
             'CUSTOMERS/DESTROY',
-            //JOBS
+            // JOBS
             'JOBS/INDEX',
-            'JOBS/CREATE',
-            'JOBS/STORE',
             'JOBS/EDIT',
             'JOBS/UPDATE',
             'JOBS/DESTROY',
-            //DISCOUNTS
+            // DISCOUNTS
             'DISCOUNTS/INDEX',
-            'DISCOUNTS/CREATE',
-            'DISCOUNTS/STORE',
             'DISCOUNTS/EDIT',
             'DISCOUNTS/UPDATE',
             'DISCOUNTS/SHOW',
             'DISCOUNTS/DESTROY',
         ],
-        'OPERADOR_SERVICIOS' => [
+
+        'ORDENES_DE_SERVICIO_USUARIO' => [
+            // SERVICES
             'SERVICES/INDEX',
             'SERVICES/CREATE',
             'SERVICES/STORE',
+            // GOODS
+            'GOODS/INDEX',
+            'GOODS/CREATE',
+            'GOODS/STORE',
+            // SERVICE ORDERS
+            'SERVICE_ORDERS/INDEX',
+            'SERVICE_ORDERS/CREATE',
+            'SERVICE_ORDERS/STORE',
+            // SERVICE ORDERS GOODS
+            'SERVICE_ORDERS_GOODS/INDEX',
+            'SERVICE_ORDERS_GOODS/CREATE',
+            'SERVICE_ORDERS_GOODS/STORE',
+            'SERVICE_ORDERS_GOODS/SHOW',
+        ],
+
+        'ORDENES_DE_SERVICIO_OPERADOR' => [
+            // SERVICES
+            'SERVICES/INDEX',
             'SERVICES/EDIT',
             'SERVICES/UPDATE',
             'SERVICES/SHOW',
             'SERVICES/DESTROY',
-        ],
-        'OPERADOR_BIENES' => [
+            // GOODS
             'GOODS/INDEX',
-            'GOODS/CREATE',
-            'GOODS/STORE',
             'GOODS/EDIT',
             'GOODS/UPDATE',
             'GOODS/SHOW',
             'GOODS/DESTROY',
-        ],
-        'OPERADOR_ORDENES_SERVICIOS' => [
+            // SERVICE ORDERS
             'SERVICE_ORDERS/INDEX',
-            'SERVICE_ORDERS/CREATE',
-            'SERVICE_ORDERS/STORE',
             'SERVICE_ORDERS/EDIT',
             'SERVICE_ORDERS/UPDATE',
             'SERVICE_ORDERS/SHOW',
             'SERVICE_ORDERS/DESTROY',
-        ],
-        'OPERADOR_ORDENES_SERVICIOS_BIENES' => [
+            // SERVICE ORDERS GOODS
             'SERVICE_ORDERS_GOODS/INDEX',
-            'SERVICE_ORDERS_GOODS/CREATE',
-            'SERVICE_ORDERS_GOODS/STORE',
             'SERVICE_ORDERS_GOODS/EDIT',
             'SERVICE_ORDERS_GOODS/UPDATE',
             'SERVICE_ORDERS_GOODS/SHOW',
             'SERVICE_ORDERS_GOODS/DESTROY',
         ],
-        'BODEGUERO_INVENTARIO' => [
-            //WAREHOUSE
+
+        'BODEGA_USUARIO' => [
+            // WAREHOUSE
+            'WAREHOUSE/INDEX',
+            'WAREHOUSE/CREATE',
+            'WAREHOUSE/STORE',
+            // PRODUCT
+            'PRODUCT/INDEX',
+            'PRODUCT/CREATE',
+            'PRODUCT/STORE',
+            // CATEGORY
+            'CATEGORY/INDEX',
+            'CATEGORY/CREATE',
+            'CATEGORY/STORE',
+            // PRODUCT WAREHOUSE
+            'PRODUCT-WAREHOUSE/INDEX',
+            'PRODUCT-WAREHOUSE/CREATE',
+            'PRODUCT-WAREHOUSE/STORE',
+            // PRODUCT MOVEMENT
+            'PRODUCT-MOVEMENT/INDEX',
+            'PRODUCT-MOVEMENT/CREATE',
+            'PRODUCT-MOVEMENT/STORE',
+        ],
+
+        'BODEGA_OPERADOR' => [
+            // WAREHOUSE
             'WAREHOUSE/INDEX',
             'WAREHOUSE/EDIT',
             'WAREHOUSE/UPDATE',
-            'WAREHOUSE/CREATE',
-            'WAREHOUSE/STORE',
             'WAREHOUSE/CHANGE-STATUS',
-            //PRODUCT
+            // PRODUCT
             'PRODUCT/INDEX',
             'PRODUCT/EDIT',
             'PRODUCT/UPDATE',
-            'PRODUCT/CREATE',
-            'PRODUCT/STORE',
             'PRODUCT/CHANGE-STATUS',
-            //CATEGORY
+            // CATEGORY
             'CATEGORY/INDEX',
             'CATEGORY/EDIT',
             'CATEGORY/UPDATE',
-            'CATEGORY/CREATE',
-            'CATEGORY/STORE',
             'CATEGORY/CHANGE-STATUS',
-            //PRODUCT-WAREHOUSE
+            // PRODUCT WAREHOUSE
             'PRODUCT-WAREHOUSE/INDEX',
             'PRODUCT-WAREHOUSE/EDIT',
             'PRODUCT-WAREHOUSE/UPDATE',
-            'PRODUCT-WAREHOUSE/CREATE',
-            'PRODUCT-WAREHOUSE/STORE',
             'PRODUCT-WAREHOUSE/CHANGE-STATUS',
-            //PRODUCT-MOVEMENT
+            // PRODUCT MOVEMENT
             'PRODUCT-MOVEMENT/INDEX',
             'PRODUCT-MOVEMENT/EDIT',
             'PRODUCT-MOVEMENT/UPDATE',
-            'PRODUCT-MOVEMENT/CREATE',
-            'PRODUCT-MOVEMENT/STORE',
             'PRODUCT-MOVEMENT/DESTROY',
         ],
     ];

@@ -27,8 +27,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -42,13 +41,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/CREATE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $categories = Category::all();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_create_product'], '');
         return view('inventory.product.create', ['categories' => $categories]);
     }
 
@@ -57,20 +55,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/STORE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => 'required',
+            'name' => 'required | unique:products|max:25',
             'category' => 'required|exists:categories,id',
         ]);
 
         $product = new Product();
         $product->name = $request->name;
         $product->category_id = $request->category;
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_store_product'], '');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Producto creado con éxito');
@@ -81,14 +78,13 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
-            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
-        }
-        $product = Product::find($id);
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
-        return view('inventory.product.show', ['product' => $product]);
+        // if (!Gate::allows('action-allowed-to-user', ['PRODUCT/SHOW'])) {
+        //     $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+        //     return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        // }
+        // $product = Product::find($id);
+        // $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        // return view('inventory.product.show', ['product' => $product]);
     }
 
     /**
@@ -96,14 +92,13 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/EDIT'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $product = Product::find($id);
         $categories = Category::all();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_edit_product'], '');
         return view('inventory.product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
@@ -112,20 +107,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/UPDATE'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
-            'name' => 'required',
+            'name' => 'required | max:25 | unique:products,name,' . $id . ',id',
             'category' => 'required|exists:categories,id',
         ]);
 
         $product = Product::find($id);
         $product->name = $request->name;
         $product->category_id = $request->category;
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_update_product'], '');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Producto actualizado con éxito');
@@ -136,12 +130,20 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("BODEGUERO_INVENTARIO");
-        if (!Gate::allows('has-rol', [$roleNames])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+       
+    }
+    function changeStatus(Request $request, string $id){
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/CHANGE-STATUS'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_change_status_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $product = Product::find($id);
+        if($product->status==0){
+            $product->status = 1;
+            $product->save();
+            $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_product'], '');
+            return redirect()->back()->with('success', 'Producto activado con éxito');
+        }
         $relatedProducts = ProductWarehouse::where('product_id', $product->id)
             ->where('status', 1)
             ->count();
@@ -150,7 +152,7 @@ class ProductController extends Controller
         }
         $product->status = 0;
         $product->save();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_product'], '');
         return redirect()->back()->with('success', 'Producto eliminado con éxito');
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Editar Categoria</h2>
+        <h2>Editar Categoría</h2>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,12 +18,13 @@
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Nombre:</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ $category->name }}"
                     required>
             </div>
-            <!-- Add other fields as needed -->
+            
             <button type="submit" class="btn btn-primary">Actualizar</button>
+            <a class="btn btn-secondary" href="{{ route('category.index') }}">Cancelar</a>
         </form>
     </div>
 

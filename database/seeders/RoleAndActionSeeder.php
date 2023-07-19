@@ -63,14 +63,32 @@ class RoleAndActionSeeder extends Seeder
             'USER/UPDATE',
             'USER/CREATE',
             'USER/STORE',
+            'USER/RESET_PASSWORD',
         ],
         'AUDITOR' => [
             'AUDIT/INDEX',
             'AUDIT/USER-ACTIONS'
         ],
+        'OPERADOR_CLIENTE' => [
+            'CUSTOMERS/INDEX',
+            'CUSTOMERS/CREATE',
+            'CUSTOMERS/STORE',
+            'CUSTOMERS/EDIT',
+            'CUSTOMERS/UPDATE',
+            'CUSTOMERS/SHOW',
+            'CUSTOMERS/DESTROY',
+        ],
+        'OPERADOR_TRABAJO' => [
+            'JOBS/INDEX',
+            'JOBS/CREATE',
+            'JOBS/STORE',
+            'JOBS/EDIT',
+            'JOBS/UPDATE',
+            'JOBS/DESTROY',
+        ],
+        'BODEGUERO_INVENTARIO',
         'OPERADOR_CLIENTE',
         'OPERADOR_TRABAJO',
-        'BODEGUERO_INVENTARIO',
         'OPERADOR_SERVICIOS'=> [
             'SERVICES/INDEX',
             'SERVICES/CREATE',
@@ -106,6 +124,42 @@ class RoleAndActionSeeder extends Seeder
             'SERVICE_ORDERS_GOODS/UPDATE',
             'SERVICE_ORDERS_GOODS/SHOW',
             'SERVICE_ORDERS_GOODS/DESTROY',
+        'BODEGUERO_INVENTARIO' => [
+            //WAREHOUSE
+            'WAREHOUSE/INDEX',
+            'WAREHOUSE/EDIT',
+            'WAREHOUSE/UPDATE',
+            'WAREHOUSE/CREATE',
+            'WAREHOUSE/STORE',
+            'WAREHOUSE/CHANGE-STATUS',
+            //PRODUCT
+            'PRODUCT/INDEX',
+            'PRODUCT/EDIT',
+            'PRODUCT/UPDATE',
+            'PRODUCT/CREATE',
+            'PRODUCT/STORE',
+            'PRODUCT/CHANGE-STATUS',
+            //CATEGORY
+            'CATEGORY/INDEX',
+            'CATEGORY/EDIT',
+            'CATEGORY/UPDATE',
+            'CATEGORY/CREATE',
+            'CATEGORY/STORE',
+            'CATEGORY/CHANGE-STATUS',
+            //PRODUCT-WAREHOUSE
+            'PRODUCT-WAREHOUSE/INDEX',
+            'PRODUCT-WAREHOUSE/EDIT',
+            'PRODUCT-WAREHOUSE/UPDATE',
+            'PRODUCT-WAREHOUSE/CREATE',
+            'PRODUCT-WAREHOUSE/STORE',
+            'PRODUCT-WAREHOUSE/CHANGE-STATUS',
+            //PRODUCT-MOVEMENT
+            'PRODUCT-MOVEMENT/INDEX',
+            'PRODUCT-MOVEMENT/EDIT',
+            'PRODUCT-MOVEMENT/UPDATE',
+            'PRODUCT-MOVEMENT/CREATE',
+            'PRODUCT-MOVEMENT/STORE',
+            'PRODUCT-MOVEMENT/DESTROY',
         ],
     ];
 }

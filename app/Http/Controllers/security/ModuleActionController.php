@@ -51,7 +51,7 @@ class ModuleActionController extends \App\Http\Controllers\Controller
         $action->save();
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_update_module_action'], 'Se actualizo la accion con id: ' . $id);
-        return redirect()->route('module_actions.index');
+        return redirect()->route('module_actions.index')->with('success', 'Se actualizo la accion correctamente.');
     }
 
     public function changeStatus(Request $request, string $id)
@@ -71,6 +71,6 @@ class ModuleActionController extends \App\Http\Controllers\Controller
         $action->save();
 
         $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_module_action'], 'Se modifico el estado de la accion con id: ' . $id);
-        return redirect()->route('module_actions.index');
+        return redirect()->route('module_actions.index')->with('success', 'Se modifico el estado de la accion correctamente.');
     }
 }

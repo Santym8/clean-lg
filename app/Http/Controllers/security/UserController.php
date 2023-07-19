@@ -76,7 +76,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'last_name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'email', 'min:3', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:3', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'max:255'],
             'identification_type' => ['required', 'string', 'min:3', 'max:255'],
             'identification' => ['required', 'string', 'min:3', 'max:255', 'unique:users'],
             'phone_number' => ['required', 'string', 'min:10', 'max:10', 'unique:users'],
@@ -203,5 +203,26 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+    }
+
+    public function resetPassword(Request $request, string $id)
+    {
+        if (!Gate::allows('action-allowed-to-user', ['USER/RESET_PASSWORD'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_reset_password_user'], 'user_id: ' . $id);
+            return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
+        }
+
+        $user = User::findOrFail($id);
+
+        if($user == null){
+            return redirect()->route('users.index')->with('error', 'Usuario no encontrado.');
+        }
+
+        error_log($request[$user->name]);
+        $user->password = $user->identification;
+        $user->save();
+
+        $this->addAudit(Auth::user(), $this->typeAudit['access_reset_password_user'], 'user_id: ' . $id);
+        return redirect()->route('users.index')->with('success', 'Contraseña actualizada con exitosamente.');
     }
 }

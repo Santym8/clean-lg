@@ -12,19 +12,20 @@ use Illuminate\Support\Facades\Gate;
 
 class CustomerController extends Controller
 {
+    private $pathViews = 'customer.customers';
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/INDEX'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $this->addAudit(Auth::user(), $this->typeAudit['access_index_customer'], '');
-        $customers = Customer::all();
-        return view('customer.customers.index', ['customers' => $customers]);
+        return view($this->pathViews . '.index', [
+            'customers' => Customer::all(),
+        ]);
     }
 
     /**
@@ -32,8 +33,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/CREATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -41,7 +41,7 @@ class CustomerController extends Controller
         $customers = Customer::all();
         $job = Job::all();
         $this->addAudit(Auth::user(), $this->typeAudit['access_create_customer'], '');
-        return view('customer.customers.create', ['customers' => $customers,'jobs' => $job]);
+        return view($this->pathViews . '.create', ['customers' => $customers,'jobs' => $job]);
     }
 
     /**
@@ -49,8 +49,7 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/STORE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -84,8 +83,7 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/SHOW'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_show_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -100,8 +98,7 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/EDIT'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -109,7 +106,7 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $job = Job::all();
         $this->addAudit(Auth::user(), $this->typeAudit['access_edit_customer'], '');
-        return view('customer.customers.edit', ['customer' => $customer, 'jobs' => $job]);
+        return view($this->pathViews . '.edit', ['customer' => $customer, 'jobs' => $job]);
     }
 
     /**
@@ -117,8 +114,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/UPDATE'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
@@ -153,8 +149,7 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        $roleNames = array("OPERADOR_CLIENTE");
-        if (!Gate::allows('has-rol', [$roleNames])) {
+        if (!Gate::allows('action-allowed-to-user', ['CUSTOMERS/DESTROY'])) {
             $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_customer'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }

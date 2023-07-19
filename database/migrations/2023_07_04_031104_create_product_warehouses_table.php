@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_warehouses', function (Blueprint $table) {
             $table->id();
-            $table->integer('cantidad');
+            $table->integer('stock')->default(0);
             $table->boolean('status')->default(1);
 
             $table->unsignedBigInteger('product_id');

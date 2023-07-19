@@ -18,7 +18,7 @@
         <table id="product-warehouse-table" class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Cantidad</th>
+                    <th scope="col">Stock</th>
                     <th scope="col">Producto</th>
                     <th scope="col">Bodega</th>
                     <th scope="col">Estado</th>
@@ -30,7 +30,7 @@
             <tbody>
                 @foreach ($product_warehouses as $prod_ware)
                     <tr>
-                        <td>{{ $prod_ware->cantidad }}</td>
+                        <td>{{ $prod_ware->stock }}</td>
                         <td>{{ $prod_ware->product->name }}</td>
                         <td>{{ $prod_ware->warehouse->name }}</td>
                         <td>

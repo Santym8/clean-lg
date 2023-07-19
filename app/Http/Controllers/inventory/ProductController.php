@@ -42,11 +42,11 @@ class ProductController extends Controller
     public function create()
     {
         if (!Gate::allows('action-allowed-to-user', ['PRODUCT/CREATE'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_create_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $categories = Category::all();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_create_product'], '');
         return view('inventory.product.create', ['categories' => $categories]);
     }
 
@@ -56,7 +56,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if (!Gate::allows('action-allowed-to-user', ['PRODUCT/STORE'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_store_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
@@ -67,7 +67,7 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->category_id = $request->category;
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_store_product'], '');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Producto creado con éxito');
@@ -93,12 +93,12 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         if (!Gate::allows('action-allowed-to-user', ['PRODUCT/EDIT'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_edit_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $product = Product::find($id);
         $categories = Category::all();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_edit_product'], '');
         return view('inventory.product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
@@ -108,7 +108,7 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         if (!Gate::allows('action-allowed-to-user', ['PRODUCT/UPDATE'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_update_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $request->validate([
@@ -119,7 +119,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name = $request->name;
         $product->category_id = $request->category;
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_update_product'], '');
         $product->save();
 
         return redirect()->route('product.index')->with('success', 'Producto actualizado con éxito');
@@ -130,11 +130,20 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/DESTROY'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_index_product'], '');
+       
+    }
+    function changeStatus(Request $request, string $id){
+        if (!Gate::allows('action-allowed-to-user', ['PRODUCT/CHANGE-STATUS'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_change_status_product'], '');
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $product = Product::find($id);
+        if($product->status==0){
+            $product->status = 1;
+            $product->save();
+            $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_product'], '');
+            return redirect()->back()->with('success', 'Producto activado con éxito');
+        }
         $relatedProducts = ProductWarehouse::where('product_id', $product->id)
             ->where('status', 1)
             ->count();
@@ -143,7 +152,7 @@ class ProductController extends Controller
         }
         $product->status = 0;
         $product->save();
-        $this->addAudit(Auth::user(), $this->typeAudit['access_index_product'], '');
+        $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_product'], '');
         return redirect()->back()->with('success', 'Producto eliminado con éxito');
     }
 }

@@ -110,12 +110,20 @@ class WarehouseController extends Controller
      */
     public function destroy(string $id)
     {
-
-        if (!Gate::allows('action-allowed-to-user', ['WAREHOUSE/DESTROY'])) {
-            $this->addAudit(Auth::user(), $this->typeAudit['not_access_destroy_warehouse'], 'warehouse_id: ' . $id);
+    }
+    function changeStatus(Request $request, string $id)
+    {
+        if (!Gate::allows('action-allowed-to-user', ['WAREHOUSE/CHANGE-STATUS'])) {
+            $this->addAudit(Auth::user(), $this->typeAudit['not_access_change_status_warehouse'], 'warehouse_id: ' . $id);
             return redirect()->route('dashboard')->with('error', 'No tiene permisos para acceder a esta sección.');
         }
         $warehouse = Warehouse::find($id);
+        if($warehouse->status==0){
+            $warehouse->status = 1;
+            $warehouse->save();
+            $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_warehouse'], 'warehouse_id: ' . $id);
+            return redirect()->back()->with('success', 'Bodega activada con éxito');
+        }
         $relatedProducts = ProductWarehouse::where('warehouse_id', $warehouse->id)
             ->where('status', 1)
             ->count();
@@ -127,7 +135,7 @@ class WarehouseController extends Controller
         $warehouse->status = 0;
         $warehouse->save();
 
-        $this->addAudit(Auth::user(), $this->typeAudit['access_destroy_warehouse'], 'warehouse_id: ' . $id);
+        $this->addAudit(Auth::user(), $this->typeAudit['access_change_status_warehouse'], 'warehouse_id: ' . $id);
         return redirect()->back()->with('success', 'Bodega eliminada con éxito');
     }
 }

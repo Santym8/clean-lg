@@ -83,6 +83,8 @@ class Controller extends BaseController
         'access_update_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-UPDATE',
         'not_access_destroy_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-DESTROY',
         'access_destroy_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-DESTROY',
+        'not_access_change_status_warehouse' => 'INVENTORY/WAREHOUSE/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_warehouse' => 'INVENTORY/WAREHOUSE/AUTHORIZED-CHANGE-STATUS',
 
         'not_access_index_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-INDEX',
         'access_index_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-INDEX',
@@ -96,6 +98,8 @@ class Controller extends BaseController
         'access_update_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-UPDATE',
         'not_access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-DESTROY',
         'access_destroy_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-DESTROY',
+        'not_access_change_status_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_product_warehouse' => 'INVENTORY/PRODUCT-WAREHOUSE/AUTHORIZED-CHANGE-STATUS',
 
         'not_access_index_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-INDEX',
         'access_index_product' => 'INVENTORY/PRODUCT/AUTHORIZED-INDEX',
@@ -109,6 +113,8 @@ class Controller extends BaseController
         'access_update_product' => 'INVENTORY/PRODUCT/AUTHORIZED-UPDATE',
         'not_access_destroy_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-DESTROY',
         'access_destroy_product' => 'INVENTORY/PRODUCT/AUTHORIZED-DESTROY',
+        'not_access_change_status_product' => 'INVENTORY/PRODUCT/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_product' => 'INVENTORY/PRODUCT/AUTHORIZED-CHANGE-STATUS',
 
         'not_access_index_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-INDEX',
         'access_index_category' => 'INVENTORY/CATEGORY/AUTHORIZED-INDEX',
@@ -122,6 +128,8 @@ class Controller extends BaseController
         'access_update_category' => 'INVENTORY/CATEGORY/AUTHORIZED-UPDATE',
         'not_access_destroy_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-DESTROY',
         'access_destroy_category' => 'INVENTORY/CATEGORY/AUTHORIZED-DESTROY',
+        'not_access_change_status_category' => 'INVENTORY/CATEGORY/NOT-AUTHORIZED-CHANGE-STATUS',
+        'access_change_status_category' => 'INVENTORY/CATEGORY/AUTHORIZED-CHANGE-STATUS',
 
         'not_access_index_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/NOT-AUTHORIZED-INDEX',
         'access_index_product_movement' => 'INVENTORY/PRODUCT-MOVEMENT/AUTHORIZED-INDEX',

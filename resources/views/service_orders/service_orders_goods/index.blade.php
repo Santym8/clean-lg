@@ -5,10 +5,13 @@
     <table class="table">
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
+
         @endif
+        @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/CREATE']))
         <form action="{{ route('service_orders_goods.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -20,6 +23,7 @@
                 <th scope="col">Usuario</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -33,7 +37,12 @@
                 <td>{{ $service_order_good->customers->first_name }}</td>
                 <td>{{ $service_order_good->users->name }}</td>
                 <td>{{ $service_order_good->created_at }}</td>
-                <td>{{ $service_order_good->updated_at }}</td>                          
+                <td>{{ $service_order_good->updated_at }}</td>
+                <td>
+                    @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS_GOODS/SHOW']))
+                    <a href="{{ route('service_orders_goods.show', $service_order_good->id) }}" class="btn btn-primary">Ver</a>
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>

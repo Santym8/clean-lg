@@ -372,6 +372,143 @@ class ModuleAndActionSeeder extends Seeder
             ]
         ],
         'BILLING',
-        'SERVICE ORDERS'
+        'SERVICE_ORDERS' => [
+            'menu_text' => 'ORDENES DE SERVICIO',
+            'icon_name' => 'mdi mdi-clipboard-text',
+            'actions' => [
+                //---------------Service Order------------
+                [
+                    'name' => 'SERVICE_ORDERS/INDEX',
+                    'route' => 'service_orders.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-file-document',
+                    'menu_text' => 'ORDENES DE SERVICIO'
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/EDIT',
+                    'route' => 'service_orders.edit',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/UPDATE',
+                    'route' => 'service_orders.update',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/CREATE',
+                    'route' => 'service_orders.create',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/STORE',
+                    'route' => 'service_orders.store',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/SHOW',
+                    'route' => 'service_orders.show',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS/DELETE',
+                    'route' => 'service_orders.destroy',
+                ],
+               
+                //---------------Services--------------
+                [
+                    'name' => 'SERVICES/INDEX',
+                    'route' => 'services.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-file-document',
+                    'menu_text' => 'SERVICIOS'
+                ],
+                [
+                    'name' => 'SERVICES/EDIT',
+                    'route' => 'services.edit',
+                ],
+                [
+                    'name' => 'SERVICES/UPDATE',
+                    'route' => 'services.update',
+                ],
+                [
+                    'name' => 'SERVICES/CREATE',
+                    'route' => 'services.create',
+                ],
+                [
+                    'name' => 'SERVICES/STORE',
+                    'route' => 'services.store',
+                ],
+                [
+                    'name' => 'SERVICES/SHOW',
+                    'route' => 'services.show',
+                ],
+                [
+                    'name' => 'SERVICES/DELETE',
+                    'route' => 'services.destroy',
+                ],
+
+                //-----------------Goods-------------
+                [
+                    'name' => 'GOODS/INDEX',
+                    'route' => 'goods.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mmdi mdi-file-document',
+                    'menu_text' => 'BIENES'
+                ],
+                [
+                    'name' => 'GOODS/EDIT',
+                    'route' => 'goods.edit',
+                ],
+                [
+                    'name' => 'GOODS/UPDATE',
+                    'route' => 'goods.update',
+                ],
+                [
+                    'name' => 'GOODS/CREATE',
+                    'route' => 'goods.create',
+                ],
+                [
+                    'name' => 'GOODS/STORE',
+                    'route' => 'goods.store',
+                ],
+                [
+                    'name' => 'GOODS/SHOW',
+                    'route' => 'goods.show',
+                ],
+                [
+                    'name' => 'GOODS/DELETE',
+                    'route' => 'goods.destroy',
+                ],
+
+                //-----------------SERVICE_ORDERS_GOODS-----------
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/INDEX',
+                    'route' => 'service_orders_goods.index',
+                    'displayable_menu' => true,
+                    'icon_name' => 'mdi mdi-file-document',
+                    'menu_text' => 'ORDENES DE SERVICIO - BIENES'
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/EDIT',
+                    'route' => 'service_orders_goods.edit',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/UPDATE',
+                    'route' => 'service_orders_goods.update',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/CREATE',
+                    'route' => 'service_orders_goods.create',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/STORE',
+                    'route' => 'service_orders_goods.store',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/SHOW',
+                    'route' => 'service_orders_goods.show',
+                ],
+                [
+                    'name' => 'SERVICE_ORDERS_GOODS/DELETE',
+                    'route' => 'service_orders_goods.destroy',
+                ],
+
+            ]
+        ]
     ];
 }

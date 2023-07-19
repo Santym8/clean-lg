@@ -6,9 +6,11 @@
         @if (session('success'))
         <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
+        @if (Gate::allows('action-allowed-to-user', ['GOODS/CREATE']))
         <form action="{{ route('goods.create') }}" method="GET">
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
+        @endif
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
@@ -35,7 +37,11 @@
                 <td>{{ $good->cost }}</td>
 
                 <td>
+                     @if (Gate::allows('action-allowed-to-user', ['GOODS/EDIT']))
                     <a href="{{ route('goods.edit', ['good' => $good->id]) }}" class="btn btn-primary">Editar</a>
+                    @endif
+
+                    @if (Gate::allows('action-allowed-to-user', ['GOODS/DESTROY']))
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal{{ $good->id }}">Eliminar</button>
                     
                     <div class="modal fade" id="modal{{ $good->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,6 +68,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </td>
             </tr>
             @endforeach

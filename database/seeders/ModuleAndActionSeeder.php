@@ -403,7 +403,6 @@ class ModuleAndActionSeeder extends Seeder
                 ],
             ]
         ],
-        'BILLING',
         'SERVICE_ORDERS' => [
             'menu_text' => 'ORDENES DE SERVICIO',
             'icon_name' => 'mdi mdi-clipboard-text',
@@ -440,7 +439,7 @@ class ModuleAndActionSeeder extends Seeder
                     'name' => 'SERVICE_ORDERS/DELETE',
                     'route' => 'service_orders.destroy',
                 ],
-               
+
                 //---------------Services--------------
                 [
                     'name' => 'SERVICES/INDEX',

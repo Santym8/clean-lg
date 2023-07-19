@@ -61,7 +61,7 @@ class UserProfileController extends Controller
 
         $request->validate([
             'new_password' => [
-                'required', 'string', 'min:8', 'max:255',
+                'required', 'string', 'min:8', 'max:64',
                 'regex:/[a-z]/',      // must contain at least one lowercase letter
                 'regex:/[A-Z]/',      // must contain at least one uppercase letter
                 'regex:/[0-9]/',      // must contain at least one digit
@@ -70,7 +70,7 @@ class UserProfileController extends Controller
         ], [
             'new_password.required' => 'Contraseña requerida.',
             'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'new_password.max' => 'La contraseña debe tener máximo 255 caracteres.',
+            'new_password.max' => 'La contraseña debe tener máximo 64 caracteres.',
             'new_password.regex' => 'La contraseña debe tener al menos una letra mayúscula, una minúscula, un número y un caracter especial @$!%*#?&_-.',
         ]);
 

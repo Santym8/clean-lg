@@ -136,9 +136,10 @@ class ServiceOrderGoodsController extends Controller
          $service_order_goods = ServiceOrders::findOrFail($id);
          $goods= Goods::where('service_order_id', $id)->get();
          $customers = Customer::find($id);
+         $totalCost = $goods->sum('cost');
          //$this->addAudit(Auth::user(), $this->typeAudit['access_show_service_orders_goods'], 'service_orders_goods: ' . $id);
          return view('service_orders.service_orders_goods.show', ['service_order_goods' => $service_order_goods, 'goods' => $goods, 'services' => $services,
-         'customers' => $customers]);
+         'customers' => $customers,'totalCost' => $totalCost]);
 
     }
 

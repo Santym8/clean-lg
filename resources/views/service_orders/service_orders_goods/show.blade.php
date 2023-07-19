@@ -64,13 +64,18 @@
                         @endforeach
 
                         <hr>
-
+                        
                     </form>
-                    <div class="form-group row mb-0">
-                            <div class="col-md-12">
-                                <a class="btn btn-primary" href="{{ route('service_orders_goods.index') }}">Volver</a>
-                            </div>
+                  
+                    <div style="float: right;">
+                            <h3>Subtotal: {{ $totalCost }}</h3>
                         </div>
+
+                    <div class="form-group row mb-0">
+                        <div class="col-md-12">
+                            <a class="btn btn-primary" href="{{ route('service_orders_goods.index') }}">Volver</a>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -15,7 +15,7 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Creado en</th>
                     <th scope="col">Actualizado en</th>
-                    <th>Acciones</th>
+                    <th class="acciones">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,7 +105,10 @@
     <script>
         $(document).ready(function() {
             $('#product-movement-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

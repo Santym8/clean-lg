@@ -1,18 +1,22 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
+
         @if (session('success'))
             <h6 class="alert alert-success">{{ session('success') }}</h6>
         @endif
         @if (Gate::allows('action-allowed-to-user', ['PRODUCT-WAREHOUSE/CREATE']))
             <form action="{{ route('product_warehouse.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success"
+                    style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
+
         @if (Gate::allows('action-allowed-to-user', ['PRODUCT-MOVEMENT/CREATE']))
             <form action="{{ route('product_movement.create') }}" method="GET">
-                <button type="submit" class="btn btn-secondary">Realizar Movimiento</button>
+                <button type="submit" class="btn btn-secondary"
+                    style="font-weight: bold; font-size: 17px">Realizar Movimiento</button>
             </form>
         @endif
         <table id="product-warehouse-table" class="table">
@@ -53,11 +57,12 @@
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#modal{{ $prod_ware->id }}">Eliminar</button>
                                 @else
-                                    <form action="{{ route('product_warehouse.changeStatus', ['id' => $prod_ware->id]) }}"
+                                    <form class="restaurar"
+                                        action="{{ route('product_warehouse.changeStatus', ['id' => $prod_ware->id]) }}"
                                         method="post">
                                         @method('PUT')
                                         @csrf
-                                        <button type="submit" class="btn btn-success">Restaurar</button>
+                                        <button type="submit" class="btn">Restaurar</button>
                                     </form>
                                 @endif
 
@@ -114,7 +119,10 @@
     <script>
         $(document).ready(function() {
             $('#product-warehouse-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

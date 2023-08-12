@@ -1,8 +1,8 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
 <div class="container">
-    <h2>Editar Trabajo</h2>
+    <h4>Editar Trabajo</h4>
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -21,13 +21,14 @@
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $job->name }}" required>
 
+            <label for="status"> Estado: </label>
             <select name="status" id="status" class="form-control">
-                <option value="1" {{ $job->status == 1 ? 'selected' : '' }}>SI</option>
-                <option value="0" {{ $job->status == 0 ? 'selected' : '' }}>NO</option>
+                <option value="1" {{ $job->status == 1 ? 'selected' : '' }}>Activo</option>
+                <option value="0" {{ $job->status == 0 ? 'selected' : '' }}>Inactivo</option>
             </select>
 
         </div>
-        <label for="status">Activado</label>
+        
 
         <!-- Add other fields as needed -->
         <button type="submit" class="btn btn-primary">Actualizar</button>

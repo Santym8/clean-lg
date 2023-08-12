@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -7,26 +7,24 @@
         @endif
         @if (Gate::allows('action-allowed-to-user', ['DISCOUNTS/CREATE']))
             <form action="{{ route('discounts.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success" style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
         <table class="table" id='customer-table'>
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Porcentaje</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
-                    <th scope="col">Cliente</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Creación</th>
+                    <th scope="col">Actualizaión</th>
+                    <th scope="col">Cédula</th>
                     <th scope="col">Nombres</th>
-                    <th>Actions</th>
+                    <th class="acciones">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($discounts as $discount)
-                    <tr>
-                        <th scope="row">{{ $discount->id }}</th>
+                    <tr>                        
                         <td>{{ $discount->percentage }}</td>
                         <td>{{ $discount->status == 1 ? 'SI' : 'NO' }}</td>
                         <td>{{ $discount->created_at }}</td>
@@ -94,7 +92,10 @@
     <script>
         $(document).ready(function() {
             $('#customer-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,   
             });
         });
     </script>

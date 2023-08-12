@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -16,27 +16,26 @@
 
         @if (Gate::allows('action-allowed-to-user', ['JOBS/CREATE']))
             <form action="{{ route('job.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success"
+                    style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
         <table class="table" id='job-table'>
 
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Creación</th>
                     <th scope="col">Actualización</th>
-                    <th>Actions</th>
+                    <th class="acciones">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($job as $job)
                     <tr>
-                        <th scope="row">{{ $job->id }}</th>
                         <td>{{ $job->name }}</td>
-                        <td>{{ $job->status == 1 ? 'SI' : 'NO' }}</td>
+                        <td>{{ $job->status == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>{{ $job->created_at }}</td>
                         <td>{{ $job->updated_at }}</td>
 
@@ -98,7 +97,10 @@
     <script>
         $(document).ready(function() {
             $('#job-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

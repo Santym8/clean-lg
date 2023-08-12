@@ -1,8 +1,8 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
-        <h2>Editar movimiento de producto</h2>
+        <h4>Editar movimiento de producto</h4>
 
         @if (session('error'))
             <div class="alert alert-danger">

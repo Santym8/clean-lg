@@ -1,17 +1,4 @@
-/**
- * WEBSITE: https://themefisher.com
- * TWITTER: https://twitter.com/themefisher
- * FACEBOOK: https://www.facebook.com/themefisher
- * GITHUB: https://github.com/themefisher/
- */
-
 @charset "UTF-8";
-/*!
- * Bootstrap v4.6.2 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
 :root {
   --blue: #007bff;
   --indigo: #00add8;
@@ -52,20 +39,13 @@
   box-sizing: border-box;
 }
 
-html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
 body {
   margin: 0;
-  font-family: "Karla", sans-serif;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.5;
@@ -12803,7 +12783,7 @@ code {
 
 /* Header Light */
 .navbar.navbar-light {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #e5e9f2;
 }
 .navbar.navbar-light .sidebar-toggle {
@@ -13450,8 +13430,9 @@ label {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 76px;
-  line-height: 76px;
+  justify-content: center;
+  height: 100px;
+  line-height: 100px;
   width: 250px;
   transition: width 0.3s ease-in-out;
   padding-left: 1.56rem;
@@ -13467,7 +13448,7 @@ label {
   }
 }
 .app-brand a img {
-  max-width: 128px;
+  max-width: 165px;
   vertical-align: middle;
 }
 .app-brand .brand-name {

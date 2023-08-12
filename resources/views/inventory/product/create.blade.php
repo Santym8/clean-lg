@@ -1,8 +1,8 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
-        <h2>Crear Producto</h2>
+        <h4>Crear Producto</h4>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,10 +18,10 @@
             @csrf
             <div class="form-group">
                 <label for="name">Nombre:</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter product name"
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre del producto"
                     required>
-                <label for="category">Categoría:</label>
-                <select name="category" id="category" class="form-control" required>
+                <label for="inputState">Categoría:</label>
+                <select name="category" id="inputState" class="form-control" required>
                     @foreach ($categories as $category)
                         @if ($category->status == 1)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>

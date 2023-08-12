@@ -15,15 +15,7 @@
 </head>
 
 <body class="navbar-fixed sidebar-fixed" id="body">
-
-    <!-- ====================================
-    ——— WRAPPER
-    ===================================== -->
     <div class="wrapper">
-
-        <!-- ====================================
-          ——— LEFT SIDEBAR WITH OUT FOOTER
-        ===================================== -->
         <aside class="left-sidebar sidebar-dark" id="left-sidebar">
             <div id="sidebar" class="sidebar sidebar-with-footer">
                 <!-- Aplication Brand -->
@@ -45,7 +37,7 @@
                         @foreach ($modules as $module)
                             @if (Gate::allows('has-access-to-at-least-one-action-module', [$module->name]))
                                 <li class="has-sub">
-                                    <a class="sidenav-item-link" href="" data-toggle="collapse"
+                                    <a class="sidenav-item-link" data-toggle="collapse"
                                         data-target="#{{ $module->name }}" aria-expanded="false"
                                         aria-controls="{{ $module->name }}">
                                         <i class="{{ $module->icon_name }}"></i>
@@ -72,26 +64,18 @@
                                 </li>
                             @endif
                         @endforeach
-
                     </ul>
-
                 </div>
             </div>
         </aside>
 
-
-        <!-- ====================================
-      ——— PAGE WRAPPER
-      ===================================== -->
         <div class="page-wrapper">
-
             <!-- Header -->
             <header class="main-header" id="header">
                 <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
 
                     <span class="page-title"
                         style="margin-left: 60px">{{ ucfirst(str_replace('_', ' ', explode('.', Route::currentRouteName())[0])) }}</span>
-
 
                     <div class="navbar-right ">
 
@@ -124,15 +108,7 @@
 
             </header>
 
-            <!-- ====================================
-        ——— CONTENT WRAPPER
-        ===================================== -->
             @yield('content')
-
-            <!-- Footer -->
-            <footer class="footer mt-auto">
-
-            </footer>
 
         </div>
     </div>

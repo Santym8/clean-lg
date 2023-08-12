@@ -1,8 +1,8 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
-        <h2>Editar Descuento</h2>
+        <h4>Editar Descuento</h4>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -21,9 +21,9 @@
 
                 <label for="percentage">Porcentaje:</label>
                 <input type="number" class="form-control" id="percentage" name="percentage"
-                    value="{{ $discount->percentage }}">>
+                    value="{{ $discount->percentage }}">
 
-                <label for="status">Status:</label>
+                <label for="status">Estado:</label>
                 <select name="status" id="status" class="form-control">
                     <option value="1" {{ $discount->status == 1 ? 'selected' : '' }}>SI</option>
                     <option value="0" {{ $discount->status == 0 ? 'selected' : '' }}>NO</option>
@@ -38,7 +38,7 @@
                                 <option value="{{ $customer->id }}"
                                     data-name="{{ $customer->first_name . ' ' . $customer->last_name }}"
                                     {{ $customer->id == $discount->customer_id ? 'selected' : '' }}>
-                                    {{ $customer->identification }}
+                                    {{ $customer->first_name . ' ' . $customer->last_name }}
                                 </option>
                             @endif
                         @endforeach

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -7,37 +7,35 @@
         @endif
         @if (Gate::allows('action-allowed-to-user', ['CUSTOMERS/CREATE']))
             <form action="{{ route('customers.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success" style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
         <table class="table" id='customer-table'>
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    {{-- <th scope="col">#</th> --}}
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
-                    <th scope="col">Tipo identificacion</th>
-                    <th scope="col">Identificacion</th>
-                    <th scope="col">Numero telefono</th>
+                    <th scope="col">Identificación</th>
+                    <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
+                    {{-- <th scope="col">Status</th> --}}
+                    <th scope="col">Creación</th>
+                    <th scope="col">Actualizacición</th>
                     <th scope="col">Trabajo</th>
-                    <th>Actions</th>
+                    <th class="acciones">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($customers as $customer)
                     <tr>
-                        <th scope="row">{{ $customer->id }}</th>
+                        {{-- <th scope="row">{{ $customer->id }}</th> --}}
                         <td>{{ $customer->first_name }}</td>
                         <td>{{ $customer->last_name }}</td>
-                        <td>{{ $customer->identification_type }}</td>
                         <td>{{ $customer->identification }}</td>
                         <td>{{ $customer->phone_number }}</td>
                         <td>{{ $customer->address }}</td>
-                        <td>{{ $customer->status == 1 ? 'SI' : 'NO' }}</td>
+                        {{-- <td>{{ $customer->status == 1 ? 'SI' : 'NO' }}</td> --}}
                         <td>{{ $customer->created_at }}</td>
                         <td>{{ $customer->updated_at }}</td>
                         <td>{{ $customer->job->name }}
@@ -51,7 +49,7 @@
                             @endif
 
                             @if (Gate::allows('action-allowed-to-user', ['CUSTOMERS/DESTROY']))
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal"
                                     data-bs-target="#modal{{ $customer->id }}">Eliminar</button>
 
                                 <!-- Modal -->
@@ -104,7 +102,10 @@
     <script>
         $(document).ready(function() {
             $('#customer-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

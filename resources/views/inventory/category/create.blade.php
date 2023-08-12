@@ -1,8 +1,8 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
-        <h2>Crear Categoría</h2>
+        <h4>Crear Categoría</h4>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -18,7 +18,7 @@
             @csrf
             <div class="form-group">
                 <label for="name">Nombre:</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter category name"
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre de la categoría"
                     required>
             </div>
             

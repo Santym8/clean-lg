@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -15,7 +15,7 @@
         @endif
         @if (Gate::allows('action-allowed-to-user', ['CATEGORY/CREATE']))
             <form action="{{ route('category.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success" style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
         <table id="category-table" class="table">
@@ -25,7 +25,7 @@
                     <th scope="col">Estado</th>
                     <th scope="col">Creado en</th>
                     <th scope="col">Actualizado en</th>
-                    <th>Acciones</th>
+                    <th class="acciones">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,11 +53,11 @@
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#modal{{ $category->id }}">Eliminar</button>
                                 @else
-                                    <form action="{{ route('category.changeStatus', ['id' => $category->id]) }}"
+                                    <form class="restaurar" action="{{ route('category.changeStatus', ['id' => $category->id]) }}"
                                         method="post">
                                         @method('PUT')
                                         @csrf
-                                        <button type="submit" class="btn btn-success">Restaurar</button>
+                                        <button type="submit" class="btn">Restaurar</button>
                                     </form>
                                 @endif
 
@@ -111,7 +111,10 @@
     <script>
         $(document).ready(function() {
             $('#category-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

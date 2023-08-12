@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 @section('content')
     <div class="container">
         @if ($errors->any())
@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Actualizar Modulo</h1>
+                <h4>Actualizar Modulo</h4>
                 <a class="btn btn-success" href="{{ route('modules.index') }}">Volver</a>
             </div>
         </div>

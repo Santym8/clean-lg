@@ -89,7 +89,13 @@
                 @php
                     $currentRouteName = Route::currentRouteName();
                     $textToShow = ucfirst(str_replace('_', ' ', explode('.', $currentRouteName)[0]));
-                    if ($textToShow === 'Warehouse') {
+                    if ($textToShow === 'Customers') {
+                        $textToShow = 'CLIENTES';
+                    } elseif ($textToShow === 'Job') {
+                        $textToShow = 'TRABAJOS';
+                    } elseif ($textToShow === 'Discounts') {
+                        $textToShow = 'DESCUENTOS';
+                    } elseif ($textToShow === 'Warehouse') {
                         $textToShow = 'BODEGAS';
                     } elseif ($textToShow === 'Product') {
                         $textToShow = 'PRODUCTOS';
@@ -99,12 +105,16 @@
                         $textToShow = 'MOVIMIENTOS DE PRODUCTOS';
                     } elseif ($textToShow === 'Category') {
                         $textToShow = 'CATEGORIAS';
-                    } elseif ($textToShow === 'Customers') {
-                        $textToShow = 'CLIENTES';
-                    } elseif ($textToShow === 'Job') {
-                        $textToShow = 'TRABAJOS';
-                    } elseif ($textToShow === 'Discounts') {
-                        $textToShow = 'DESCUENTOS';
+                    } elseif ($textToShow === 'Audit trails') {
+                        $textToShow = 'AUDITORIAS';
+                    } elseif ($textToShow === 'Goods') {
+                        $textToShow = 'BIENES';
+                    } elseif ($textToShow === 'Services') {
+                        $textToShow = 'SERVICIOS';
+                    } elseif ($textToShow === 'Service orders') {
+                        $textToShow = 'ORDENES DE SERVICIO';
+                    } elseif ($textToShow === 'Service orders goods') {
+                        $textToShow = 'ORDENES DE SERVICIO BIENES';
                     }
                 @endphp
                 {{ $textToShow }}
@@ -166,7 +176,7 @@
             sidebarBtn.addEventListener("click", () => {
                 sidebar.classList.toggle("close");
             });
-            
+
         });
     </script>
 

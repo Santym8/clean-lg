@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -19,7 +19,7 @@
 
         @if (Gate::allows('action-allowed-to-user', ['ROLE/CREATE']))
             <form action="{{ route('roles.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success" style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
 
@@ -116,7 +116,10 @@
     <script>
         $(document).ready(function() {
             $('#roles-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

@@ -1,19 +1,19 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Auditor&iacute;a</h1>
+                {{-- <h4>Auditor&iacute;a</h4> --}}
                 <table id="audit-table" class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Identificaci&oacute;n Usuario</th>
+                            <th>Identificación Usuario</th>
                             <th>Usuario</th>
                             <th>Ip</th>
                             <th>Tipo</th>
                             <th>Fecha</th>
-                            <th>Informaci&oacute;n Adicional</th>
+                            <th>Información Adicional</th>
                         </tr>
                     </thead>
 
@@ -52,7 +52,10 @@
     <script>
         $(document).ready(function() {
             $('#audit-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

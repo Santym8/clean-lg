@@ -1,8 +1,8 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
-        <h2>Crear Servicio</h2>
+        <h4>Crear Servicio</h4>
 
         @if ($errors->any())
             <div class="alert alert-danger">

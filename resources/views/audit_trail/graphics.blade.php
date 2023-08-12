@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <script src="https://code.highcharts.com/highcharts.js"></script>

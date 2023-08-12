@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -16,27 +16,32 @@
                                 <div class="service-order form-inline">
                                     <div class="form-group">
                                         <label for="delivery_date" class="mr-2">Fecha de Entrega:</label>
-                                        <input type="date" class="form-control mr-2" name="delivery_date" >
+                                        <input type="date" class="form-control mr-2" name="delivery_date">
                                     </div>
 
                                     <div class="form-group">
-                                    <label for="prepayment" class="mr-2">Pago por Adelantado:</label>
-                                    <input type="number" step="0.01" class="form-control mr-2" name="prepayment" value="0" required>
+                                        <label for="prepayment" class="mr-2">Pago por Adelantado:</label>
+                                        <input type="number" step="0.01" class="form-control mr-2" name="prepayment"
+                                            value="0" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="customer_id" class="mr-2">Cliente:</label>
-                                        <select class="form-control mr-2" name="customer_id" onchange="updateCustomerName(this)">
+                                        <select class="form-control mr-2" name="customer_id"
+                                            onchange="updateCustomerName(this)">
                                             <option value="" disabled selected>Seleccione el cliente</option>
                                             @foreach ($customers as $customer)
-                                                <option value="{{ $customer->id }}" data-name="{{ $customer->first_name }} {{ $customer->last_name }}">{{ $customer->identification }}</option>
+                                                <option value="{{ $customer->id }}"
+                                                    data-name="{{ $customer->first_name }} {{ $customer->last_name }}">
+                                                    {{ $customer->identification }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="name" class="mr-2">Nombres:</label>
-                                        <input id="name" type="text" class="form-control mr-2" name="name" readonly>
+                                        <input id="name" type="text" class="form-control mr-2" name="name"
+                                            readonly>
                                     </div>
 
 
@@ -50,7 +55,8 @@
 
                                     <div class="form-group">
                                         <label for="description" class="mr-2">Descripción:</label>
-                                        <input id="description" type="text" class="form-control mr-2" name="description[]"  >
+                                        <input id="description" type="text" class="form-control mr-2"
+                                            name="description[]">
                                     </div>
 
                                     <div class="form-group">
@@ -58,13 +64,15 @@
                                         <select class="form-control mr-2" name="service_id[]" onchange="updateCost(this)">
                                             <option value="" disabled selected>Seleccione el servicio</option>
                                             @foreach ($services as $service)
-                                                <option value="{{ $service->id }}" data-price="{{ $service->cost }}">{{ $service->name }}</option>
+                                                <option value="{{ $service->id }}" data-price="{{ $service->cost }}">
+                                                    {{ $service->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="cost" class="mr-2">Costo:</label>
-                                        <input id="cost[]" type="number" step="0.01" class="form-control mr-2" name="cost[]" >
+                                        <input id="cost[]" type="number" step="0.01" class="form-control mr-2"
+                                            name="cost[]">
                                     </div>
 
 
@@ -72,7 +80,7 @@
                             </div>
                             <hr>
 
-                              <!-- Campos para los bienes -->
+                            <!-- Campos para los bienes -->
 
 
                             <div class="form-group row mb-0">
@@ -96,7 +104,9 @@
 
             // Limpiar los campos del nuevo bien clonado
             const fields = clone.querySelectorAll('input, select');
-            fields.forEach(field => {field.value = '';});
+            fields.forEach(field => {
+                field.value = '';
+            });
             container.appendChild(clone);
         }
 
@@ -115,7 +125,7 @@
             costInput.value = price;
         }
 
-       function updateCustomerName(select) {
+        function updateCustomerName(select) {
             const container = select.parentNode.parentNode;
             const nameInput = container.querySelector('input[name="name"]');
             const customerName = select.options[select.selectedIndex].getAttribute('data-name');
@@ -123,11 +133,11 @@
         }
     </script>
 
-    @if($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger">
             <h6>Por favor corregir los siguientes errores:</h6>
             <ul>
-                @foreach($errors->all() as $error)
+                @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>

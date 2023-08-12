@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Crear Usuario</h1>
+                <h4>Crear Usuario</h4>
                 <a class="btn btn-success" href="{{ route('users.index') }}">Volver</a>
             </div>
         </div>

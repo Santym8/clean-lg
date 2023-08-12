@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -7,19 +7,18 @@
         @endif
         @if (Gate::allows('action-allowed-to-user', ['SERVICE_ORDERS/CREATE']))
             <form action="{{ route('service_orders.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success" style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
         <table class="table" id="serices-order-table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Fecha de entrega</th>
-                    <th scope="col">Pago por adelantado</th>
+                    <th scope="col">Abonó</th>
                     <th scope="col">Entregado</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Creado</th>
+                    <th scope="col">Actualizado</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Usuario</th>
                     <th>Actions</th>
@@ -28,11 +27,10 @@
             <tbody>
                 @foreach ($service_orders as $service_order)
                     <tr>
-                        <th scope="row">{{ $service_order->id }}</th>
                         <td>{{ $service_order->delivery_date }}</td>
                         <td>{{ $service_order->prepayment }}</td>
                         <td>{{ $service_order->delivery == 1 ? 'SI' : 'NO' }}</td>
-                        <td>{{ $service_order->status == 1 ? 'SI' : 'NO' }}</td>
+                        <td>{{ $service_order->status == 1 ? 'Actuvo' : 'Inactivo' }}</td>
                         <td>{{ $service_order->created_at }}</td>
                         <td>{{ $service_order->updated_at }}</td>
                         <td>{{ $service_order->customers->first_name }}
@@ -99,7 +97,10 @@
     <script>
         $(document).ready(function() {
             $('#serices-order-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>

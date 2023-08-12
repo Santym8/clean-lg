@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 @section('content')
     <div class="container">
         @if ($errors->any())
@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <h1>Actualizar Usuario</h1>
+                <h4>Actualizar Usuario</h4>
                 <a class="btn btn-success" href="{{ route('users.index') }}">Volver</a>
             </div>
         </div>
@@ -21,71 +21,73 @@
         <form action="{{ route('users.update', [$user->id]) }}" method="POST">
             @csrf
             @method('PATCH')
-            <label for="name">Nombre</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Nombre"
-                value="{{ $user->name }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="Nombre"
+                            value="{{ $user->name }}">
 
-            <label for="last_name">Apellido</label>
-            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Apellido"
-                value="{{ $user->last_name }}">
+                        <label for="last_name">Apellido</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Apellido"
+                            value="{{ $user->last_name }}">
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control" placeholder="Email"
-                value="{{ $user->email }}">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                            value="{{ $user->email }}">
 
-            <label for="identification_type">Tipo Identificaci&oacute;n</label>
-            <select name="identification_type" id="identification_type" class="form-control">
-                <option value="CEDULA" {{ $user->identification_type == 'CEDULA' ? 'selected' : '' }}>C&eacute;dula de
-                    Ciudadan&iacute;a</option>
-                <option value="PASAPORTE" {{ $user->identification_type == 'PASAPORTE' ? 'selected' : '' }}>Pasaporte
-                </option>
-            </select>
+                        <label for="identification_type">Tipo Identificación</label>
+                        <select name="identification_type" id="identification_type" class="form-control">
+                            <option value="CEDULA" {{ $user->identification_type == 'CEDULA' ? 'selected' : '' }}>Cédula de
+                                Ciudadanía</option>
+                            <option value="PASAPORTE" {{ $user->identification_type == 'PASAPORTE' ? 'selected' : '' }}>
+                                Pasaporte</option>
+                        </select>
 
-            <label for="identification">Identificaci&oacute;n</label>
-            <input type="text" name="identification" id="identification" class="form-control"
-                placeholder="Identificaci&oacute;n" value="{{ $user->identification }}">
+                        <label for="identification">Identificación</label>
+                        <input type="text" name="identification" id="identification" class="form-control"
+                            placeholder="Identificación" value="{{ $user->identification }}">
 
-            <label for="phone_number">N&uacute;mero de Tel&eacute;fono</label>
-            <input type="text" name="phone_number" id="phone_number" class="form-control"
-                placeholder="N&uacute;mero de Tel&eacute;fono" value="{{ $user->phone_number }}">
+                        <label for="phone_number">Número de Teléfono</label>
+                        <input type="text" name="phone_number" id="phone_number" class="form-control"
+                            placeholder="Número de Teléfono" value="{{ $user->phone_number }}">
 
-            <label for="status">Activado</label>
-            <select name="status" id="status" class="form-control">
-                <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>SI</option>
-                <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>NO</option>
-            </select>
-            <br>
-            <div class="row">
-                <div class="col-md-5 .d-inline-flex">
-                    <label for="available_roles">Roles Disponibles</label>
-                    <select style="height: 300px;" name="available_roles[]" id="available_roles" multiple class="form-control">
-                        @foreach ($available_roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                        @endforeach
-                    </select>
+                        <label for="status">Activado</label>
+                        <select name="status" id="status" class="form-control">
+                            <option value="1" {{ $user->status == 1 ? 'selected' : '' }}>SI</option>
+                            <option value="0" {{ $user->status == 0 ? 'selected' : '' }}>NO</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="available_roles">Roles Disponibles</label>
+                        <select style="height: 300px;" name="available_roles[]" id="available_roles" multiple
+                            class="form-control">
+                            @foreach ($available_roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
 
-                </div>
-                <div class="col-md-1 d-flex align-items-center">
-                    <div class="text-center">
-                        <button type="button" id="add_role" class="btn btn-primary">&gt;</button>
-                        <br><br>
-                        <button type="button" id="remove_role" class="btn btn-primary">&lt;</button>
+                        <div class="text-center mt-3">
+                            <button type="button" id="add_role" class="btn btn-primary">&gt;</button>
+                            <br><br>
+                            <button type="button" id="remove_role" class="btn btn-primary">&lt;</button>
+                        </div>
+
+                        <label for="selected_roles">Roles Asignados</label>
+                        <select style="height: 300px;" name="selected_roles[]" id="selected_roles" multiple
+                            class="form-control" readonly>
+                            @foreach ($user->roles as $role)
+                                <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-
-                <div class="col-md-5 .d-inline-flex">
-                    <label for="selected_roles">Roles Asignados</label>
-                    <select style="height: 300px;" name="selected_roles[]" id="selected_roles" multiple class="form-control" readonly>
-                        @foreach ($user->roles as $role)
-                            <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="row mt-3">
+                    <div class="col">
+                        <input id="submit" type="submit" class="btn btn-primary" value="Guardar" />
+                    </div>
                 </div>
             </div>
-            <br>
-            <input id="submit" type="submit" class="btn btn-primary" value="Guardar" />
-
-
         </form>
     </div>
 

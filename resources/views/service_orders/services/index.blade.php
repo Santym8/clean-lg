@@ -1,4 +1,4 @@
-@extends('app')
+@extends('app2')
 
 @section('content')
     <div class="container">
@@ -16,26 +16,24 @@
         @endif
         @if (Gate::allows('action-allowed-to-user', ['SERVICES/CREATE']))
             <form action="{{ route('services.create') }}" method="GET">
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-success" style="font-weight: bold; width:100px; font-size: 17px">Crear</button>
             </form>
         @endif
         <table class="table" id="services-table">
 
             <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
+                <tr>                    
                     <th scope="col">Nombre</th>
                     <th scope="col">Costo</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
+                    <th scope="col">Creado</th>
+                    <th scope="col">Actualizado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($services as $service)
-                    <tr>
-                        <th scope="row">{{ $service->id }}</th>
+                    <tr>                        
                         <td>{{ $service->name }}</td>
                         <td>{{ $service->cost }}</td>
                         <td>{{ $service->status == 1 ? 'SI' : 'NO' }}</td>
@@ -100,7 +98,10 @@
     <script>
         $(document).ready(function() {
             $('#services-table').DataTable({
-                // Configuración personalizada de DataTables
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                responsive: true,
             });
         });
     </script>
